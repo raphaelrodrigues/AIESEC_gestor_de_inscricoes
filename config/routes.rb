@@ -1,7 +1,6 @@
 Gestor::Application.routes.draw do
   
-  map.root :controller => "comites" 
-  
+
   resources :estados
 
   resources :candidatos do
