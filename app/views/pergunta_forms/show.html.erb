@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pergunta:</b>
+  <%= @pergunta_form.perguntum_id %>
+</p>
+
+<p>
+  <b>Ordem:</b>
+  <%= @pergunta_form.ordem %>
+</p>
+
+<p>
+  <b>Obrigatoria:</b>
+  <%= @pergunta_form.obrigatoria %>
+</p>
+
+<p>
+  <b>Formulario:</b>
+  <%= @pergunta_form.formulario_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_pergunta_form_path(@pergunta_form) %> |
+<%= link_to 'Back', pergunta_forms_path %>

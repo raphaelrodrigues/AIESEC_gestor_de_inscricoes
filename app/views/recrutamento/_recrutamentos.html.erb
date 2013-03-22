@@ -1,0 +1,103 @@
+
+<div class="header">
+        <h1 class="page-title">Recrutamentos</h1>
+</div>
+<ul class="breadcrumb">
+              <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+              <li class="active">Recrutamentos</li>
+ </ul>
+ <br>
+
+<div class="container-fluid">     
+   <form id="tab">
+      <div class="well">
+
+        <% if @recr_activo.nil? %>
+          <div class="alert alert-block">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            
+           Não existe nenhum recrutamento de estágios activo!!
+          </div>
+        <% else %>
+
+              <label>Recrutamento Activo <%= @recr_activo.id %> 
+                <%= link_to "Ver", recrutamento_path(@recr_activo.id) ,:class=>'btn'%> 
+                
+              </label>
+             
+              <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Insrciçoes</th>
+                        <th>Recrutamento</th>
+                        <th>Inscrições</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><%= current_comite.nome %></td>
+                        <td>
+                          <a href="#myModal" data-toggle="modal"> <span title="Alterar Estado" class="label label-success">Aberto</span></a>
+                        </td>
+
+                        <td>
+                          <% if @recr_activo.inscricao_activa == true %>
+                               <span title="Alterar Estado" class="label label-success">Abertas</span>
+                              Candidatos inscritos
+                              <span title="Alterar Estado" class="label label-success">
+                                <%= @recr_activo.candidatos.count %>
+                              </span> 
+
+                          <% else %>
+                              <a href="#myModal" data-toggle="modal"> <span class="label label-important">Fechadas</span>
+                              </a>
+
+                          <% end %>
+                       </td>
+                      </tr>
+                    </tbody>
+              </table>
+        <% end %>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="well">
+        <table class="table">
+         <thead>
+          <tr>
+            <th>Estado</th>
+            <th>Tipo</th>
+            <th>Comite_id</th>
+            <th>created_at</th>
+            <th>finished_at</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @recrutamentos.each do |r| %>
+          <% if r.id != @recr_activo.id %>
+            <tr>
+              <td><%= r.estado %></td>
+              <td><%= r.tipo %></td>
+              <td><%= r.comite_id %></td>
+              <td><%= r.created_at %></td>
+              <td>
+                <%= if r.finished_at.nil? 
+                        "Não terminado"
+                    else
+                        r.finished_at
+                    end
+                %>
+              </td>
+               <td><%= link_to 'Show', r %></td>
+            </tr>
+         <% end %>
+        <% end %>
+        </table>
+        <br />
+    </div>
+  </div>
+</div>
+

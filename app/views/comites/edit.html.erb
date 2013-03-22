@@ -1,0 +1,92 @@
+<div class="header">
+     <h1 class="page-title">Editar Comité</h1>
+</div>
+                <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li >Perfil do LC  <span class="divider">/</span></li>
+            <li class="active">Editar Comité</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+    <%= form_for(@comite) do |f| %>         
+		<div class="btn-toolbar">
+		    <button class="btn btn-primary"><i class="icon-save"></i>Update</button>
+		  <div class="btn-group">
+		  </div>
+		</div>
+		<div class="well">
+		    <ul class="nav nav-tabs">
+		      <li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
+		      <li><a href="#profile" data-toggle="tab">Change Password</a></li>
+		    </ul>
+		    <div id="myTabContent" class="tab-content">
+		      <div class="tab-pane active in" id="home">
+	    
+			  <% if @comite.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@comite.errors.count, "error") %> prohibited this comite from being saved:</h2>
+
+			      <ul>
+			      <% @comite.errors.full_messages.each do |msg| %>
+			        <li><%= msg %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+
+	    	<%= f.label :nome %><br />
+    		<%= f.text_field :nome ,:class=>"input-xlarge"%>
+	        
+	        
+	        <%= f.label :descricao %><br />
+    		<%= f.text_field :descricao,:class=>"input-xlarge" %>       
+	        
+	         <%= f.label :email %><br />
+   			 <%= f.text_field :email ,:class=>"input-xlarge"%>
+	        
+	         <%= f.label :telefone %><br />
+   			 <%= f.text_field :telefone ,:class=>"input-xlarge"%>
+	        
+	        <%= f.label :morada %><br />
+    		<%= f.text_field :morada,:class=>"input-xlarge" %>
+	        
+	        
+	          <%= f.label :email_ocp %><br />
+    		<%= f.text_field :email_ocp,:class=>"input-xlarge" %>
+		    
+			<% end %>
+	   </div>
+	        
+	<div class="tab-pane fade" id="profile">
+	    <form id="tab2">
+	    	<label>Old Password</label>
+	        <input type="password" class="input-xlarge">
+	        
+	        
+	        <label>New Password</label>
+	        <input type="password" class="input-xlarge">
+	        	        
+	        <label>Re-enter New Password</label>
+	        <input type="password" class="input-xlarge">
+	        
+	        <div>
+	            <button class="btn btn-primary">Update</button>
+	        </div>
+	    </form>
+	 </div>	
+	</div>
+	
+	<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    <h3 id="myModalLabel">Delete Confirmation</h3>
+	  </div>
+	  <div class="modal-body">
+	    
+	    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the user?</p>
+	  </div>
+	  <div class="modal-footer">
+	    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+	    <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+	  </div>

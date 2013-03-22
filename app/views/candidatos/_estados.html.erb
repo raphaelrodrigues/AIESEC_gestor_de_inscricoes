@@ -1,0 +1,35 @@
+<div class="container-fluid">
+      <div class="well">
+
+          <h1>Listing estados</h1>
+
+          <table class="table table-striped">
+            <tr>
+              <th>Nome</th>
+              <th>Data</th>
+              <th>Descricao</th>
+              <th>Responsavel</th>
+              <th>Ultima Actualização</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+
+          <% @estados.each do |estado| %>
+            <tr>
+              <td><%= estado.nome %></td>
+              <td><%= estado.data %></td>
+              <td><%= estado.descricao %></td>
+              <td><%= estado.responsavel %></td>
+              <td><%= estado.updated_at %></td>
+              <td><%= link_to 'Show', estado %></td>
+              <td><%= link_to 'Edit', edit_estado_path(estado) %></td>
+              <td><%= link_to 'Destroy', estado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+          </table>
+
+          <br />
+      </div>
+    </div>
+  </div>

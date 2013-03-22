@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  estado: false
+  tipo: 1
+  comite_id: 1
+  finished_at: 2013-03-14
+
+two:
+  estado: false
+  tipo: 1
+  comite_id: 1
+  finished_at: 2013-03-14

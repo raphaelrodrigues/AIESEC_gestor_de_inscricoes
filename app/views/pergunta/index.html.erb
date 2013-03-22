@@ -1,0 +1,35 @@
+<h1>Listing pergunta</h1>
+
+
+<div class="btn-toolbar">
+  <div class="well">
+    <table class="table table-hover">
+      <tr>
+        <th>Titulo</th>
+        <th>Descricao</th>
+        <th>Tipo</th>
+        <th>Activa</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+    <% @perguntas.each do |perguntum| %>
+      <tr>
+        <td><%= perguntum.titulo %></td>
+        <td><%= perguntum.descricao %></td>
+        <td><%= perguntum.tipo %></td>
+        <td><%= perguntum.activa %></td>
+        <td><%= link_to 'Show', perguntum %></td>
+        <td><%= link_to 'Edit', edit_perguntum_path(perguntum) %></td>
+        <td><%= link_to 'Destroy', perguntum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+
+    </table>
+
+    <br />
+
+    <%= link_to 'New Perguntum', new_perguntum_path %>
+
+  </div>

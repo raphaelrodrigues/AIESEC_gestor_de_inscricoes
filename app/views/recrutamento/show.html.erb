@@ -1,0 +1,28 @@
+<ul class="breadcrumb">
+              <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+              <li class="active">Recrutamento</li>
+</ul>
+
+<h1>Recrutamento <%= tipoToString( @recrutamento.tipo ) %></h1>
+<h3> Criado há <%=  time_ago_in_words(@recrutamento.created_at)  %> </h3>
+
+<p>
+  <b>Inicio: </b>
+  <%= @recrutamento.created_at %><P>
+  <b>Estado</b> : <%= @recrutamento.estado %><p>
+
+  <b>Pertence ao Comite </b><%= @recrutamento.comite_id %>
+</p>
+
+
+
+  <%= link_to_function "Candidatos", "$('#candidatos_recrut').slideToggle();",:class =>'btn btn-primary' %><br><br>
+  <div id="candidatos_recrut">
+   <%= render "candidatos",collection: @candidatos %>
+  </div>
+  <%= link_to_function "Formulários", "$('#formulario_recrut').slideToggle();",:class =>'btn btn-primary' %><br><br>
+  <div id="formulario_recrut">
+    <%= render "formulario",collection: @recrutamento.formulario %>
+  </div>
+
+<br />

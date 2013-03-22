@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Titulo:</b>
+  <%= @perguntum.titulo %>
+  <%= @perguntum.id %>
+</p>
+
+<p>
+  <b>Descricao:</b>
+  <%= @perguntum.descricao %>
+</p>
+
+<p>
+  <b>Tipo:</b>
+  <%= @perguntum.tipo %>
+</p>
+
+<p>
+  <b>Activa:</b>
+  <%= @perguntum.activa %>
+</p>
+
+
+<%= link_to 'Edit', edit_perguntum_path(@perguntum) %> |
+<%= link_to 'Back', pergunta_path %>

@@ -1,0 +1,5 @@
+<% if @candidatos.nil? %>
+	<h1>Não estao Abertos Recrutamentos</h1>
+<% else %>
+	<%= render "lista_candidatos" %>
+<% end %>

@@ -1,0 +1,33 @@
+<h1>Listing comites</h1>
+
+<table class="table">
+  <tr>
+    <th>Nome</th>
+    <th>Descricao</th>
+    <th>Email</th>
+    <th>Telefone</th>
+    <th>Morada</th>
+    <th>Email ocp</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @comites.each do |comite| %>
+  <tr>
+    <td><%= comite.nome %></td>
+    <td><%= comite.descricao %></td>
+    <td><%= comite.email %></td>
+    <td><%= comite.telefone %></td>
+    <td><%= comite.morada %></td>
+    <td><%= comite.email_ocp %></td>
+    <td><%= link_to 'Show', comite %></td>
+    <td><%= link_to 'Edit', edit_comite_path(comite) %></td>
+    <td><%= link_to 'Destroy', comite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Comite', new_comite_path %>

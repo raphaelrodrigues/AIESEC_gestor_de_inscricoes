@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  candidato_id: 1
+  pergunta_id: 1
+  resposta: MyText
+  tipo: 1
+
+two:
+  candidato_id: 1
+  pergunta_id: 1
+  resposta: MyText
+  tipo: 1

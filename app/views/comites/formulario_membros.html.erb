@@ -1,0 +1,9 @@
+<% if @formulario.nil? %>
+	<div id="perguntas">
+		<h1>Nao existem formularios</h1>
+	</div>
+<% else %>
+	<div id="perguntas">
+		<%= render 'show' %>
+	</div>
+<% end %>

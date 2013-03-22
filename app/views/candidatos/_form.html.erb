@@ -1,0 +1,41 @@
+<%= form_for(@candidato) do |f| %>
+  <% if @candidato.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@candidato.errors.count, "error") %> prohibited this candidato from being saved:</h2>
+
+      <ul>
+      <% @candidato.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </div>
+  <div class="field">
+    <%= f.label :telemovel %><br />
+    <%= f.text_field :telemovel %>
+  </div>
+  <div class="field">
+    <%= f.label :data_nascimento %><br />
+    <%= f.text_field :data_nascimento %>
+  </div>
+  <div class="field">
+    <%= f.label :comite_id %><br />
+    <%= f.number_field :comite_id ,:value=>current_comite.id%>
+  </div>
+  <div class="field">
+    <%= f.label :tipo %><br />
+    <%= f.number_field :tipo %>
+  </div>
+  <div class="field">
+    <%= f.label :recrutamento_id %><br />
+    <%= f.number_field :recrutamento_id ,value: current_comite.recrutamento.recrutamento_activo(1).id %>
+  </div>
+
+   <%= render 'estados/form' %>
+   
+<% end %>

@@ -1,0 +1,33 @@
+<h1>Listing candidatos</h1>
+<div class="container-fluid">
+      <div class="well">
+        <table class="table table-striped">
+          <tr>
+            <th>Nome</th>
+            <th>Telemovel</th>
+            <th>Data nascimento</th>
+            <th>Comite</th>
+            <th>Tipo</th>
+            <th>Recrutamento</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @recrutamento.candidatos.each do |candidato| %>
+          <tr>
+            <td><%= candidato.nome %></td>
+            <td><%= candidato.telemovel %></td>
+            <td><%= candidato.data_nascimento %></td>
+            <td><%= candidato.comite_id %></td>
+            <td><%= candidato.tipo %></td>
+            <td><%= candidato.recrutamento_id %></td>
+            <td><%= link_to 'Show', candidato %></td>
+            <td><%= link_to 'Edit', edit_candidato_path(candidato) %></td>
+            <td><%= link_to 'Destroy', candidato, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+        </table>
+        <br />
+    </div>
+</div>

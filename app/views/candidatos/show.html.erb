@@ -1,0 +1,56 @@
+          
+<ul class="breadcrumb">
+      <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+      <li class="active">Perfil Candidato</li>
+</ul>
+
+<p id="notice"><%= notice %></p>
+
+<h3> Registou-se há <%=  time_ago_in_words(@candidato.created_at)  %> </h3>
+<p>
+  <b>Nome:</b>
+  <%= @candidato.nome %>
+</p>
+
+<p>
+  <b>Telemovel:</b>
+  <%= @candidato.telemovel %>
+</p>
+
+<p>
+  <b>Data nascimento:</b>
+  <%= @candidato.data_nascimento %>
+</p>
+
+<p>
+  <b>Comite:</b>
+  <%= @candidato.comite_id %>
+</p>
+
+<p>
+  <b>Tipo:</b>
+  <%= @candidato.tipo %>
+</p>
+
+<p>
+  <b>Recrutamento:</b>
+  <%= @candidato.recrutamento_id %>
+</p>
+
+<!-- verifica se tem algum estado, se tiver mostra-->
+<% if  !@candidato.estados.last.nil? %>
+  <p>
+      <b>Estado Actual</b>
+      <span title="Alterar Estado" class="label label-success"><%= @candidato.estados.first.nome %></span>
+  </p>
+<% end %>
+
+<%= link_to '<i class="icon-plus"></i> Novo Estado'.html_safe, new_estado_path(:candidato=> @candidato.id) ,:class=>"btn" %>
+
+<%= render 'respostas' %>
+<%= render 'estados', collection: @estados %>
+
+
+
+<%= link_to 'Edit', edit_candidato_path(@candidato) %> |
+<%= link_to 'Back', candidatos_path %>

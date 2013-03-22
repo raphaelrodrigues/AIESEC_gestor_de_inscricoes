@@ -1,0 +1,67 @@
+   <div class="header">
+            
+     <h1 class="page-title">Listing pergunta</h1>
+   </div>
+        
+    <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li class="active">Perguntas por Comité</li>
+      </ul>
+
+ <div class="container-fluid">
+    <div class="row-fluid">
+
+        <form id="tab" class="inline">
+                <label>Comité</label>
+                <select name="DropDownComitePerguntas" id="DropDownComitePerguntas" class="input">
+                  <% @comites.each do |c| %> 
+                  <% z = params[:id] %>
+                    <option value="<%= c.id %>" <%= 'selected' if current_form?(params[:id].to_i,c.id) %> ><%= c.nome %></option>
+                 <% end %>
+                </select>
+
+        </form>
+    <!-- formulario para importar as perguntas para os formularios -->
+     <%= form_for(:perguntas, :url => {:action => 'importar_pergunta_form',:controller => 'pergunta'}) do |f| %>
+          <div class="well">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" name="select-all" id="select-all"></th>
+                  <th>Titulo</th>
+                  <th>Descricao</th>
+                  <th>Tipo</th>
+                  <th>Activa</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+            <% @perguntas.each do |perguntum| %>
+              <tr>
+                <td><%= check_box_tag 'perguntas[]', perguntum.id, false,:class=>"select-all" %></td>
+                <td><%= perguntum.titulo %></td>
+                <td><%= perguntum.descricao %></td>
+                <td><%= perguntum.tipo %></td>
+                <td><%= link_to 'Show', perguntum %></td>
+                <td><%= link_to 'Edit', edit_perguntum_path(perguntum.id) %></td>
+                <td><%= link_to 'Destroy', perguntum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+            </table>
+
+            <br />
+
+            <%= link_to 'New Perguntum', new_perguntum_path %>
+        </div>
+    </div>
+
+    <!-- se nao for do comite que tem login feito nao pode alterar o formulario -->
+
+     <div class="btn-toolbar">
+          <%= f.submit "Add Form. Membros",:class=>"btn" %>
+          <%= f.submit "Add Form. Estagios",:class=>"btn " %>
+
+  <% end %><!--fim do foumulario-->
+</div>
+

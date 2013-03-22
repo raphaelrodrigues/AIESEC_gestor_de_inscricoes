@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nome: MyString
+  comite_id: 1
+  estado: 1
+  tipo: 1
+
+two:
+  nome: MyString
+  comite_id: 1
+  estado: 1
+  tipo: 1

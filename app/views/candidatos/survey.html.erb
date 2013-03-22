@@ -1,0 +1,88 @@
+<% if @formulario.nil? %>
+    <div class="well">
+        Obrigada pelo teu interesse em te juntares à AIESEC.
+        De momento, as inscrições encontram-se fechadas!
+        Para mais informações contacta-nos pelo mail: 
+        apply@fep.aiesec.pt<br>
+        <a href="http://aiesec.pt"> Voltar</a>
+    </div>
+<% else %>
+
+    <!-- Forms
+    ================================================== -->
+    <section id="forms">
+      <div class="page-header">
+        <h1>Survey <%= @comite.nome %> para <%= @formulario.tipo %></h1>
+        <div class="fb-like" data-href="http://aiesec.pt/apply/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend" data-font="arial"></div>
+
+      </div>
+
+      <div class="row">
+        <div class="span10 offset1">
+
+          <div class="well">
+
+            <%= form_for(:respostas, :url => {:action => 'guardar_survey',:controller => 'candidatos',:id=>@comite.id,:tipo=> @formulario.tipo},:html => {:class=>"form-horizontal ",:onsubmit=>"return ;"} ) do |f| %>
+
+            <fieldset>
+            <!-- **********************************perguntas obrigatorias**********************************-->
+              <div class="control-group">
+                    <label class="control-label" >Nome*</label>
+                    <div class="controls">
+                      <input type="text" name="respostas[nome]" placeholder="Nome" >
+                      <p class="help-block"></p>
+                    </div>
+               </div>
+
+                <div class="control-group">
+                    <label class="control-label" >Telemovel*</label>
+                    <div class="controls">
+                      <input type="text" name="respostas[telemovel]" placeholder="Telemovel" >
+                      <p class="help-block"></p>
+                    </div>
+               </div>
+
+               <div class="control-group">
+                    <label class="control-label" >Data de Nascimento*</label>
+                    <div class="controls">
+
+                      <input type="text" name="respostas[data_nascimento]" placeholder="ex 19/09/1990" class="datepicker">
+                      <p class="help-block"></p>
+                    </div>
+               </div>
+
+              
+              <legend>Questionário</legend>
+               <% @perguntas_form.each do |p| %>
+                  <% pergunta = p.perguntum %>
+
+                  <div class="control-group">
+                    <label class="control-label" >
+                      <%= pergunta.titulo %>
+                      <%= e_obrigatoria?(p.obrigatoria) %><!--verifica se é obrigatoria-->
+                    </label>
+                    <div class="controls">
+                      <%= tipo_input(pergunta.tipo,"de",p.obrigatoria) %>
+                      <input type="hidden" name="respostas[id][]" placeholder="Resposta" value="<%= pergunta.id %>">
+                      <!--<input type="text" name="respostas[resposta][]" placeholder="Resposta" >-->
+                      <p class="help-block"><%= pergunta.descricao %> </p>
+                    </div>
+                  </div>
+               <% end %>
+               
+            </fieldset>
+
+            <div class="form-actions">
+              <%= f.submit "Submeter",:class=>"btn btn-primary" %>
+              <button type="reset" class="btn">Cancel</button>
+            </div>
+
+        <%end %>
+
+        <!-- **********************************fim do formulario**********************************-->
+        </div>
+      </div>
+      </div>
+
+    </section>
+<% end %><!-- fim do else -->

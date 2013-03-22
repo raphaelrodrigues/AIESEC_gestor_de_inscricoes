@@ -1,0 +1,63 @@
+  <div class="header">
+            
+        <h1 class="page-title">Inscrições</h1>
+        </div>
+        
+                <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li><a href="#">AIESEC in Minho</a> <span class="divider">/</span></li>
+            <li class="active">Gerir Inscrições</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+            </div>
+        
+	 <form id="tab">
+      <div class="well">
+          <div class="alert alert-block">
+		    <button type="button" class="close" data-dismiss="alert">&times;</button>
+		    
+		    Atenção que a epoca oficial ainda não começou!
+		  </div>
+       <label>Data de abertura oficial AIESEC: 20-03-2012</label>
+       
+        <table class="table">
+              <thead>
+                <tr>
+                  <th>Insrciçoes</th>
+                  <th>Membros</th>
+                  <th>Estágio</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AIESEC Minho</td>
+                  <td><span title="Alterar Estado" class="label label-success">Abertas</span></td>
+                  <td><a href="#myModal" data-toggle="modal"> <span class="label label-important">Fechadas</span></a></td>
+                </tr>
+              </tbody>
+        </table>
+
+<%= link_to "Abrir Recrutamento Membros",abrir_recrutamento_path(:tipo=> 1), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+
+<%= link_to "Abrir Inscricoes Membro",abrir_inscricoes_path(:tipo=> 1), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+
+<%= link_to "Abrir Recrutamento Estagios",abrir_recrutamento_path(:tipo=> 2), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+
+<%= link_to "Abrir Inscricoes Membro",abrir_inscricoes_path(:tipo=> 2), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+	
+	
+<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Delete Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the user?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+    </div>
+</div>

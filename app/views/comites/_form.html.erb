@@ -1,0 +1,53 @@
+<%= form_for(@comite) do |f| %>
+  <% if @comite.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comite.errors.count, "error") %> prohibited this comite from being saved:</h2>
+
+      <ul>
+      <% @comite.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </div>
+ <div class="field">
+   <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+   </p>
+  </div>
+  <div class="field">
+   <p>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+    </p>
+  </div>
+  <div class="field">
+    <%= f.label :descricao %><br />
+    <%= f.text_field :descricao %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :telefone %><br />
+    <%= f.text_field :telefone %>
+  </div>
+  <div class="field">
+    <%= f.label :morada %><br />
+    <%= f.text_field :morada %>
+  </div>
+  <div class="field">
+    <%= f.label :email_ocp %><br />
+    <%= f.text_field :email_ocp %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  titulo: MyString
+  descricao: MyString
+  tipo: 1
+  activa: false
+  formulario_id: 1
+
+two:
+  titulo: MyString
+  descricao: MyString
+  tipo: 1
+  activa: false
+  formulario_id: 1

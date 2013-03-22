@@ -1,0 +1,79 @@
+<!-- Forms
+================================================== -->
+<section id="forms">
+  <div class="page-header">
+    <h1>Inscrições online da AIESEC em Portugal</h1>
+    <h4>
+      Obrigada pelo teu interesse em te juntares à AIESEC. 
+A seguinte informação vai permitir que o escritório local da tua universidade te contacte para prosseguir com o processo de selecção. Ficamos à espera de te encontrar brevemente na nossa network global!
+    </h4>
+
+
+  </div>
+
+
+
+  <div class="row">
+    <div class="span10 offset1">
+
+      <div class="well">
+
+        <%= form_for(:cenas, :url => {:action => 'survey',:controller => 'candidatos'},:html => {:class=>"form-horizontal "}) do |f| %>
+
+          <div class="control-group">
+            <label class="control-label" for="select01">Estabelecimento de Ensino</label>
+            <div class="controls">
+              <%= f.select :comite, options_for_select([["Estabelecimento", "null"],["Uminho", "1"], ["Coimbra", "2"]]) %>
+            </div>
+            <p class="help-block" id="comite_esta_ensino">&nbsp;</p>
+
+            
+          </div>
+
+
+
+          <div class="field">
+                      <%= f.hidden_field :tipo,:id =>"btn-input-tipo", :value =>  1 %>
+          </div>
+
+
+          <div class="control-group">
+            <label class="control-label" for="select01">Tipo</label>
+            <div class="controls">
+                              <div class="btn-group" data-toggle="buttons-radio">
+                              <button  type="button" class="btn active" value="1" onClick="$('#btn-input-tipo').val( $(this).val() );" >
+                                &nbsp;&nbsp;Membro&nbsp;&nbsp;&nbsp;
+                              </button>
+
+                              
+                              <button type="button" class="btn " value="2" onClick="$('#btn-input-tipo').val( $(this).val() );">
+                                &nbsp;&nbsp;Estágio&nbsp;&nbsp;
+                              </button>
+
+              </div><br><br>
+               <p class="help-block">
+                                  Membro* Experiência de trabalho na gestão de um escritório da AIESEC em Portugal. 
+Clica aqui para mais informações
+                              </p>
+                               <p class="help-block">
+                                Estágio* Experiência profissional ou de voluntariado no estrangeiro. 
+Clica aqui para mais informações
+                              </p>
+          </div>
+       </div>
+
+
+        <div class="form-actions">
+          <%= f.submit "     Seguir     ",:class=>"btn btn-primary ",:id=>"btn-seguir",:disabled=>true %>
+          <button type="reset" class="btn">Cancel</button>
+        </div>
+
+    <%end %>
+
+    <!-- **********************************fim do formulario**********************************-->
+    </div>
+    
+  </div>
+  </div>
+
+</section>

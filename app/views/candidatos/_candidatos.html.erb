@@ -1,0 +1,48 @@
+<div class="container-fluid">
+      <div class="well">
+        <table class="table table-hover sortable1">
+          <thead>
+            <tr>
+              <th><input type="checkbox" name="select-all" id="select-all"></th>
+              <th data-sort="Nome">Nome</th>
+              <th>Telemovel</th>
+              <th data-sort="Data">Data nascimento</th>
+              <th data-sort="DataR">Data Registo</th>
+              <th data-sort="Comite" >Comite</th>
+              <th data-sort="Tipo">Tipo</th>
+              <th>Recrut</th>
+              <th data-sort="Estado">Estado</th>
+              <th style="width: 26px;"></th>
+              <th style="width: 26px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @candidatos.each do |candidato| %>
+              <tr>
+                <td><%= check_box_tag 'candidatos[]', candidato.id, false,:class=>"select-all" %></td>
+                <td><%= candidato.nome %></td>
+                <td><%= candidato.telemovel %></td>
+                <td><%= candidato.data_nascimento %></td>
+                <td><%= candidato.created_at.strftime('%d %b') %></td>
+                <td><%= candidato.comite_id %></td>
+                <td><%= candidato.tipo %></td>
+                <td><%= candidato.recrutamento_id %></td>
+                <td>
+                  <%=  estadoToLabel(candidato.estados.first) %>
+                </td>
+                <td><%= link_to 'Show', candidato %></td>
+                <td>
+                    <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_candidato_path(candidato)%>
+                    <%= link_to '<i class="icon-remove"></i>'.html_safe, candidato, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+
+</div>
+
+

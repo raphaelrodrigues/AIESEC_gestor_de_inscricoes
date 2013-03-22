@@ -1,0 +1,29 @@
+<h1>Listing pergunta_forms</h1>
+
+<table>
+  <tr>
+    <th>Pergunta</th>
+    <th>Ordem</th>
+    <th>Obrigatoria</th>
+    <th>Formulario</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pergunta_forms.each do |pergunta_form| %>
+  <tr>
+    <td><%= pergunta_form.perguntum_id %></td>
+    <td><%= pergunta_form.ordem %></td>
+    <td><%= pergunta_form.obrigatoria %></td>
+    <td><%= pergunta_form.formulario_id %></td>
+    <td><%= link_to 'Show', pergunta_form %></td>
+    <td><%= link_to 'Edit', edit_pergunta_form_path(pergunta_form) %></td>
+    <td><%= link_to 'Destroy', pergunta_form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pergunta form', new_pergunta_form_path %>

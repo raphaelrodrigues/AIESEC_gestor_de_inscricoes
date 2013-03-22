@@ -1,0 +1,115 @@
+<div class="header">
+            
+            <h1 class="page-title">Nova Pergunta</h1>
+        </div>
+        
+                <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li><a href="users.html">Formulário</a> <span class="divider">/</span></li>
+            <li class="active">Nova Pergunta</li>
+        </ul>
+
+    <div class="container-fluid">
+       <div class="row-fluid">
+        <div class="btn-toolbar">
+   
+          </div>
+          <div class="well">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#home" data-toggle="tab">Nova Pergunta</a></li>
+              </ul>
+              <div id="myTabContent" class="tab-content">
+                <div class="tab-pane active in" id="home">
+                              
+                <%= form_for( @perguntum ) do |f| %>
+                  <% if @perguntum.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@perguntum.errors.count, "error") %> prohibited this perguntum from being saved:</h2>
+
+                      <ul>
+                      <% @perguntum.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                      <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+                  <div class="field">
+                    <%= f.label :titulo %><br />
+                    <%= f.text_field :titulo %>
+                  </div>
+                  <div class="field">
+                    <%= f.label :descricao %><br />
+                    <%= f.text_field :descricao,:value=>"descricao" %>
+                  </div>
+
+                  <!--campo de TIPO -->
+                   <div class="field">
+                      <%= f.hidden_field :tipo,:id =>"btn-input-tipo", :value =>  1 %>
+                    </div>
+                    <label>Tipo</label>
+                      <div class="btn-group" data-toggle="buttons-radio">
+                      <button type="button" class="btn active" value="1" onClick="$('#btn-input-tipo').val( $(this).val() );">
+                        Resposta Aberta
+                      </button>
+                      <button type="button" class="btn " value="2" onClick="$('#btn-input-tipo').val( $(this).val() );">
+                        CheckBox
+                      </button>
+                      <button type="button" class="btn " value="3" onClick="$('#btn-input-tipo').val( $(this).val() );">
+                        ComboBox
+                      </button>
+                      <button type="button" class="btn " value="4" onClick="$('#btn-input-tipo').val( $(this).val() );">
+                        Radio Box
+                      </button>
+                    </div>
+
+                  <!-- END -->
+
+                  <div class="field">
+                    <%= f.label :comite_id %><br />
+                    <%= f.number_field :comite_id,value:current_comite.id %>
+                  </div>
+
+
+                  <div class="field">
+                    <%= f.label :activa %><br />
+                    <%= f.check_box :activa, :checked=>true %>
+                  </div>
+
+                  
+                  <% if !params[:name].blank? || !@perguntum.pergunta_forms.nil? %>
+                     <%= render 'pergunta_forms/form' %>
+                  <% else %>
+                      <%= f.submit %>
+                  <% end %>
+
+
+
+                <% end %>
+
+
+        <br>
+
+          <label>Opções</label>
+            <div class="btn-group" data-toggle="buttons-toggle">
+          <button type="button" class="btn " >Incluir</button>
+          <button type="button" class="btn " >Obrigatória</button>
+          <button type="button" class="btn " >Adicionar ao Formulário Estágio</button>
+          <button type="button" class="btn " >Adicionar ao Formulário Membros</button>
+        </div>
+        <br>
+
+      </div>
+      
+    
+  </div>
+  
+  
+
+</div>
+
+ <button class="btn btn-primary"><i class="icon-save"></i>Guardar</button>
+    <a href="#myModal" data-toggle="modal" class="btn">Apagar</a>
+  <div class="btn-group">
+  
+  </div>

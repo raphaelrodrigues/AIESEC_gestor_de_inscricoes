@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nome: MyString
+  telemovel: MyString
+  data_nascimento: MyString
+  comite_id: 1
+  tipo: 1
+  recrutamento_id: 1
+
+two:
+  nome: MyString
+  telemovel: MyString
+  data_nascimento: MyString
+  comite_id: 1
+  tipo: 1
+  recrutamento_id: 1

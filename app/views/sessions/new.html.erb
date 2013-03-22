@@ -1,0 +1,26 @@
+<div class="row-fluid">
+    <div class="dialog">
+        <div class="block">
+            <p class="block-heading">Sign In</p>
+            <div class="block-body">
+                <%= form_tag sessions_path do %>
+                    <%= label_tag "Comité" %><br />
+                    <%= text_field_tag :nome, params[:nome], :class=>"span9",:placeholder=>"Comité"%>
+
+                    <%= label_tag :password %><br />
+                    <%= password_field_tag :password ,:class=>"span10"%>
+
+                    
+                    
+                    <%= label_tag :remember_me %>
+                     <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+                    <p class="button"><%= submit_tag "Log in" ,:class=>"btn btn-primary pull-right"%></p>
+                <% end %>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+        <p class="pull-right" style=""><a href="http://www.portnine.com" target="blank">AIESEC</a></p>
+        <p><a href="reset-password.html">Forgot your password?</a></p>
+    </div>
+</div>

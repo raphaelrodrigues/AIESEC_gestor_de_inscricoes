@@ -1,0 +1,83 @@
+        <div class="header">
+            
+         <div class="stats">
+                <p class="stat"><span class="number">10</span>Aceites</p>
+                <p class="stat"><span class="number">30</span>Contactados </p>
+                <p class="stat"><span class="number">15</span>Intermédio</p>
+            
+         </div>
+            
+        <h1 class="page-title">Estágiarios</h1>
+        </div>
+        
+                <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li class="active">Users</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+<div class="btn-toolbar">
+
+     <form id="tab">
+       
+        <label>Comité</label>
+        <select name="DropDownTimezone" id="DropDownTimezone" class="input">
+          <option value="-12.0">Minho</option>
+          <option value="-12.0">Aveiro</option>
+          <option value="-11.0">Todos</option>
+        </select>
+    </form>
+    
+
+
+  <%= form_tag candidatos_path, :method => 'get'  ,:class => 'form-inline', :id=>'candidatos_search' do  %>
+         
+      <%= text_field_tag :nome, params[:nome], :class =>"span3 search-input",:placeholder => "Pesquisa...",:autocomplete=>"off" %>
+    
+
+
+        <label class="naLinha"></label>
+        <select name="DropDownTimezone" id="DropDownTimezone" class="naLinha">
+          <option value="-12.0">Qualquer</option>
+          <option value="-12.0">Data</option>
+          <option value="-11.0">Nome</option>
+        </select>
+        
+         <button class="btn" type="button"><i class="icon-search"></i> Go</button>
+    
+    
+    
+  </div>
+
+    <div id="candidatos_lista">
+      <%= render :partial => 'candidatos' %>
+    </div>
+
+    <div class="paginate">
+      <%= will_paginate @candidatos, :inner_window => 2 %>
+    </div>
+
+    <div class="btn-toolbar">
+      <button class="btn btn-primary"><i class="icon-save"></i> Send Mail</button>
+      <a href="#myModal" data-toggle="modal" class="btn btn-danger">Delete</a>
+      <a href="#myModal" data-toggle="modal" class="btn ">Mudar Estado</a>
+      <%= link_to 'New User', new_candidato_path,:class => 'btn' %>
+  <div class="btn-group">
+
+<% end %>
+    
+        <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Delete Confirmation</h3>
+            </div>
+            <div class="modal-body">
+                <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the user?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+            </div>
+        </div>
