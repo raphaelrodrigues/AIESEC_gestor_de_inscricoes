@@ -1,5 +1,7 @@
 Gestor::Application.routes.draw do
   
+  map.root :controller => "comites" 
+  
   resources :estados
 
   resources :candidatos do
@@ -50,8 +52,7 @@ Gestor::Application.routes.draw do
   get "inscricoes" => "comites#inscricoes", :as => "inscricoes"
   get "profile" => "comites#show", :as => "profile"
 
-  root :to => "comites#index"
-
+  
 
   get "perguntas_comite/:id" => "pergunta#perguntas_comite",:as =>"perguntas_comite"
 
