@@ -167,8 +167,8 @@ class ComitesController < ApplicationController
 
     respond_to do |format|
       if @comite.save
-         format.html { redirect_to log_in, notice: 'Comite was successfully created.' }
-            format.json { render json: @comite, status: :created, location: log_in }
+         format.html { redirect_to log_in_path, notice: 'Comite was successfully created.' }
+            format.json { render json: @comite, status: :created, location: log_in_path }
       else
         format.html { render action: "new" }
         format.json { render json: @comite.errors, status: :unprocessable_entity }
