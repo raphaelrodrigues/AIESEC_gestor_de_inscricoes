@@ -11,7 +11,7 @@ class Recrutamento < ActiveRecord::Base
   default_scope order('created_at DESC')
 
   def self.recrutamento_activo(tipo)
-  	where('estado = false and tipo = ?',tipo)[0]
+  	where('estado = true and tipo = ?',tipo)[0]
   end
 
   def abre_inscricao

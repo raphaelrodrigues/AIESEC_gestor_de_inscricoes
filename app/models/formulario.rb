@@ -8,6 +8,6 @@ class Formulario < ActiveRecord::Base
   has_many :pergunta_forms
 
   def self.formulario_activo(tipo)
-  	where('estado = false and tipo = ?',tipo)[0]
+  	where('estado = true and tipo = ?',tipo)[0]
   end
 end
