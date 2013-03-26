@@ -23,10 +23,10 @@ class RecrutamentoController < ApplicationController
 
 
   def abrir_recrutamento_m
-  	tipo = params[:tipo].to_i   									   #tipo=1 é pra membros e tipo=2 é pra estagios
-  	@comite = Comite.find(current_comite)  			       #seleciona o comite pelo o id que esta no request
+  	tipo = params[:tipo].to_i   									           #tipo=1 é pra membros e tipo=2 é pra estagios
+  	@comite = Comite.find(current_comite)  			             #seleciona o comite pelo o id que esta no request
 
-  	if !@comite.recrutamento.recrutamento_activo(tipo).nil?
+  	if !@comite.recrutamento.recrutamento_activo(tipo).nil?  #quando não existe nenhum recrutamento activo
   		r = @comite.recrutamento.recrutamento_activo(tipo)
   		r.fecha_inscricao
   	end

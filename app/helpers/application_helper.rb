@@ -50,10 +50,17 @@ module ApplicationHelper
 
   #retorna qual o input
   def tipo_input(tipo,nome,obrigatoria)
-    if tipo == 1
+    case tipo
+    when 1
       text_field_tag 'respostas[resposta][]', nil,:required => obrigatoria,:placeholder=> nome
-    else
+    when 4
         html = "<input type='checkbox' name='respostas[resposta][]' value='1'>".html_safe 
+        html << "<input type='hidden'  name='respostas[resposta][]'  value='0' />".html_safe 
+    when 3
+        html = "<input type='comboxbox' name='respostas[resposta][]' value='1'>".html_safe 
+        html << "<input type='hidden'  name='respostas[resposta][]'  value='0' />".html_safe 
+    when 2
+        html = "<input type='radiobox' name='respostas[resposta][]' value='1'>".html_safe 
         html << "<input type='hidden'  name='respostas[resposta][]'  value='0' />".html_safe 
     end
  end
@@ -62,6 +69,20 @@ module ApplicationHelper
   if obrigatoria
     return "**".html_safe
   end
+ end
+
+ #verifica qual a pagina em que está
+ # para poder alterar o caminho da pesquisa
+ # a pesquisa é feita  nos candidatos membros ou candidatos estagios
+ # esta funcao altera a o caminho do form de pesquisa
+ def getPathSearch
+
+  if current_page?(candidatos_membros_path)
+      candidatos_membros_path
+  else
+      candidatos_estagios_path
+  end
+
  end
 
 

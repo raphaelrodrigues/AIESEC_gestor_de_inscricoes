@@ -34,4 +34,20 @@ Gestor::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  #CONFIG MAIL
+  config.action_mailer.raise_delivery_errors = true
+
+  # set delivery method to :smtp, :sendmail or :test
+  config.action_mailer.delivery_method = :smtp
+
+  # these options are only needed if you choose smtp delivery
+  config.action_mailer.smtp_settings = {
+    :address        => 'smtp.example.com',
+    :port           => 25,
+    :domain         => 'www.example.com',
+    :authentication => :login,
+    :user_name      => 'www',
+    :password       => 'secret'
+  }
 end

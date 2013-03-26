@@ -18,9 +18,28 @@
 
 $(document).ready(function() {
   
-  $('.datepicker').datepicker();
-  
-  
+  //$(".sortable1").stupidtable();
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear()-17, nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  var startDate = new Date("1990","01", "01", 0, 0, 0, 0);
+  var checkin = $('.datepicker').datepicker({
+    format: 'dd/mm/yyyy',
+    autoclose: true,
+    onRender: function(date) {
+      return date.valueOf() > now.valueOf() ? 'disabled' : '';
+    }
+  }).on('changeDate', function(ev) {
+    if (ev.date.valueOf() > checkout.date.valueOf()) {
+      var newDate = new Date(ev.date)
+      newDate.setDate(newDate.getDate() + 1);
+      checkout.setValue(newDate);
+    }
+    checkin.hide();
+    $('.datepicker')[0].focus();
+  }).data('datepicker');
+
+
+
   $(window).bind('beforeunload', function(){ 
      if (window.location == "http://localhost:3000/formulario_membros/1")
      {
@@ -38,7 +57,6 @@ $(document).ready(function() {
     if( $(this).hasClass('allowEnter') == false )
       if(e.which == 13) 
             e.preventDefault(); // Stops from triggering the button to be clicked
-      
   });
   
   /*
@@ -57,7 +75,7 @@ $(document).ready(function() {
       }
 
 
-  });
+   });
 
 
     var pobj = null;
@@ -77,18 +95,6 @@ $(document).ready(function() {
               
               //$.post("/formularios/1/reorder", pobj);
             }
-
-
-
-
-            // var item = ui.item;
-            // var container = item.parent();
-            // var reorder = [];
-            // container.children('tr').each(function(i){
-            //     // save the item id order in array
-            //     reorder[i] = $(this).attr('id');
-            //     //alert($(this).attr('id'));
-            // });
 
     }).disableSelection();
 
@@ -152,11 +158,12 @@ $(document).ready(function() {
   * Procura de candidatos por AJAX
   */
   $("#candidatos_search input").keyup(function() {
+        //alert($("#candidatos_search").attr("action"));
         $.get($("#candidatos_search").attr("action"), $("#candidatos_search").serialize(), null,     "script");
         return false;
   });
 
-  $(".sortable1").stupidtable();
+  
 
 
   /*

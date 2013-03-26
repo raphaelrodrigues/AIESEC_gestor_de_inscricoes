@@ -1,10 +1,10 @@
 Gestor::Application.routes.draw do
   
-
   resources :estados
 
   resources :candidatos do
     member do
+     
       post :guardar_survey
     end
   end
@@ -73,6 +73,8 @@ Gestor::Application.routes.draw do
   get "help" => "comites#help",:as =>"help"
   get "dashboard" => "comites#dashboard",:as =>"dashboard"
 
+
+  post "edit_candidatos" =>"candidatos#edit_candidatos"
 
   #get 'formularios/:id/muda' => 'formularios#muda'
 

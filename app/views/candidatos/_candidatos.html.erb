@@ -1,48 +1,109 @@
-<div class="container-fluid">
-      <div class="well">
-        <table class="table table-hover sortable1">
-          <thead>
-            <tr>
-              <th><input type="checkbox" name="select-all" id="select-all"></th>
-              <th data-sort="Nome">Nome</th>
-              <th>Telemovel</th>
-              <th data-sort="Data">Data nascimento</th>
-              <th data-sort="DataR">Data Registo</th>
-              <th data-sort="Comite" >Comite</th>
-              <th data-sort="Tipo">Tipo</th>
-              <th>Recrut</th>
-              <th data-sort="Estado">Estado</th>
-              <th style="width: 26px;"></th>
-              <th style="width: 26px;"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @candidatos.each do |candidato| %>
+<%= form_for(:candidatos, :url => {:action => 'edit_candidatos',:controller => 'candidatos'},:multipart => true) do |f| %>
+
+  <div class="container-fluid">
+        <div class="well">
+          <table class="table table-hover sortable1">
+            <thead>
               <tr>
-                <td><%= check_box_tag 'candidatos[]', candidato.id, false,:class=>"select-all" %></td>
-                <td><%= candidato.nome %></td>
-                <td><%= candidato.telemovel %></td>
-                <td><%= candidato.data_nascimento %></td>
-                <td><%= candidato.created_at.strftime('%d %b') %></td>
-                <td><%= candidato.comite_id %></td>
-                <td><%= candidato.tipo %></td>
-                <td><%= candidato.recrutamento_id %></td>
-                <td>
-                  <%=  estadoToLabel(candidato.estados.first) %>
-                </td>
-                <td><%= link_to 'Show', candidato %></td>
-                <td>
-                    <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_candidato_path(candidato)%>
-                    <%= link_to '<i class="icon-remove"></i>'.html_safe, candidato, method: :delete, data: { confirm: 'Are you sure?' } %>
-                </td>
+                <th><input type="checkbox" name="select-all" id="select-all"></th>
+                <th data-sort="Nome">Nome</th>
+                <th>Telemovel</th>
+                <th data-sort="Data">Idade</th>
+                <th data-sort="DataR">Data Registo</th>
+                <th data-sort="Comite" >Comite</th>
+                <th data-sort="Tipo">Tipo</th>
+                <th>Recrut</th>
+                <th data-sort="Estado">Estado</th>
+                <th style="width: 26px;"></th>
+                <th style="width: 26px;"></th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <% @candidatos.each do |candidato| %>
+                <tr>
+                  <td><%= check_box_tag 'candidatos[]', candidato.id, false ,:class=>"select-all" %></td>
+                  <td><%= candidato.nome %></td>
+                  <td><%= candidato.telemovel %></td>
+                  <td><%= age(candidato.data_nascimento) %></td>
+                  <td><%= candidato.created_at.strftime('%d %b') %></td>
+                  <td><%= candidato.comite_id %></td>
+                  <td><%= candidato.tipo %></td>
+                  <td><%= candidato.recrutamento_id %></td>
+                  <td>
+                    <%=  estadoToLabel(candidato.estados.first) %>
+                  </td>
+                  <td><%= link_to 'Show', candidato %></td>
+                  <td>
+                      <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_candidato_path(candidato)%>
+                      <%= link_to '<i class="icon-remove"></i>'.html_safe, candidato, method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
     </div>
+
+      <div class="btn-toolbar">
+          <a href="#myModalMail" data-toggle="modal" class="btn btn-danger">Delete</a>
+          <a href="#myModalEstado" data-toggle="modal" class="btn ">Mudar Estado</a>
+          <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i>Mudar Estado</button>
+          <%= f.submit "Import",:class=>"btn" %>
+      <div class="btn-group">
   </div>
 
 
-</div>
+   <!-- Modal MAIL-->
+<div id="myModalMail" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Modal header</h3>
+    </div>
+    <div class="modal-body">
+       <form class="form-horizontal">
+        <fieldset>
+          <div class="control-group">
+           
+              <input type="text" placeholder="name" class="input-xlarge"/>
+           
+          </div>
+       <div class="control-group">
+           
+              <input type="text" placeholder="email" class="input-xlarge"/>
+           
+          </div>
+       <div class="control-group">
+           
+              <input type="text" placeholder="subject" class="input-xlarge"/>
+          
+          </div>
+          <div class="control-group">
+              <textarea rows="3" id="textarea" class="input-xlarge"></textarea>
+           
+          </div>
 
+        </fieldset>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Send Mail</button>
+    </div>
+  </div>
 
+     <!-- Modal ESTDO-->
+<div id="myModalEstado" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Modal header</h3>
+    </div>
+    <div class="modal-body">
+       <%= render 'form_estados' %>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Mudar Estado</button>
+    </div>
+  </div>
+
+<% end %><!--fim do form-->

@@ -14,7 +14,7 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
   def candidatos_membros
    recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                                        #vai buscar o recrutamento que esta activo
    @candidatos = recrutamento.candidatos.search(params[:search],params[:page]) unless  recrutamento.nil?    #vai buscar os candidatos desse recrutamento
-
+   @estado = Estado.new
   end
 
   def candidatos_estagios
@@ -23,6 +23,41 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
   
   end
 
+  # altera propriedades das perguntas de um formulario
+  # para esta action é passado como argumentos as comboxbox
+  # que foram selecionadas nos formulario
+  # para cada uma delas é feita a accao que se deseja
+    # altera propriedades das perguntas de um formulario
+  # para esta action é passado como argumentos as comboxbox
+  # que foram selecionadas nos formulario
+  # para cada uma delas é feita a accao que se deseja
+  def edit_candidatos
+    r = formulario_membros_path(current_comite.id)
+
+    if !params[:candidatos].nil?
+      val = params[:candidatos]
+      case params[:commit]
+          when "Import"
+            r = formulario_membros_path(current_comite.id)
+          when "Mudar Estado"
+            val.each do |v|
+                candidato = Candidato.find(v)
+                params[:estado][:candidato_id] = v.to_i
+                estado = candidato.estados.build(params[:estado])
+                estado.save
+             end
+             r = candidatos_membros_path
+      end
+
+    end #fim do if
+      respond_to do |format|
+              format.html { redirect_to  r}
+              format.json { head :no_content }
+      end
+
+    
+
+  end
 
 
   # GET /candidatos/1
@@ -74,9 +109,9 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
      @comite = Comite.find(params[:id])
 
      @formulario = @comite.formularios.formulario_activo(params[:tipo])
-     @candidato = Candidato.new(nome: val[:nome],telemovel: val[:telemovel],data_nascimento: val[:data_nascimento],comite_id: @comite.id,tipo: params[:tipo],recrutamento_id: @formulario.recrutamento.id)
+     @candidato = Candidato.novo(val,params[:tipo],@comite.id,@formulario.recrutamento.id) #cria um novo candidato
 
-     @perguntas = @formulario.pergunta_forms
+     @perguntas = @formulario.pergunta_forms             #vai buscar todas as perguntas do formulario
      
      n = 0
      if @candidato.save

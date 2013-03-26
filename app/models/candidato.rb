@@ -13,4 +13,9 @@ class Candidato < ActiveRecord::Base
            :conditions => ['nome like ?', "%#{nome}%"]
   end
 
+  #Para que o controller nao fique tao grande
+  def self.novo(val,tipo,comite_id,recrutamento_id)
+  	new(nome: val[:nome],telemovel: val[:telemovel],data_nascimento: val[:data_nascimento],comite_id: comite_id,tipo: tipo,recrutamento_id: recrutamento_id)
+  end
+
 end

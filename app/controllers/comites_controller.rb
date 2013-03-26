@@ -25,6 +25,12 @@ class ComitesController < ApplicationController
     end
   end
 
+  #metodo que guarda a ordem das perguntas 
+  #com o drag&drop podemos alterar a sua ordem
+  #no javascript é lancado um pedido para para executar este metodo
+  #o js manda um array com os valores dos id' s das perguntas
+  #ex params[:respostas]=[2,4,5]
+  #ele vai a cada uma das perguntas e altera a sua ordem
   def reorder
     perguntas_ids = params[:perguntas]
     n = 1
@@ -109,17 +115,13 @@ class ComitesController < ApplicationController
 
 
 
-  #metodo que guarda a ordem das perguntas 
-  #com o drag&drop podemos alterar a sua ordem
-  #no javascript é lancado um pedido para para executar este metodo
-  #o js manda um array com os valores dos id' s das perguntas
-  #ex params[:respostas]=[2,4,5]
-  #ele vai a cada uma das perguntas e altera a sua ordem
+ 
   def guardar
-     val = params[:respostas]
-     @comite = Comite.find(params[:id])
+      val = params[:respostas]
+      @comite = Comite.find(params[:id])
       @formulario = @comite.formularios[0]
       @perguntas = @formulario.perguntum
+
       n = 0
       @perguntas.each do |p|
         Respostum.new(pergunta_id:params[:respostas][:id][n],resposta:params[:respostas][:resposta][n]).save
@@ -163,25 +165,8 @@ class ComitesController < ApplicationController
 
     respond_to do |format|
       if @comite.save
-        # #cria dois formularios
-        # @recrutamento_m = Recrutamento.new(estado: true,tipo: 1, comite_id: @comite.id)
-        # @recrutamento_e = Recrutamento.new(estado: true,tipo: 2, comite_id: @comite.id)
-
-       
-        # if @recrutamento_m.save  && @recrutamento_e.save
-        #    @formulario_membro = Formulario.new(:nome=>"Formulario Membros",:comite_id=> @comite.id , :tipo=>1, :recrutamento_id=> @recrutamento_m.id)
-        #    @formulario_estagio = Formulario.new(:nome=>"Formulario Estagio",:comite_id=> @comite.id ,:tipo=>2,:recrutamento_id=> @recrutamento_e.id)
-
-        #   if   @formulario_membro.save && @formulario_estagio.save
-        #     format.html { redirect_to @comite, notice: 'Comite was successfully created.' }
-        #     format.json { render json: @comite, status: :created, location: @comite }
-        #   end
-        # else
-        #    format.html { render action: "new" }
-        #    format.json { render json: @comite.errors, status: :unprocessable_entity }
-        # end
-         format.html { redirect_to @comite, notice: 'Comite was successfully created.' }
-            format.json { render json: @comite, status: :created, location: @comite }
+         format.html { redirect_to log_in, notice: 'Comite was successfully created.' }
+            format.json { render json: @comite, status: :created, location: log_in }
       else
         format.html { render action: "new" }
         format.json { render json: @comite.errors, status: :unprocessable_entity }
