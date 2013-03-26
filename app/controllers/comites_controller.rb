@@ -84,8 +84,10 @@ class ComitesController < ApplicationController
       @formulario_membro_novo  = @comite.formularios.build(:nome=>"Formulario Estagios",:comite_id=> @comite.id,:tipo=>2)
     end
 
-    @formulario.estado = 0                                         #altera o estado do formulario antigo outro para 0
-    @formulario.save                                               #salva o formulario antigo
+    if !@formulario.nil?
+      @formulario.estado = 0                                         #altera o estado do formulario antigo outro para 0
+      @formulario.save  
+    end                                             #salva o formulario antigo
     
     @formulario_membro_novo.save                                   #guarda o formulario novo
 
