@@ -1,9 +1,10 @@
 <% if @formulario.nil? %>
     <div class="well">
+      <%= @comite.nome %>
         Obrigada pelo teu interesse em te juntares à AIESEC.
         De momento, as inscrições encontram-se fechadas!
         Para mais informações contacta-nos pelo mail: 
-        apply@fep.aiesec.pt<br>
+        <%= @comite.email%><br>
         <a href="http://aiesec.pt"> Voltar</a>
     </div>
 <% else %>

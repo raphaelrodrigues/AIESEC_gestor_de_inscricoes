@@ -18,7 +18,7 @@ module CandidatosHelper
 	end
 
 	def getUltimoUpdate
-		if @estados.nil?
+		if @estados.blank?
 			"Sem alteracoes"
 		else
 			@estados.first.updated_at.to_formatted_s(:short)
