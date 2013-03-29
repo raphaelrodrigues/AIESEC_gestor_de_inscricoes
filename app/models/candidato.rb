@@ -1,5 +1,5 @@
 class Candidato < ActiveRecord::Base
-  attr_accessible :comite_id, :data_nascimento,:email, :nome, :recrutamento_id, :telemovel, :tipo
+  attr_accessible :comite_id, :data_nascimento, :nome, :recrutamento_id, :telemovel, :tipo,:email
 
   has_many :respostas
   has_many :estados
