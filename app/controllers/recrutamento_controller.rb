@@ -72,9 +72,21 @@ class RecrutamentoController < ApplicationController
   	respond_to do |format|
 	      format.html { redirect_to formulario_membros_path(@comite) }
 	      format.json { head :no_content }
-	end
+	  end
   end
 
+  def fechar_inscricoes
+    tipo = params[:tipo].to_i                        #tipo=1 é pra membros e tipo=2 é pra estagios
+    @comite = Comite.find(current_comite.id)                     #seleciona o comite pelo o id que esta no request
+
+    @recrutamento = @comite.recrutamento.recrutamento_activo(tipo)         #cria o novo recrutamento
+    @recrutamento.fecha_inscricao
+
+    respond_to do |format|
+        format.html { redirect_to formulario_membros_path(@comite) }
+        format.json { head :no_content }
+    end
+  end
 
   def show
   	@recrutamento = Recrutamento.find(params[:id])

@@ -34,6 +34,17 @@ class Comite < ActiveRecord::Base
     end
   end
 
+  #funcao que verifica se tem inscriçoes activas
+  def inscricao_activa?(tipo)
+    r = self.recrutamento.recrutamento_activo(tipo)
+
+    if !r.nil?
+      return r.inscricao_activa_recrut?
+    else
+      return false
+    end
+  end
+
   #cria um novo formulario
   def cria_formulario(tipo,comite_id,recrutamento_id)
     if tipo == 1
@@ -59,6 +70,30 @@ class Comite < ActiveRecord::Base
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while Comite.exists?(column => self[column])
+  end
+
+  def cenas
+        obj1 = Array.new
+        num_anuncios = Comite.all.count
+        Comite.all.each do |c|
+          val = (100 / 40) * 100
+
+          obj1.push([ c.nome, val ])
+        end
+
+        return obj1
+  end
+
+
+  def candidatos_por_recrutamento(idC,tipo)
+    obj = Array.new
+
+    Recrutamento.where(:comite_id => idC,:tipo =>tipo).each do |r|
+      num_cand = r.candidatos.count
+      obj.push([ r.created_at, num_cand ])
+    end
+
+    return obj
   end
 
 

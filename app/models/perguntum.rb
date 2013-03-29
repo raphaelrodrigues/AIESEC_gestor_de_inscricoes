@@ -9,8 +9,10 @@ class Perguntum < ActiveRecord::Base
   has_many :pergunta_forms
 
 
-  def self.activa
-		where("activa = true")
+  def self.my_find(idP)
+  	where(
+		  id: idP, 
+		  activa: true).first
   end
 
 end

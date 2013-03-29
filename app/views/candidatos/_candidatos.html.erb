@@ -1,4 +1,4 @@
-<%= form_for(:candidatos, :url => {:action => 'edit_candidatos',:controller => 'candidatos'},:multipart => true) do |f| %>
+<%= form_for(:candidatos, :html=>{:id =>"form_candidatos"},:url => {:action => 'edit_candidatos',:controller => 'candidatos'},:multipart => true) do |f| %>
 
   <div class="container-fluid">
         <div class="well">
@@ -6,12 +6,11 @@
             <thead>
               <tr>
                 <th><input type="checkbox" name="select-all" id="select-all"></th>
-                <th data-sort="Nome">Nome</th>
+                <th data-sort="string">Nome</th>
                 <th>Telemovel</th>
-                <th data-sort="Data">Idade</th>
-                <th data-sort="DataR">Data Registo</th>
-                <th data-sort="Comite" >Comite</th>
-                <th data-sort="Tipo">Tipo</th>
+                <th data-sort="string">Idade</th>
+                <th data-sort="string">Email</th>
+                <th data-sort="string">Data Registo</th>
                 <th>Recrut</th>
                 <th data-sort="Estado">Estado</th>
                 <th style="width: 26px;"></th>
@@ -23,11 +22,10 @@
                 <tr>
                   <td><%= check_box_tag 'candidatos[]', candidato.id, false ,:class=>"select-all" %></td>
                   <td><%= candidato.nome %></td>
-                  <td><%= candidato.telemovel %></td>
+                  <td id="tel<%= candidato.id %>" value="<%= candidato.email %>"><%= candidato.telemovel %></td>
                   <td><%= age(candidato.data_nascimento) %></td>
+                  <td id="email<%= candidato.id %>" value="<%= candidato.email %>"><%= candidato.email %></td>
                   <td><%= candidato.created_at.strftime('%d %b') %></td>
-                  <td><%= candidato.comite_id %></td>
-                  <td><%= candidato.tipo %></td>
                   <td><%= candidato.recrutamento_id %></td>
                   <td>
                     <%=  estadoToLabel(candidato.estados.first) %>
@@ -45,60 +43,85 @@
     </div>
 
       <div class="btn-toolbar">
-          <a href="#myModalMail" data-toggle="modal" class="btn btn-danger">Delete</a>
-          <a href="#myModalEstado" data-toggle="modal" class="btn ">Mudar Estado</a>
-          <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i>Mudar Estado</button>
-          <%= f.submit "Import",:class=>"btn" %>
+          <a href="#myModalMail" data-toggle="modal" class="btn"><i class="icon-envelope"></i>Enviar Mail</a>
+          <a href="#myModalEstado" data-toggle="modal" class="btn btn-primary"><i class="icon-tag"></i>Mudar Estado</a>
+         
+
       <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          Obter
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+           <li id="mail"> <a href="#">Obter Emails</a></li>
+           <li id="telemovel"><a href="#" >Obter Telemovel</a></li>
+           <li><a href="#myModal" data-toggle="modal">Importar perguntas para Estágios</a></li>
+          <!-- dropdown menu links -->
+        </ul>
+    </div>
+
+     <a href="#myModalStats" data-toggle="modal" class="btn btn-primary"><i class="icon-signal"></i>Ver Estatisticas</a>
   </div>
+
+
+
+<!--<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>-->
+
+</div>
+
+    <div id="askDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+      <div class="modal-header">
+        <a href="#" class="close" data-dismiss="modal">&times;</a>
+        <h3 id="askDialogPrompt"> </h3>
+        </div>
+      <div class="modal-body" id="askDialogBody">
+      
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+      </div>
 
 
    <!-- Modal MAIL-->
 <div id="myModalMail" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">Modal header</h3>
+      <h3 id="myModalLabel">Enviar Mail</h3>
     </div>
     <div class="modal-body">
-       <form class="form-horizontal">
-        <fieldset>
-          <div class="control-group">
-           
-              <input type="text" placeholder="name" class="input-xlarge"/>
-           
-          </div>
-       <div class="control-group">
-           
-              <input type="text" placeholder="email" class="input-xlarge"/>
-           
-          </div>
-       <div class="control-group">
-           
-              <input type="text" placeholder="subject" class="input-xlarge"/>
-          
-          </div>
-          <div class="control-group">
-              <textarea rows="3" id="textarea" class="input-xlarge"></textarea>
-           
-          </div>
-
-        </fieldset>
-      </form>
+      <%= render 'form_mail' %>
     </div>
     <div class="modal-footer">
       <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Send Mail</button>
+       <button class="btn btn-primary" name="commit" value="Enviar Mail"><i class="icon-save"></i>Enviar Mail</button>
     </div>
   </div>
 
-     <!-- Modal ESTDO-->
+ <!-- Modal ESTDO-->
 <div id="myModalEstado" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">Modal header</h3>
+      <h3 id="myModalLabel">Novo Estado</h3>
     </div>
     <div class="modal-body">
        <%= render 'form_estados' %>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Mudar Estado</button>
+    </div>
+  </div>
+
+  <!-- Modal STATS-->
+<div id="myModalStats" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Estatísticas</h3>
+    </div>
+    <div class="modal-body">
+       
+      <%= high_chart("candidatos_estados", @h ) %>
     </div>
     <div class="modal-footer">
       <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

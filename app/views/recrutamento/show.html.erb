@@ -14,6 +14,14 @@
   <b>Pertence ao Comite </b><%= @recrutamento.comite_id %>
 </p>
 
+<p>
+  Meter uma zona de estatisticas
+  Possui <%= @recrutamento.candidatos.count %> Candidatos
+</p>
+
+<p>
+  Formúlario possui  <%= @recrutamento.formulario.pergunta_forms.count %> Perguntas
+</p>
 
 
   <%= link_to_function "Candidatos", "$('#candidatos_recrut').slideToggle();",:class =>'btn btn-primary' %><br><br>
@@ -23,6 +31,11 @@
   <%= link_to_function "Formulários", "$('#formulario_recrut').slideToggle();",:class =>'btn btn-primary' %><br><br>
   <div id="formulario_recrut">
     <%= render "formulario",collection: @recrutamento.formulario %>
+  </div>
+
+  <%= link_to_function "Estatisticas", "$('#stats_recrut').slideToggle();",:class =>'btn btn-primary' %><br><br>
+  <div id="stats_recrut">
+      <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
   </div>
 
 <br />

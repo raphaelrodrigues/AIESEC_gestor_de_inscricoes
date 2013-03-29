@@ -33,19 +33,24 @@
               <tbody>
                 <tr>
                   <td>AIESEC Minho</td>
-                  <td><span title="Alterar Estado" class="label label-success">Abertas</span></td>
-                  <td><a href="#myModal" data-toggle="modal"> <span class="label label-important">Fechadas</span></a></td>
+                  <td><span title="Alterar Estado" class="label label-success"><%= @comite.inscricao_activa?(1) %></span></td>
+                  <td><a href="#myModal" data-toggle="modal"> <span class="label label-important"><%= @comite.inscricao_activa?(2) %></span></a></td>
                 </tr>
               </tbody>
         </table>
 
 <%= link_to "Abrir Recrutamento Membros",abrir_recrutamento_path(:tipo=> 1), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
 
-<%= link_to "Abrir Inscricoes Membro",abrir_inscricoes_path(:tipo=> 1), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+<%= link_to "Abrir Inscricoes Membros",abrir_inscricoes_path(:tipo=> 1), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+
+<%= link_to "Fechar Inscricoes Membros",fechar_inscricoes_path(:tipo=> 1), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
 
 <%= link_to "Abrir Recrutamento Estagios",abrir_recrutamento_path(:tipo=> 2), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
 
-<%= link_to "Abrir Inscricoes Membro",abrir_inscricoes_path(:tipo=> 2), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+<%= link_to "Abrir Inscricoes Estagios",abrir_inscricoes_path(:tipo=> 2), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+
+<%= link_to "Fechar Inscricoes Estágios",fechar_inscricoes_path(:tipo=> 2), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+
 	
 	
 <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

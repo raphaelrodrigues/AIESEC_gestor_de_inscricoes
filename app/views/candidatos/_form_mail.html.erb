@@ -1,0 +1,21 @@
+<%= fields_for :mail,:html => { :class=> "form-horizontal"} do |f| %>
+  <div class="control-group">
+           
+     <input type="text" name="mail[name]" class="input-xlarge" placeholder="Name"/>
+           
+   </div>
+  <div class="control-group">
+           
+              <input type="text" name="mail[email]" class="input-xlarge" placeholder="Email"/>
+           
+          </div>
+  <div class="control-group">
+           
+              <input type="text" name="mail[subject]" class="input-xlarge" placeholder="Subject"/>
+          
+          </div>
+ <div class="control-group">
+              <textarea rows="3" id="textarea" class="input-xlarge" name="mail[body]" placeholder="Corpo"></textarea>
+           
+          </div>
+<% end %>

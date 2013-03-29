@@ -14,17 +14,28 @@ class Recrutamento < ActiveRecord::Base
   	where('estado = true and tipo = ?',tipo)[0]
   end
 
+  def inscricao_activa_recrut?
+    if self.inscricao_activa == true
+      return "Aberta"
+    else
+      return "Fechada"
+    end
+  end
+
   def abre_inscricao
   	self.inscricao_activa = 1
     self.save
   end
 
   def fecha_inscricao
-    self.estado = 0
+    #self.estado = 0
   	self.inscricao_activa = 0
     self.finished_at = Time.now
   	self.save
   end
+
+
+  
 
   
 end

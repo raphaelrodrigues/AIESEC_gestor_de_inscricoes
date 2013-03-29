@@ -21,7 +21,7 @@
               <td><%= estado.data %></td>
               <td><%= estado.descricao %></td>
               <td><%= estado.responsavel %></td>
-              <td><%= estado.updated_at %></td>
+              <td><%= l estado.updated_at ,:format => :time %></td>
               <td><%= link_to 'Show', estado %></td>
               <td><%= link_to 'Edit', edit_estado_path(estado) %></td>
               <td><%= link_to 'Destroy', estado, method: :delete, data: { confirm: 'Are you sure?' } %></td>

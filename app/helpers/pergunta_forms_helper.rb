@@ -11,4 +11,9 @@ module PerguntaFormsHelper
 			@ultima_ordem = 1
 		end
 	end
+
+
+	def num_form_presente(perguntaGeral)
+		return perguntaGeral.pergunta_forms.count
+	end
 end

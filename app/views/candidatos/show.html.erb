@@ -18,6 +18,11 @@
 </p>
 
 <p>
+  <b>Email:</b>
+  <%= @candidato.email %>
+</p>
+
+<p>
   <b>Idade:</b>
   <%= age(@candidato.data_nascimento) %> <b>Anos</b> Data Nascimento  <%= @candidato.data_nascimento %>
 </p>
@@ -35,6 +40,13 @@
 <p>
   <b>Recrutamento:</b>
   <%= @candidato.recrutamento_id %>
+</p>
+
+<p>
+
+  <!--devolve para html a ultima actualizacao do estado do candidato-->
+  <b>Ultima actualização:</b>
+  <%= getUltimoUpdate %> 
 </p>
 
 <!-- verifica se tem algum estado, se tiver mostra-->

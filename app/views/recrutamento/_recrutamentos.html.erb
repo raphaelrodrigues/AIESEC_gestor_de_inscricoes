@@ -68,8 +68,8 @@
             <th>Estado</th>
             <th>Tipo</th>
             <th>Comite_id</th>
-            <th>created_at</th>
-            <th>finished_at</th>
+            <th>Data de Início</th>
+            <th>Data de Fim</th>
             <th></th>
             <th></th>
             <th></th>
@@ -81,12 +81,12 @@
               <td><%= r.estado %></td>
               <td><%= r.tipo %></td>
               <td><%= r.comite_id %></td>
-              <td><%= r.created_at %></td>
+              <td><%= l r.created_at %></td>
               <td>
                 <%= if r.finished_at.nil? 
                         "Não terminado"
                     else
-                        r.finished_at
+                        l r.finished_at
                     end
                 %>
               </td>

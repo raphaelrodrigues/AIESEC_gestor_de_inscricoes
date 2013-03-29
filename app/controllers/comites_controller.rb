@@ -1,9 +1,11 @@
 class ComitesController < ApplicationController
   # GET /comites
   # GET /comites.json
+  before_filter :correct_comite, :only => [ :edit, :destroy]
+
+  before_filter :isAdmin? , :only =>[:new,:create,:destroy,:edit]
 
   skip_before_filter :authorize, :only => [:new,:create]
-  before_filter :correct_comite, :only => [ :edit, :destroy]
 
   def index
     @comites = Comite.all
@@ -18,6 +20,12 @@ class ComitesController < ApplicationController
   # GET /comites/1.json
   def show
     @comite = !params[:id].nil? ? Comite.find(params[:id]) : current_comite
+
+    @stats = @comite.candidatos_por_recrutamento(current_comite.id,1)
+
+    @h = get_grafico_anuncio_categoria
+    @h1 = get_grafico_precos_medios_cat(@stats)
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -138,7 +146,7 @@ class ComitesController < ApplicationController
 
 
   def inscricoes
-
+    @comite = Comite.find(current_comite)
   end
 
   def help

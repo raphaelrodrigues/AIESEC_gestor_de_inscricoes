@@ -56,6 +56,7 @@ GEM
       multi_json (~> 1.0)
     font-awesome-rails (3.0.2.0)
       railties (>= 3.1)
+    hash-deep-merge (0.1.1)
     heroku (2.35.0)
       heroku-api (~> 0.3.7)
       launchy (>= 0.3.2)
@@ -73,6 +74,9 @@ GEM
     json (1.7.7)
     launchy (2.2.0)
       addressable (~> 2.3)
+    lazy_high_charts (1.3.3)
+      bundler (~> 1.0)
+      hash-deep-merge
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -151,6 +155,7 @@ DEPENDENCIES
   font-awesome-rails
   heroku
   jquery-rails
+  lazy_high_charts
   meta_request
   mysql2
   pg

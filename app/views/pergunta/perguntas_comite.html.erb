@@ -14,13 +14,17 @@
         <form id="tab" class="inline">
                 <label>Comité</label>
                 <select name="DropDownComitePerguntas" id="DropDownComitePerguntas" class="input">
-                  <% @comites.each do |c| %> 
-                  <% z = params[:id] %>
-                    <option value="<%= c.id %>" <%= 'selected' if current_form?(params[:id].to_i,c.id) %> ><%= c.nome %></option>
-                 <% end %>
+                  <% @comites.each do |c| %>
+                  <% if c.nome != "Aiesec Admin" %>
+                    <% z = params[:id] %>
+                      <option value="<%= c.id %>" <%= 'selected' if current_form?(params[:id].to_i,c.id) %> ><%= c.nome %></option>
+                   <% end %>
+                  <% end %>
                 </select>
 
         </form>
+
+
     <!-- formulario para importar as perguntas para os formularios -->
      <%= form_for(:perguntas, :url => {:action => 'importar_pergunta_form',:controller => 'pergunta'}) do |f| %>
           <div class="well">
@@ -31,6 +35,7 @@
                   <th>Titulo</th>
                   <th>Descricao</th>
                   <th>Tipo</th>
+                  <th>Presente em  </th>
                   <th>Activa</th>
                   <th></th>
                   <th></th>
@@ -43,6 +48,7 @@
                 <td><%= perguntum.titulo %></td>
                 <td><%= perguntum.descricao %></td>
                 <td><%= perguntum.tipo %></td>
+                <td><%= num_form_presente(perguntum) %></td>
                 <td><%= link_to 'Show', perguntum %></td>
                 <td><%= link_to 'Edit', edit_perguntum_path(perguntum.id) %></td>
                 <td><%= link_to 'Destroy', perguntum, method: :delete, data: { confirm: 'Are you sure?' } %></td>

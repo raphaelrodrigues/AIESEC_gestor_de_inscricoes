@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :data %><br />
-    <%= f.date_select :data %>
+    <%= f.hidden_field :data,value: Time.now %>
   </div>
   <div class="field">
     <%= f.label :descricao %><br />

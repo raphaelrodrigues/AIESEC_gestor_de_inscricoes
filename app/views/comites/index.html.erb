@@ -1,5 +1,13 @@
-<h1>Listing comites</h1>
-
+        <div class="header">
+            
+            
+        <h1 class="page-title">Comites</h1>
+        </div>
+        
+                <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li class="active">Comites</li>
+        </ul>
 <table class="table">
   <tr>
     <th>Nome</th>
@@ -21,13 +29,17 @@
     <td><%= comite.telefone %></td>
     <td><%= comite.morada %></td>
     <td><%= comite.email_ocp %></td>
+
     <td><%= link_to 'Show', comite %></td>
-    <td><%= link_to 'Edit', edit_comite_path(comite) %></td>
-    <td><%= link_to 'Destroy', comite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+     <% if isAdmin? %> 
+        <td><%= link_to 'Edit', edit_comite_path(comite) %></td>
+        <td><%= link_to 'Destroy', comite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+     <% end %> 
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Comite', new_comite_path %>
+<% if isAdmin? %>
+ <%= link_to 'New Comite', new_comite_path %>
+<% end %>

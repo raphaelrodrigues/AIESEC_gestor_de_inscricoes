@@ -43,6 +43,8 @@ Gestor::Application.routes.draw do
 
   get "abrir_recrutamento" => "recrutamento#abrir_recrutamento_m"
   get "abrir_inscricoes" => "recrutamento#abrir_inscricoes"
+  get "fechar_inscricoes" => "recrutamento#fechar_inscricoes"
+
 
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"

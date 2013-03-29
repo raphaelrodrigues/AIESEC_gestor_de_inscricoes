@@ -1,5 +1,6 @@
 module ApplicationHelper
 
+  include LazyHighCharts::LayoutHelper
 	#verifica se está com login feito
   def signed_in?
 	 !!current_comite
@@ -71,6 +72,15 @@ module ApplicationHelper
   end
  end
 
+
+ def obrigatoria?(obr)
+  if obr == true
+    '<i class=" icon-ok"></i>'.html_safe
+  else
+    '<i class="icon-remove"></i>'.html_safe
+  end
+ end
+
  #verifica qual a pagina em que está
  # para poder alterar o caminho da pesquisa
  # a pesquisa é feita  nos candidatos membros ou candidatos estagios
@@ -84,6 +94,42 @@ module ApplicationHelper
   end
 
  end
+
+ def isAdmin?
+  current_comite.nome == "Aiesec Admin" ? true : false
+ end
+
+ 
+
+ def get_grafico_anuncio_categoria
+
+   obj1 = @stats
+
+   return  @h = LazyHighCharts::HighChart.new('pie') do |f|
+          f.chart({:defaultSeriesType=>"pie" , :margin=> [30, 70, 0, 70]} )
+          series = {
+                   :type=> "pie",
+                   :name=> 'Percentagem de Anuncios por categoria',
+                   :data=> obj1
+          }
+          f.series(series)
+          f.options[:title][:text] = "Percentagem de anuncios por categoria"
+          f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
+          f.plot_options(:pie=>{
+            :allowPointSelect=>true, 
+            :cursor=>"pointer" , 
+            :dataLabels=>{
+              :enabled=>true,
+              :color=>"white",
+              :style=>{
+                :font=>"13px Trebuchet MS, Verdana, sans-serif",
+                :width => "50px",
+                :height => "50px" 
+              }
+            }
+          })
+        end
+  end
 
 
 

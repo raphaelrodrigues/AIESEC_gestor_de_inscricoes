@@ -15,7 +15,87 @@ class ApplicationController < ActionController::Base
     @pergunta = Perguntum.find(id_pergunta)
   end
 
+  ##########################ESTATISTICAS########################################
+  
+  #da grafico das estatisticas
+  
 
+
+     #da grafico das estatisticas
+  def get_grafico_precos_medios_cat(stats)
+
+   obj1 = stats
+
+   return   LazyHighCharts::HighChart.new('pie') do |f|
+          f.chart({:defaultSeriesType=>"bar" ,type: 'column',renderTo: 'container', :margin=> [10, 100, 60, 100]} )
+          series = {
+                   :type=> 'column',
+                   :name=> '',
+                   :data=> obj1
+          }
+          f.series(series)
+          f.options[:title][:text] = "Candidatos por Recrutamento"
+          f.options[:xAxis] = {
+
+              :title => { :text => "Recrutamentos" },
+              :labels => { :enabled => false }
+           }
+          f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '50px'}) 
+          f.plot_options(:pie=>{
+            :allowPointSelect=>true, 
+            :cursor=>"pointer" , 
+            :dataLabels=>{
+              :enabled=>true,
+              :color=>"white",
+              :style=>{
+                :font=>"13px Trebuchet MS, Verdana, sans-serif",
+                :width => "250px",
+                :height => "150px" 
+              }
+            }
+          })
+        end
+  end
+
+
+
+  def estados_por_candidato(stats)
+
+   obj1 = stats
+
+   return   LazyHighCharts::HighChart.new('pie') do |f|
+          f.chart({:defaultSeriesType=>"bar" ,type: 'column',renderTo: 'container', :margin=> [10, 100, 60, 100]} )
+          series = {
+                   :type=> 'column',
+                   :name=> '',
+                   :data=> obj1
+          }
+          f.series(series)
+          f.options[:title][:text] = "Candidatos por Recrutamento"
+          f.options[:xAxis] = {
+
+              :title => { :text => "Recrutamentos" },
+              :labels => { :enabled => false }
+           }
+          f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '50px'}) 
+          f.plot_options(:pie=>{
+            :allowPointSelect=>true, 
+            :cursor=>"pointer" , 
+            :dataLabels=>{
+              :enabled=>true,
+              :color=>"white",
+              :style=>{
+                :font=>"13px Trebuchet MS, Verdana, sans-serif",
+                :width => "250px",
+                :height => "150px" 
+              }
+            }
+          })
+        end
+  end
+
+
+  ##########################FIM ESTATISTICAS########################################
   private
     #verifica se esta alguem logado e se estiver devolve o comite que esta logado
   	def current_comite
@@ -25,7 +105,7 @@ class ApplicationController < ActionController::Base
     #verifica se comite que tenta aceder é aquele que esta logado(para evitar que comites alterem outros)
     def correct_comite
       @comite = Comite.find(params[:id])
-      redirect_to "/comites" unless @comite.id == current_comite.id
+      redirect_to "/comites" unless @comite.id == current_comite.id || isAdmin?
     end
 
     #verifica se um recrutamento pertence ao comite
@@ -37,6 +117,14 @@ class ApplicationController < ActionController::Base
     def cand_belongsTo_comite?
       @candidato = Candidato.find(params[:id])
       redirect_to "/candidatos" unless @candidato.comite_id == current_comite.id
+    end
+
+    def isAdmin?
+      if signed_in?
+        current_comite.nome == "Aiesec Admin" ? true : (redirect_to "/comites")
+      else
+        redirect_to "/log_in"
+      end
     end
 
     #verifica se uma pergunta pertence ao comite

@@ -40,13 +40,15 @@
                   </div>
                   <div class="field">
                     <%= f.label :descricao %><br />
-                    <%= f.text_field :descricao,:value=>"descricao" %>
+                    <%= f.text_area :descricao,:value=>"descricao",:rows => 5, :cols => 100 %>
+
                   </div>
 
                   <!--campo de TIPO -->
                    <div class="field">
                       <%= f.hidden_field :tipo,:id =>"btn-input-tipo", :value =>  1 %>
                     </div>
+
                     <label>Tipo</label>
                       <div class="btn-group" data-toggle="buttons-radio">
                       <button type="button" class="btn active" value="1" onClick="$('#btn-input-tipo').val( $(this).val() );">
@@ -70,19 +72,13 @@
                     <%= f.number_field :comite_id,value:current_comite.id %>
                   </div>
 
-
                   <div class="field">
-                    <%= f.label :activa %><br />
-                    <%= f.check_box :activa, :checked=>true %>
+                    <%= f.hidden_field :activa, :checked=>true %>
                   </div>
 
                   
-                  <% if !params[:name].blank? || !@perguntum.pergunta_forms.nil? %>
-                     <%= render 'pergunta_forms/form' %>
-                  <% else %>
-                      <%= f.submit %>
-                  <% end %>
-
+                  
+                <button class="btn btn-primary"><i class="icon-save"></i>Guardar</button>
 
 
                 <% end %>
@@ -108,8 +104,3 @@
 
 </div>
 
- <button class="btn btn-primary"><i class="icon-save"></i>Guardar</button>
-    <a href="#myModal" data-toggle="modal" class="btn">Apagar</a>
-  <div class="btn-group">
-  
-  </div>

@@ -15,6 +15,9 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
    recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                                        #vai buscar o recrutamento que esta activo
    @candidatos = recrutamento.candidatos.search(params[:search],params[:page]) unless  recrutamento.nil?    #vai buscar os candidatos desse recrutamento
    @estado = Estado.new
+   stats = @candidatos.est_candidatos(recrutamento)
+
+   @h = estados_por_candidato(stats)
   end
 
   def candidatos_estagios
@@ -32,13 +35,11 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
   # que foram selecionadas nos formulario
   # para cada uma delas é feita a accao que se deseja
   def edit_candidatos
-    r = formulario_membros_path(current_comite.id)
+    r = candidatos_membros_path
 
     if !params[:candidatos].nil?
       val = params[:candidatos]
       case params[:commit]
-          when "Import"
-            r = formulario_membros_path(current_comite.id)
           when "Mudar Estado"
             val.each do |v|
                 candidato = Candidato.find(v)
@@ -47,6 +48,13 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
                 estado.save
              end
              r = candidatos_membros_path
+
+          when "Enviar Mail"
+            n =0
+            val.each do |v|
+              SendMail.mail_candidato(v,params[:mail],n).deliver
+              n = n+1
+            end
       end
 
     end #fim do if
@@ -65,7 +73,7 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
   def show
     @candidato = Candidato.find(params[:id])
     @estados = @candidato.estados
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @candidato }

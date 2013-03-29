@@ -45,16 +45,16 @@ class PerguntaController < ApplicationController
 
   # GET /pergunta/1/edit
   def edit
-    @perguntum = Perguntum.find(params[:id]).activa
+    @perguntum = Perguntum.my_find(params[:id])
     @pergunta_form = @perguntum.pergunta_forms
   end
 
 
   #perguntas do comites
   def perguntas_comite
-
     @comites = Comite.find(:all,:select=>"id,nome")
-    @perguntas = Perguntum.where("comite_id = ?",params[:id]).activa
+    @perguntas = Perguntum.where("comite_id = ? and activa = true",params[:id])
+    
 
   end
 

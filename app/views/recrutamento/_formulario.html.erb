@@ -6,9 +6,7 @@
           <th><input type="checkbox" name="select-all" id="select-all"></th>
           <th >Titulo</th>
           <th>Descriçao</th>
-          <th>Tipo</th>
           <th>Obrigatória</th>
-          <th>Ordem</th>
           <th style="width: 26px;"></th>
         </tr>
       </thead>
@@ -19,15 +17,7 @@
               <td><%= check_box_tag 'perguntas[]', p.id, false,:class=>"select-all" %></td>
               <td><%= @pergunta.titulo %></td>
               <td> <%= @pergunta.descricao %></td>
-              <td><%= @pergunta.tipo %></td>
-               <td>
-                <% if p.obrigatoria %>
-                  <input type="checkbox" checked>
-                <% else %>
-                  <input type="checkbox" unchecked>
-                <% end %>
-              </td>
-              <td><%= p.ordem %></td>
+              <td><%= obrigatoria?(p.obrigatoria) %></td>
               <% if current_comite?(params[:id].to_i) %> 
                 <td>
                     <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_perguntum_path(@pergunta)%>

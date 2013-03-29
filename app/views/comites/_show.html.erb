@@ -5,7 +5,7 @@
         
         <ul class="breadcrumb">
             <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-            <li>Recrutamento <%= @recrutamento.created_at %><span class="divider">/</span></li>
+            <li>Recrutamento <%= l @recrutamento.created_at , :format => :long %><span class="divider">/</span></li>
             <li class="active"><%= @formulario.nome %> <%= @formulario.id %> <%= @formulario.comite_id %></li>
         </ul>
 
@@ -34,7 +34,7 @@
     
     <!--verifica se inscriçoes estao abertas -->
     <div id="inscricoes_form">
-      <%= insc_abertas?(@recrutamento.inscricao_activa) %>
+      <b>Inscricoes</b> <%= insc_abertas?(@recrutamento.inscricao_activa) %>
     </div>
 
     <%= form_for(:perguntas, :url => {:action => 'edit_pergunta_form',:controller => 'pergunta_forms',:id=>@formulario.id}) do |f| %>
@@ -62,11 +62,10 @@
       <thead>
         <tr>
           <th><input type="checkbox" name="select-all" id="select-all"></th>
-          <th >Titulo</th>
+          <th >Título</th>
           <th>Descriçao</th>
           <th>Tipo</th>
           <th>Obrigatória</th>
-          <th>Ordem</th>
           <th style="width: 26px;"></th>
         </tr>
       </thead>
@@ -79,14 +78,8 @@
               <td><%= pergunta.titulo %></td>
               <td> <%= pergunta.descricao %></td>
               <td><%= pergunta.tipo %></td>
-               <td>
-                <% if p.obrigatoria %>
-                  <input type="checkbox" checked>
-                <% else %>
-                  <input type="checkbox" unchecked>
-                <% end %>
-              </td>
-              <td><%= p.ordem %></td>
+               <td><%= obrigatoria?(p.obrigatoria) %></td>
+              <!--<td><%= p.ordem %></td>-->
               <% if current_comite?(params[:id].to_i) %> 
                 <td>
                     <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_perguntum_path(pergunta)%>
@@ -101,26 +94,22 @@
     </table>
 </div>
 
+  <div class="btn-toolbar">
     <!-- se nao for do comite que tem login feito nao pode alterar o formulario -->
     <% if current_comite?(params[:id].to_i) %>
+
       <span class="label label-success" id="estado">Guardado</span>
-      <button class="btn btn-primary" id="guardar" href="#"><i class="icon-save"></i>Guardar</button>
-
-      <div class="btn-toolbar">
-        
-        <a href="#myModal" role="button" class="btn open-AddBookDialog" data-toggle="modal">Launch demo modal</a>
-
-      </div>
-
+      <button class="btn btn-primary" id="guardar" href="#"><i class="icon-save"></i> Guardar</button>
 
       <div class="btn-toolbar">
           <%= f.submit "Remover",:class=>"btn" %>
-          <%= f.submit "Obrigatoria",:class=>"btn btn-primary" %>
+          <%= f.submit "Obrigatoria",:class=>"btn " %>
           <%= f.submit "Opcional",:class=>"btn btn-primary" %>
 
     <% end %><!--fim da condicao-->
 
   <% end %> <!-- fim do fromulario -->
+</div>
 </div>
 
   

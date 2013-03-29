@@ -17,4 +17,12 @@ module CandidatosHelper
 	  now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
 	end
 
+	def getUltimoUpdate
+		if @estados.nil?
+			"Sem alteracoes"
+		else
+			@estados.first.updated_at.to_formatted_s(:short)
+		end
+	end
+
 end
