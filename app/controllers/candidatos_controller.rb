@@ -15,9 +15,9 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
    recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                                        #vai buscar o recrutamento que esta activo
    @candidatos = recrutamento.candidatos.search(params[:search],params[:page]) unless  recrutamento.nil?    #vai buscar os candidatos desse recrutamento
    @estado = Estado.new
-   stats = @candidatos.est_candidatos(recrutamento)
+   #stats = @candidatos.est_candidatos(recrutamento)  unless  recrutamento.nil?
 
-   @h = estados_por_candidato(stats)
+   #@h = estados_por_candidato(stats)
   end
 
   def candidatos_estagios
