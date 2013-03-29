@@ -1,5 +1,5 @@
 class Candidato < ActiveRecord::Base
-  attr_accessible :comite_id, :data_nascimento, :nome, :recrutamento_id, :telemovel, :tipo, :email
+  attr_accessible :comite_id, :data_nascimento,:email, :nome, :recrutamento_id, :telemovel, :tipo
 
   has_many :respostas
   has_many :estados
@@ -17,7 +17,7 @@ class Candidato < ActiveRecord::Base
   def self.novo(val,tipo,comite_id,recrutamento_id)
   	new(nome: val[:nome],telemovel: val[:telemovel],data_nascimento: val[:data_nascimento],comite_id: comite_id,tipo: tipo,recrutamento_id: recrutamento_id,email: val[:email])
   end
-  
+
 
   #nao esta a funcionar
   # def self.est_candidatos(recrutamento)
