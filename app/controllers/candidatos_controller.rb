@@ -30,7 +30,7 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
   # para esta action é passado como argumentos as comboxbox
   # que foram selecionadas nos formulario
   # para cada uma delas é feita a accao que se deseja
-    # altera propriedades das perguntas de um formulario
+  # altera propriedades das perguntas de um formulario
   # para esta action é passado como argumentos as comboxbox
   # que foram selecionadas nos formulario
   # para cada uma delas é feita a accao que se deseja
@@ -73,6 +73,8 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
   def show
     @candidato = Candidato.find(params[:id])
     @estados = @candidato.estados
+    
+    @estado = Estado.new
     
     respond_to do |format|
       format.html # show.html.erb

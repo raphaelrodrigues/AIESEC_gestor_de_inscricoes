@@ -4,65 +4,111 @@
       <li class="active">Perfil Candidato</li>
 </ul>
 
+
 <p id="notice"><%= notice %></p>
 
 <h3> Registou-se há <%=  time_ago_in_words(@candidato.created_at)  %> </h3>
-<p>
-  <b>Nome:</b>
-  <%= @candidato.nome %>
-</p>
 
-<p>
-  <b>Telemovel:</b>
-  <%= @candidato.telemovel %>
-</p>
+    <!--info candidatos-->
+      <div class="info_anuncio">
+        <div class="span6">
 
-<p>
-  <b>Email:</b>
-  <%= @candidato.email %>
-</p>
+            <address>
+              <strong>Nome: </strong> <span><%= @candidato.nome %></span><br><br> 
 
-<p>
-  <b>Idade:</b>
-  <%= age(@candidato.data_nascimento) %> <b>Anos</b> Data Nascimento  <%= @candidato.data_nascimento %>
-</p>
+            </address>
+          
+              <h2>
+              <strong>Telemovel: <%= @candidato.telemovel %></strong> <br /><br />
+              </h2>
 
-<p>
-  <b>Comite:</b>
-  <%= @candidato.comite_id %>
-</p>
+              <div class="span10">
+                <div class="sumdata"> 
+                    <div><span>Telemovel: </span> <%= @candidato.telemovel %></div>
+                    <div><span>Email:</span> <%= @candidato.email %></div> 
+                    <div ><span>Idade</span> <%= age(@candidato.data_nascimento) %></div>
+                    <div><span>Data Nascimento </span> <%= @candidato.data_nascimento %></div>
+                    <div><span>Tipo:</span> <%= @candidato.tipo %></div>
+                    <div ><span>Comite:</span> <%= @candidato.comite_id %></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
 
-<p>
-  <b>Tipo:</b>
-  <%= @candidato.tipo %>
-</p>
+              </div>
+          <!--devolve para html a ultima actualizacao do estado do candidato-->
+          <b>Ultima actualização:</b>
+          <%= getUltimoUpdate %> 
+        </p>   
 
-<p>
-  <b>Recrutamento:</b>
-  <%= @candidato.recrutamento_id %>
-</p>
+        <!-- verifica se tem algum estado, se tiver mostra-->
+        <% if  !@candidato.estados.last.nil? %>
+          <p>
+              <b>Estado Actual</b>
+              <span title="Alterar Estado" class="label label-success"><%= @candidato.estados.first.nome %></span>
+          </p>
+        <% end %>
 
-<p>
+    </div><!--fim info canditado--> 
+</div>
 
-  <!--devolve para html a ultima actualizacao do estado do candidato-->
-  <b>Ultima actualização:</b>
-  <%= getUltimoUpdate %> 
-</p>
 
-<!-- verifica se tem algum estado, se tiver mostra-->
-<% if  !@candidato.estados.last.nil? %>
-  <p>
-      <b>Estado Actual</b>
-      <span title="Alterar Estado" class="label label-success"><%= @candidato.estados.first.nome %></span>
-  </p>
-<% end %>
+
+
+ 
+
+
+<button class="btn btn-primary">Copy mail to clipBoard</button><br><br>
+
+
 
 <%= link_to '<i class="icon-plus"></i> Novo Estado'.html_safe, new_estado_path(:candidato=> @candidato.id) ,:class=>"btn" %>
+ <div class="btn-toolbar">
+          <a href="#myModalEstado" data-toggle="modal" class="btn"><i class="icon-plus"></i>Novo Estado</a>
+</div>
+
+
+
 
 <%= render 'respostas' %>
-<%= render 'estados', collection: @estados %>
 
+<div class="row">
+        <div class="span13">
+          <div class="tabbable">
+            <ul class="nav nav-tabs">
+            <li class="active"><a href="#1" data-toggle="tab">Estado</a></li>
+            <li><a href="#2" data-toggle="tab">Estatistica</a></li>
+            </ul>
+                <div class="tab-content">
+                <div class="tab-pane active" id="1">
+                  <%= render 'estados', collection: @estados %>
+                </div>
+                <div class="tab-pane" id="2">
+                    cenas
+                </div>    
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
 
 
 <%= link_to 'Edit', edit_candidato_path(@candidato) %> |
 <%= link_to 'Back', candidatos_path %>
+
+
+
+ <!-- Modal ESTDO-->
+<div id="myModalEstado" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Novo Estado</h3>
+    </div>
+    <div class="modal-body">
+       <%= render :partial=>'estados/form' , :locals => { :candidato => @candidato.id } %>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Mudar Estado</button>
+    </div>
+  </div>

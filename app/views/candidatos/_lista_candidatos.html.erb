@@ -26,14 +26,10 @@
   <%= form_tag path , :method => 'get'  ,:class => 'form-inline', :id=>'candidatos_search' do  %>
          
       <%= text_field_tag :search, params[:search], :class =>"span3 search-input",:placeholder => "Pesquisa...",:autocomplete=>"off" %>
-    
-        <label class="naLinha"></label>
-        <select name="params[field]" id="DropDownField" class="naLinha">
-          <option value="1" selected>Nome</option>
-          <option value="2">Data</option>
-          <option value="3">Estado</option>
-        </select>
 
+      <label class="naLinha"></label>
+      <%= select_tag(:field, options_for_select([['Nome', 1], ['Data', 2], ["Estado",3]]) ) %>
+        
    <% end %>
     
   </div>

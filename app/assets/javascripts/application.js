@@ -19,6 +19,9 @@
 $(document).ready(function() {
   
       $(".sortable1").stupidtable();
+      $('form:first *:input[type!=hidden]:first').focus();
+      //$('#search').focus();
+
       var pobj = null;
       var checkValues = [];
       var saved = 1;
@@ -120,14 +123,14 @@ $(document).ready(function() {
       });
 
 
-
+      
       /*
       * Evita que se dê um enter e ele valide o formulario
       */
       $(':input').keypress(function(e) {
         //verifica se é um input em que pode dar um enter 
         if( $(this).hasClass('allowEnter') == false )
-          if(e.which == 13) 
+          if(e.which == 13)
                 e.preventDefault(); // Stops from triggering the button to be clicked
       });
       
@@ -148,7 +151,7 @@ $(document).ready(function() {
 
 
        });
-
+      
 
         
         $("#sortable tbody").sortable({

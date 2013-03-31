@@ -8,9 +8,11 @@ class Candidato < ActiveRecord::Base
 
   default_scope :order => 'created_at DESC'
 
-  def self.search(nome,page)
+  def self.search(search,page)
       paginate :per_page => 10, :page => page,
-           :conditions => ['nome like ?', "%#{nome}%"]
+           :conditions => ['nome LIKE  ?', "%#{search}%"]
+
+      
   end
 
   #Para que o controller nao fique tao grande

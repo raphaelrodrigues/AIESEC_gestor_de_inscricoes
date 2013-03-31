@@ -23,6 +23,7 @@ class ComitesController < ApplicationController
 
     @stats = @comite.candidatos_por_recrutamento(current_comite.id,1)
 
+
     @h = get_grafico_anuncio_categoria
     @h1 = get_grafico_precos_medios_cat(@stats)
 
@@ -66,6 +67,8 @@ class ComitesController < ApplicationController
 
     @recrutamento = @formulario.recrutamento  unless  @formulario.nil?
     
+    @perguntum = Perguntum.new
+
   end
 
   #formularios estagios tipo = 2
@@ -77,6 +80,8 @@ class ComitesController < ApplicationController
     @formulario = @comite.formularios.formulario_activo(2)         #vai buscar o formulario que esta activo de estagio que é o 2
     @recrutamento = @formulario.recrutamento  unless  @formulario.nil?
  
+    @perguntum = Perguntum.new
+    
   end
 
   #serve para abrir um recrutamento e criar novos formularios

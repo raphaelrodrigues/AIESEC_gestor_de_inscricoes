@@ -757,3 +757,37 @@ table.table.list tr:first-child td {
     font-size: .5em;
   }
 }
+
+
+ 
+.sumbox { padding: 0 0 0 0; min-height: 598px; }
+.sumbox p { padding: 0 0 15px 0; }
+
+
+.sumbox h1 { margin: 0 auto 10px auto; font-size: 2.5em; letter-spacing: -3px; text-align: left; line-height: 30px; width: 100%; }
+
+
+.sumbox h3, .epbox h3 {  font-size: 1.7em; letter-spacing: -0.06em; padding: 3px 0 3px 10px; }
+
+
+.sumbox h1 { margin: 0 auto 10px auto; font-size: 2.5em; letter-spacing: -3px; text-align: left; line-height: 30px; width: 100%; }
+.sumbox h3, .epbox h3 {  font-size: 1.7em; letter-spacing: -0.06em; padding: 3px 0 3px 10px; }
+
+.sumbox .suminfo { margin: 100px 0 0 12px; float: none; clear: both; width: 730px; line-height: 1.55; text-align: justify; }
+.sumbox .suminfo h1 a { border: 1px solid; border-left: none; font-size: 1.2em; height: 40px; line-height: 60px; overflow: hidden; letter-spacing: -0.06em; border-radius: 0; padding: 0 35px 0 15px; margin-left: -18px; }
+
+.sumdata { width: 100%; margin: 0; padding: 0; }
+
+.sumdata:after { content: ""; display: block; height: 0; clear: both; visibility: hidden; }   
+
+.sumdata div { width: 232px; padding: 5px 10px 6px 10px; margin: 0px; float: left;  font-family: 'Open Sans', Helvetica, sans-serif; font-weight: 700;  font-size: 1.7em; border: 1px solid;  border-bottom: none; border-left: none; line-height: 1.1;  letter-spacing: -1px; }
+.sumdata div span { font-size: 0.6em; letter-spacing: -0.04em; font-weight: 600; margin: 0 0 2px 0; display: block; }
+
+.sumdata a { display: block; padding: 4px 5px; margin: 4px 0 0 0; font-size: 1.6em; font-weight: 700; letter-spacing: -1px; line-height: 1.1; text-decoration: none; }
+.sumdata a span { font-size: 0.6em; letter-spacing: 0px; display: block; }
+.sumdata label {  cursor: pointer; }
+ 
+
+.sumdata input { border: 1px solid; font-family: Verdana; font-size: 1.25em; font-weight: bold; padding: 8px 6px 7px 6px; width: 250px; margin: 0; } 
+
+
