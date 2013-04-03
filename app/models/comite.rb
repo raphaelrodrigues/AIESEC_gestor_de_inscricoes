@@ -3,17 +3,17 @@ class Comite < ActiveRecord::Base
 
   
   attr_accessor :password
-  before_save :encrypt_password
+  
   
   validates_format_of :email, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
-
   validates_format_of :email_ocp, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
 
   validates_confirmation_of :password
-  
   validates_presence_of :password, :on => :create
   validates_presence_of :nome
   validates_uniqueness_of :nome
+
+  before_save :encrypt_password
 
   has_many :formularios
   has_many :recrutamento
@@ -91,7 +91,7 @@ class Comite < ActiveRecord::Base
 
     Recrutamento.where(:comite_id => idC,:tipo =>tipo).each do |r|
       num_cand = r.candidatos.count
-      obj.push([ r.created_at, num_cand ])
+      obj.push([ r.created_at.strftime('%d/%m/%Y'), num_cand ])
     end
 
     return obj

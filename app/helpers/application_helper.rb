@@ -101,35 +101,7 @@ module ApplicationHelper
 
  
 
- def get_grafico_anuncio_categoria
-
-   obj1 = @stats
-
-   return  @h = LazyHighCharts::HighChart.new('pie') do |f|
-          f.chart({:defaultSeriesType=>"pie" , :margin=> [30, 70, 0, 70]} )
-          series = {
-                   :type=> "pie",
-                   :name=> 'Percentagem de Anuncios por categoria',
-                   :data=> obj1
-          }
-          f.series(series)
-          f.options[:title][:text] = "Percentagem de anuncios por categoria"
-          f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
-          f.plot_options(:pie=>{
-            :allowPointSelect=>true, 
-            :cursor=>"pointer" , 
-            :dataLabels=>{
-              :enabled=>true,
-              :color=>"white",
-              :style=>{
-                :font=>"13px Trebuchet MS, Verdana, sans-serif",
-                :width => "50px",
-                :height => "50px" 
-              }
-            }
-          })
-        end
-  end
+ 
 
 
   def flash_message

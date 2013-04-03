@@ -60,7 +60,7 @@
 
  <%= link_to_function "Estátisticas", "$('#stats_recrut').slideToggle();",:class =>'btn' %><br><br>
   <div id="stats_recrut">
-     <%= high_chart("my_id1", get_grafico_anuncio_categoria ) %>
+     <%= high_chart("my_id1", @h ) %>
      <%= high_chart("my_id", @h1 ) %>
   </div>
 

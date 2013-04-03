@@ -54,9 +54,11 @@
 
 
 
-
- 
-
+<p>
+  Download:
+  <%= link_to "CSV", candidato_path(id: @candidato.id ,format: "csv") %> |
+  <%= link_to "Excel", candidato_path(id: @candidato.id ,format: "xls") %>
+</p>
 
 <button class="btn btn-primary">Copy mail to clipBoard</button><br><br>
 
@@ -84,7 +86,7 @@
                   <%= render 'estados', collection: @estados %>
                 </div>
                 <div class="tab-pane" id="2">
-                    cenas
+                   
                 </div>    
             </ul>
           </div>

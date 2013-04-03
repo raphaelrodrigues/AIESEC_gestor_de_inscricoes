@@ -1,7 +1,9 @@
 class EstadosController < ApplicationController
+
+  before_filter :correct_comite, :only => [  :destroy,:edit ]
   # GET /estados
   # GET /estados.json
-  def index
+  def index #tem de sair
     @estados = Estado.all
 
     respond_to do |format|

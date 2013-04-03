@@ -35,6 +35,7 @@
             <ul class="nav nav-tabs">
             <li class="active"><a href="#1" data-toggle="tab">Candidatos</a></li>
             <li><a href="#2" data-toggle="tab">Formulários</a></li>
+             <li><a href="#3" data-toggle="tab">Estatisticas</a></li>
             </ul>
                 <div class="tab-content">
                 <div class="tab-pane active" id="1">
@@ -42,6 +43,10 @@
                 </div>
                 <div class="tab-pane" id="2">
                   <%= render "formulario",collection: @recrutamento.formulario %>
+                </div>  
+
+                 <div class="tab-pane" id="3">
+                   <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
                 </div>    
             </ul>
           </div>

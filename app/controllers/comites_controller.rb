@@ -1,11 +1,10 @@
 class ComitesController < ApplicationController
   # GET /comites
   # GET /comites.json
-  before_filter :correct_comite, :only => [ :edit, :destroy]
-
-  before_filter :isAdmin? , :only =>[:new,:create,:destroy,:edit]
-
+  before_filter :correct_comite, :only => [ :edit, :destroy,:abrir_recrutamento]
+  
   skip_before_filter :authorize, :only => [:new,:create]
+
 
   def index
     @comites = Comite.all
@@ -24,9 +23,8 @@ class ComitesController < ApplicationController
     @stats = @comite.candidatos_por_recrutamento(current_comite.id,1)
 
 
-    @h = get_grafico_anuncio_categoria
-    @h1 = get_grafico_precos_medios_cat(@stats)
-
+    @h = candidatos_recrutamento_plot
+    @h1 = candidatos_recrutamento_plot1(@stats)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -120,16 +118,6 @@ class ComitesController < ApplicationController
   end
 
 
-  def survey
-    @comite = Comite.find(params[:id])
-    @formulario = @comite.formularios[0]
-    @perguntas = @formulario.perguntum
-    @form_id = @formulario.id
-
-  end
-
-
-
  
   def guardar
       val = params[:respostas]
@@ -154,10 +142,17 @@ class ComitesController < ApplicationController
     @comite = Comite.find(current_comite)
   end
 
+  
   def help
   end
 
   def dashboard
+    @counter_membr = Counter.my_find(current_comite.id,1)
+    @counter_estag = Counter.my_find(current_comite.id,2)
+
+    #ultimos candidatos inscritos
+    @last_cand = Candidato.find(:all, :conditions =>["comite_id = ?",current_comite.id], :limit => 10)
+
   end
   
   # GET /comites/new

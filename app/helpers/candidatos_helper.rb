@@ -8,6 +8,10 @@ module CandidatosHelper
 		end
 	end	
 
+	
+	def tipoToString(tipo)
+		tipo == 1 ? "<span class='label label-success'>Membros</span>".html_safe : "<span class='label label-info'>&nbsp;Estagio&nbsp;&nbsp;</span>".html_safe
+	end
 
 	def age(dob)
 	  #dob = Date.strptime(dob,"%m-%d-%Y")

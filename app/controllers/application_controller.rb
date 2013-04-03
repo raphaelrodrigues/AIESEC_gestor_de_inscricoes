@@ -18,11 +18,39 @@ class ApplicationController < ActionController::Base
   ##########################ESTATISTICAS########################################
   
   #da grafico das estatisticas
-  
+  def pie_plot(stats,name)
+
+   obj1 = stats
+
+   return  LazyHighCharts::HighChart.new('pie') do |f|
+          f.chart({:defaultSeriesType=>"pie" , :margin=> [30, 70, 0, 70]} )
+          series = {
+                   :type=> "pie",
+                   :name=> name,
+                   :data=> obj1
+          }
+          f.series(series)
+          f.options[:title][:text] = name
+          f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
+          f.plot_options(:pie=>{
+            :allowPointSelect=>true, 
+            :cursor=>"pointer" , 
+            :dataLabels=>{
+              :enabled=>true,
+              :color=>"blue",
+              :style=>{
+                :font=>"13px Trebuchet MS, Verdana, sans-serif",
+                :width => "50px",
+                :height => "50px" 
+              }
+            }
+          })
+        end
+  end
 
 
      #da grafico das estatisticas
-  def get_grafico_precos_medios_cat(stats)
+  def candidatos_recrutamento_plot1(stats)
 
    obj1 = stats
 
@@ -105,7 +133,7 @@ class ApplicationController < ActionController::Base
     #verifica se comite que tenta aceder é aquele que esta logado(para evitar que comites alterem outros)
     def correct_comite
       @comite = Comite.find(params[:id])
-      redirect_to "/comites" unless @comite.id == current_comite.id || isAdmin?
+      redirect_to "/dashboard" unless @comite.id == current_comite.id || isAdmin?
     end
 
     #verifica se um recrutamento pertence ao comite

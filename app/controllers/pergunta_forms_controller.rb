@@ -4,9 +4,9 @@ class PerguntaFormsController < ApplicationController
   before_filter :pergunta_belongsTo_comite?, :only =>[:edit,:destroy]
   # GET /pergunta_forms
   # GET /pergunta_forms.json
-  def index
+  def index #retirar
     @pergunta_forms = PerguntaForm.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @pergunta_forms }

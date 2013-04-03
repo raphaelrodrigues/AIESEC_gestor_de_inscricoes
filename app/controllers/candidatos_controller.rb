@@ -1,9 +1,12 @@
 class CandidatosController < ApplicationController
 
-before_filter :cand_belongsTo_comite?, :only =>[:show]  
+before_filter :cand_belongsTo_comite?, :only =>[:show,:edit,:destroy]  
+
+skip_before_filter :authorize, :only => [:inscricao,:survey]
+
   # GET /candidatos
   # GET /candidatos.json
-  def index
+  def index #a tirar retirar /view/index
 
     recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                              #vai buscar o recrutamento que esta activo
     @candidatos = recrutamento.candidatos.search(params[:search],params[:page])  #vai buscar os candidatos desse recrutamento
@@ -18,12 +21,25 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
    #stats = @candidatos.est_candidatos(recrutamento)  unless  recrutamento.nil?
 
    #@h = estados_por_candidato(stats)
+
+   @stats = Candidato.percentagem_idades(recrutamento.id)
+   @h = pie_plot(@stats,"Idade Candidatos")
+
+   @stats1 = Candidato.est_candidatos(recrutamento)
+   @h1 = pie_plot(@stats1,"Estados Candidatos")
+   
   end
 
   def candidatos_estagios
    recrutamento = current_comite.recrutamento.recrutamento_activo(2)                                     #vai buscar o recrutamento que esta activo
    @candidatos = recrutamento.candidatos.search(params[:search],params[:page])  unless  recrutamento.nil?  #vai buscar os candidatos desse recrutamento
   
+   @stats = Candidato.percentagem_idades(recrutamento.id)
+   @h = pie_plot(@stats,"Idade Candidatos")
+
+   @stats1 = Candidato.est_candidatos(recrutamento)
+   @h1 = pie_plot(@stats1,"Estados Candidatos")
+
   end
 
   # altera propriedades das perguntas de um formulario
@@ -78,6 +94,8 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
     
     respond_to do |format|
       format.html # show.html.erb
+      format.csv 
+      format.xls  #{ send_data Candidato.to_csv({col_sep: "\t"},@candidato,@candidato.respostas) }
       format.json { render json: @candidato }
     end
   end
@@ -102,13 +120,18 @@ before_filter :cand_belongsTo_comite?, :only =>[:show]
   end
 
   def survey
-    
+
     @comite = Comite.find(params[:cenas][:comite])
     @formulario = @comite.formularios.formulario_activo(params[:cenas][:tipo])
 
+    
+    
     if !@formulario.nil?
       @perguntas_form = @formulario.pergunta_forms
+      Counter.conta(@comite.id,@formulario.tipo)
     end
+
+
 
     render :layout =>"survey"
   end

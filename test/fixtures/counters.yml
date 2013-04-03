@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  comite_id: 1
+  visitas: 1
+
+two:
+  comite_id: 1
+  visitas: 1

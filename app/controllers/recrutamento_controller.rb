@@ -2,7 +2,7 @@ class RecrutamentoController < ApplicationController
   
   before_filter :recr_belongsTo_comite?, :only =>[:show]
 
-  def index
+  def index #tem de sair
   	tipo = params[:tipo].to_i
     redirect_to "/profile" unless !tipo.nil? #se nao houver nenhum parametro 
 

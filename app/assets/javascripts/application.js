@@ -237,8 +237,15 @@ $(document).ready(function() {
             return false;
       });
 
-      
+      $("#candidatos_search input").keyup(function() {
+            //alert($("#candidatos_search").attr("action"));
+            $.get($("#candidatos_search").attr("action"), $("#candidatos_search").serialize(), null,     "script");
+            return false;
+      });
 
+
+
+      
 
       /*
       *   Mandar conteudo pra um modal 
@@ -249,7 +256,26 @@ $(document).ready(function() {
         $('#myModal').modal('show');
       });
 
-});
+
+      /*
+      * Carregar info do modal dos estado
+      */
+      // $('.show').click(function(e) {
+          
+      //     var id = $(this).attr('id');
+      //     $.ajax({
+      //         type: 'GET',
+      //         url: '/estados/' + id,
+      //         success: function(data){
+      //             alert(data);
+      //         },
+      //         dataType: 'html'
+      //     });
+      //     $("#modal-bodyEstado").html("sdsd");   
+      //     $("#myModalEstadoPrevis").modal('show');
+      // });
+
+ });
   
   /*
   *   funcao que copia para o clipboard texto
@@ -269,56 +295,56 @@ $(document).ready(function() {
   }
 
 
-$(function () {
-        $('#container').highcharts({
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-            title: {
-                text: 'TExto qualquer'
-            },
-            tooltip: {
-              pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-              percentageDecimals: 1
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        color: '#000000',
-                        connectorColor: '#000000',
-                        formatter: function() {
-                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
-                        }
-                    }
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Browser share',
-                data: [
-                    ['Firefox',   45.0],
-                    ['IE',       26.8],
-                    {
-                        name: 'Chrome',
-                        y: 12.8,
-                        sliced: true,
-                        selected: true
-                    },
-                    ['Safari',    8.5],
-                    ['Opera',     6.2],
-                    ['Others',   0.7]
-                ]
-            }],
-            exporting: {
-          enabled: true
-        }
-        });
-    });
+// $(function () {
+//         $('#container').highcharts({
+//             chart: {
+//                 plotBackgroundColor: null,
+//                 plotBorderWidth: null,
+//                 plotShadow: false
+//             },
+//             title: {
+//                 text: 'TExto qualquer'
+//             },
+//             tooltip: {
+//               pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+//               percentageDecimals: 1
+//             },
+//             plotOptions: {
+//                 pie: {
+//                     allowPointSelect: true,
+//                     cursor: 'pointer',
+//                     dataLabels: {
+//                         enabled: true,
+//                         color: '#000000',
+//                         connectorColor: '#000000',
+//                         formatter: function() {
+//                             return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+//                         }
+//                     }
+//                 }
+//             },
+//             series: [{
+//                 type: 'pie',
+//                 name: 'Browser share',
+//                 data: [
+//                     ['Firefox',   45.0],
+//                     ['IE',       26.8],
+//                     {
+//                         name: 'Chrome',
+//                         y: 12.8,
+//                         sliced: true,
+//                         selected: true
+//                     },
+//                     ['Safari',    8.5],
+//                     ['Opera',     6.2],
+//                     ['Others',   0.7]
+//                 ]
+//             }],
+//             exporting: {
+//           enabled: true
+//         }
+//         });
+//     });
 
 
 $(function () {

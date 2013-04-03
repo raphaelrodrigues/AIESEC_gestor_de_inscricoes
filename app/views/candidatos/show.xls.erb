@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Telemovel</Data></Cell>
+        <Cell><Data ss:Type="String">Nome</Data></Cell>
+        <Cell><Data ss:Type="String">Email</Data></Cell>
+        <Cell><Data ss:Type="String">Idade</Data></Cell>
+        <Cell><Data ss:Type="String">Data de nascimento</Data></Cell>
+        <Cell><Data ss:Type="String">Comite ID</Data></Cell>
+      </Row>
+
+      <Row>
+        <Cell><Data ss:Type="String"><%= @candidato.telemovel %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @candidato.nome %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @candidato.email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= age(@candidato.data_nascimento) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @candidato.data_nascimento %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @candidato.comite_id %></Data></Cell>
+      </Row>
+
+
+      <Row>
+        <Cell><Data ss:Type="String">wdewe</Data></Cell>
+        <Cell><Data ss:Type="String">wwe</Data></Cell>
+        <Cell><Data ss:Type="String">we</Data></Cell>
+        <Cell><Data ss:Type="String">we</Data></Cell>
+        <Cell><Data ss:Type="String">e</Data></Cell>
+      </Row>
+    <% @candidato.respostas.each do |r| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= getPergunta(r.pergunta_id).titulo %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= r.resposta %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= r.candidato_id%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= r.pergunta_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @candidato.comite_id %></Data></Cell>
+      </Row>
+    <% end %>
+
+    </Table>
+  </Worksheet>
+</Workbook>

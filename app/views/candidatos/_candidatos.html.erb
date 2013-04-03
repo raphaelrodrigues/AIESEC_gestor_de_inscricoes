@@ -47,6 +47,9 @@
           <a href="#myModalEstado" data-toggle="modal" class="btn btn-danger"><i class="icon-tag"></i>Mudar Estado</a>
          
 
+     
+
+
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
           Obter
@@ -82,6 +85,51 @@
       </div>
       </div>
 
+
+
+<script type="text/javascript">
+
+//JSON.parse(data.replace(/&quot;/g,'"'));
+
+$(function () {
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: "Cenas"
+            },
+            tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+              percentageDecimals: 1
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data:  <%= @stats.to_json.html_safe  %>
+            }],
+            exporting: {
+          enabled: true
+        }
+        });
+    });
+</script>
 
    <!-- Modal MAIL-->
 <div id="myModalMail" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -120,12 +168,32 @@
       <h3 id="myModalLabel">Estatísticas</h3>
     </div>
     <div class="modal-body">
-       
-     
+      <div class="row">
+        <div class="span13">
+          <div class="tabbable">
+            <ul class="nav nav-tabs">
+            <li class="active"><a href="#1" data-toggle="tab">Idades</a></li>
+            <li><a href="#2" data-toggle="tab">Estados</a></li>
+            </ul>
+                <div class="tab-content">
+                <div class="tab-pane active" id="1">
+                   <%= high_chart("my_id11", @h ) %>
+                  
+
+                </div>
+                <div class="tab-pane" id="2">
+                   <%= high_chart("my_id1", @h1 ) %>
+
+                </div>    
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+           
     </div>
     <div class="modal-footer">
       <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Mudar Estado</button>
     </div>
   </div>
 
