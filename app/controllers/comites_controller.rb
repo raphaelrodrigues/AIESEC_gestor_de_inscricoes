@@ -22,8 +22,11 @@ class ComitesController < ApplicationController
 
     @stats = @comite.candidatos_por_recrutamento(current_comite.id,1)
 
+    @estado_recrut = EstadoRecrut.new
+    @estados_membros = EstadoRecrut.find(:all,:conditions =>["comite_id = ? and tipo = 1 and activo = 1",@comite.id])
+    @estados_estagios = EstadoRecrut.find(:all,:conditions =>["comite_id = ? and tipo = 2 and activo = 1",@comite.id])
 
-    @h = candidatos_recrutamento_plot
+    @h = pie_plot(@stats,"cenas")
     @h1 = candidatos_recrutamento_plot1(@stats)
 
     respond_to do |format|
@@ -31,6 +34,8 @@ class ComitesController < ApplicationController
       format.json { render json: @comite }
     end
   end
+
+  
 
   #metodo que guarda a ordem das perguntas 
   #com o drag&drop podemos alterar a sua ordem

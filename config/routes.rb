@@ -1,11 +1,20 @@
 Gestor::Application.routes.draw do
   
+  get "estado_recrut/new"
+
+  get "estado_recrut/create"
+
+  get "estado_recrut/destroy"
+
+  get "estado_recrut/edit"
+
   resources :estados
 
   resources :candidatos do
     member do
      
       post :guardar_survey
+      post :guardar_cand_fora_epoca
     end
   end
 
@@ -36,10 +45,18 @@ Gestor::Application.routes.draw do
       post :guardar
       post :reorder
       get :abrir_recrutamento
+      post :add_estado
     end
   end
 
   resources :recrutamento
+  
+  resources :estado_recrut do
+    member do
+      post :create_estado
+      put :update_estado
+    end
+  end
 
   get "abrir_recrutamento" => "recrutamento#abrir_recrutamento_m"
   get "abrir_inscricoes" => "recrutamento#abrir_inscricoes"

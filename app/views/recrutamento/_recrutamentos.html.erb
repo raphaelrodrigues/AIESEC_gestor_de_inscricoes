@@ -15,11 +15,12 @@
           <div class="alert alert-block">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             
-           Não existe nenhum recrutamento de estágios activo!!
+           Não existe nenhum recrutamento activo!!
           </div>
         <% else %>
 
-              <label>Recrutamento Activo <%= @recr_activo.id %> 
+              <label>Recrutamento Activo <%= @recr_activo.id %>
+                <h4>Iniciado há <%= time_ago_in_words(@recr_activo.created_at) %></h4>
                 <%= link_to "Ver", recrutamento_path(@recr_activo.id) ,:class=>'btn'%> 
                 
               </label>

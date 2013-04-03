@@ -73,6 +73,7 @@ class Candidato < ActiveRecord::Base
 
   end
 
+  
   def self.est_candidatos(recrutamento)
     lista_estados = Array.new
     stats = Array.new
@@ -96,6 +97,21 @@ class Candidato < ActiveRecord::Base
     end
 
     return stats
+  end
+
+
+  def self.candidatos_estado(candidatos,estado)
+    n = 0
+    candidatos.each do |c|
+      estado_cand = c.estados.first
+      if !estado_cand.nil?
+        if estado == estado_cand.nome
+          n += 1
+        end
+      end
+    end
+
+    return n
   end
 
   #nao esta a funcionar

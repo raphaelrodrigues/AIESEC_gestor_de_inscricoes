@@ -5,6 +5,44 @@
         De momento, as inscrições encontram-se fechadas!
         Para mais informações contacta-nos pelo mail: 
         <%= @comite.email%><br>
+
+
+        <fieldset>
+            <!-- **********************************perguntas obrigatorias**********************************-->
+              <div class="control-group">
+                    <label class="control-label" >Nome*</label>
+                    <div class="controls">
+                      <input type="text" name="respostas[nome]" placeholder="Nome" >
+                      <p class="help-block"></p>
+                    </div>
+               </div>
+
+                <div class="control-group">
+                    <label class="control-label" >Telemovel*</label>
+                    <div class="controls">
+                      <input type="text" name="respostas[telemovel]" placeholder="Telemovel" >
+                      <p class="help-block"></p>
+                    </div>
+               </div>
+
+               <div class="control-group">
+                    <label class="control-label" >Data de Nascimento*</label>
+                    <div class="controls">
+
+                      <input type="text" name="respostas[data_nascimento]" placeholder="ex 19/09/1990" class="datepicker">
+                      <p class="help-block"></p>
+                    </div>
+               </div>
+
+               <div class="control-group">
+                    <label class="control-label" >Email*</label>
+                    <div class="controls">
+
+                      <input type="text" name="respostas[email]" placeholder="exemplo@gmail.com">
+                      <p class="help-block"></p>
+                    </div>
+               </div>
+          </fieldset>
         <a href="http://aiesec.pt"> Voltar</a>
     </div>
 <% else %>

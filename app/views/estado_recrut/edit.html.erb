@@ -1,0 +1,64 @@
+<div class="header">
+     <h1 class="page-title">Editar Estado Recrutamento <%= tipoToString( @estado_recrut.tipo ) %></h1>
+</div>
+                <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li >Perfil do LC  <span class="divider">/</span></li>
+            <li class="active">Editar Estado</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">       
+         <div class="btn-group">
+      </div>
+    </div>
+    <div class="well">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#home" data-toggle="tab">Estado</a></li>
+        </ul>
+            <div id="myTabContent" class="tab-content">
+                 <div class="tab-pane active in" id="home">
+
+            <%= form_for(@estado_recrut, :url => {:action => 'update_estado',:controller => 'estado_recrut',:id=>@estado_recrut.id}) do |f| %>
+              <% if @estado_recrut.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@estado_recrut.errors.count, "error") %> prohibited this comite from being saved:</h2>
+
+                  <ul>
+                  <% @estado_recrut.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+
+              <div class="field">
+                <%= f.label :nome %><br />
+                <%= f.text_field :nome %>
+              </div>
+
+               <div class="field">
+                <%= f.label :comite_id %><br />
+                <%= f.text_field :comite_id,value: @estado_recrut.comite_id %>
+              </div>
+
+              <div class="field">
+                <%= f.label :tipo %><br />
+                <%= f.text_field :tipo ,:value=> @estado_recrut.tipo %>
+              </div>
+
+              <div class="field">
+                <%= f.label :ordem %><br />
+                <%= f.text_field :ordem, value: @estado_recrut.ordem  %>
+              </div>
+
+
+              <div class="actions">
+                <%= f.submit "Actualizar",:class=>"btn btn-primary"%>
+              </div>
+            <% end %>
+
+            <%= link_to 'Back', estados_path %>
+      </div>
+    </div>
+  </div>

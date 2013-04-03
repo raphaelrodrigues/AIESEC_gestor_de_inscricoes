@@ -1,9 +1,12 @@
         <div class="header">
             
          <div class="stats">
-                <p class="stat"><span class="number">10</span>Aceites</p>
-                <p class="stat"><span class="number">30</span>Contactados </p>
-                <p class="stat"><span class="number">15</span>Intermédio</p>
+                <% @estados_recrut.each do |e| %>
+                  <p class="stat">
+                    <span class="number"><%= Candidato.candidatos_estado(@candidatos,e.nome) %></span>
+                    <%= e.nome %>
+                  </p>
+                <% end %>
                 <p class="stat"><span class="number"><%= @candidatos.count %></span>Inscritos</p>
             
          </div>
@@ -19,28 +22,30 @@
         <div class="container-fluid">
             <div class="row-fluid">
                     
-<div class="btn-toolbar">
+              <div class="btn-toolbar">
 
-  <% path = getPathSearch %>
+                <% path = getPathSearch %>
 
-  <%= form_tag path , :method => 'get'  ,:class => 'form-inline', :id=>'candidatos_search' do  %>
-         
-      <%= text_field_tag :search, params[:search], :class =>"span3 search-input",:placeholder => "Pesquisa...",:autocomplete=>"off" %>
+                <%= form_tag path , :method => 'get'  ,:class => 'form-inline', :id=>'candidatos_search' do  %>
+                       
+                    <%= text_field_tag :search, params[:search], :class =>"span3 search-input",:placeholder => "Pesquisa...",:autocomplete=>"off" %>
 
-      <label class="naLinha"></label>
-      <%= select_tag(:field, options_for_select([['Nome', 1], ['Data', 2], ["Estado",3]]) ) %>
-        
-   <% end %>
-    
-  </div>
+                    <label class="naLinha"></label>
+                    <%= select_tag(:field, options_for_select([['Nome', 1], ['Data', 2], ["Estado",3]]) ) %>
+                      
+                 <% end %>
+                  
+                </div>
 
-    <div id="candidatos_lista">
-      <%= render :partial => 'candidatos' %>
-    </div>
+                  <div id="candidatos_lista">
+                    <%= render :partial => 'candidatos' %>
+                  </div>
 
-    <div class="paginate">
-      <%= will_paginate @candidatos, :inner_window => 2 %>
-    </div>
+                  <div class="paginate">
+                    <%= will_paginate @candidatos, :inner_window => 2 %>
+                  </div>
+            </div>
+        </div>
 
 
 

@@ -13,6 +13,9 @@
 
   <div class="field">
     <% f.label :nome %><br />
+    <%= f.select :nome, @estados_recrut.collect {|p| [ p.nome, p.nome ] } + ['Outro'] , :prompt => 'Escolha um'%>
+
+    
     <%= f.text_field :nome,:placeholder =>"Nome estado" %>
   </div>
 
@@ -34,7 +37,7 @@
     <%= f.text_field :candidato_id ,value: candidato %>
   </div>
 
-  <!--<button class="btn btn-primary"  href="#"><i class="icon-plus"></i> Adicionar Estado</button>-->
+  <button class="btn btn-primary"  href="#"><i class="icon-plus"></i> Adicionar Estado</button>
 
   
 <% end %>

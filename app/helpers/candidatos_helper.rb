@@ -2,14 +2,14 @@ module CandidatosHelper
 
 	def estadoToLabel(estado)
 		if !estado.nil?
-			return "<span class='label label-success'>#{estado.nome}</span>".html_safe
+			return "<span class='label label-info'>#{estado.nome}</span>".html_safe
 		else
-			return "<span class='label label-warning'>Nao Contactado</span>".html_safe
+			return "<span class='label label-warning'>Não Contactado</span>".html_safe
 		end
 	end	
 
 	
-	def tipoToString(tipo)
+	def tipoToStringLabel(tipo)
 		tipo == 1 ? "<span class='label label-success'>Membros</span>".html_safe : "<span class='label label-info'>&nbsp;Estagio&nbsp;&nbsp;</span>".html_safe
 	end
 

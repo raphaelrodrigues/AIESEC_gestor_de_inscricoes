@@ -43,7 +43,6 @@
     </div>
 
 
-    <%= link_to 'Export XLS', url_for(:format => 'xls') %>
       <div class="btn-toolbar">
           <a href="#myModalMail" data-toggle="modal" class="btn"><i class="icon-envelope"></i>Enviar Mail</a>
           <a href="#myModalEstado" data-toggle="modal" class="btn btn-danger"><i class="icon-tag"></i>Mudar Estado</a>
@@ -60,7 +59,7 @@
         <ul class="dropdown-menu">
            <li id="mail"> <a href="#">Obter Emails</a></li>
            <li id="telemovel"><a href="#" >Obter Telemovel</a></li>
-           <li><a href="#myModal" data-toggle="modal">Importar perguntas para Estágios</a></li>
+           <li><a id="email_nao_contactados">Obter Emails de não contactados</a></li>
           <!-- dropdown menu links -->
         </ul>
     </div>
@@ -90,8 +89,6 @@
 
 
 <script type="text/javascript">
-
-//JSON.parse(data.replace(/&quot;/g,'"'));
 
 $(function () {
         $('#container').highcharts({

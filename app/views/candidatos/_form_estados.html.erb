@@ -1,6 +1,10 @@
 <%= fields_for :estado, @estado do |f| %>
 <div class="field">
     <% f.label :nome %><br />
+
+    <%= f.select :nome, @estados_recrut.collect {|p| [ p.nome, p.nome ] } + ['Outro'] , :prompt => 'Escolha um'%>
+
+    
     <%= f.text_field :nome,:placeholder =>"Nome estado" %>
   </div>
 

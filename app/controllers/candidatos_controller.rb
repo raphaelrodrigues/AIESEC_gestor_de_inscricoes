@@ -11,6 +11,14 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
     recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                              #vai buscar o recrutamento que esta activo
     @candidatos = recrutamento.candidatos.search(params[:search],params[:page])  #vai buscar os candidatos desse recrutamento
 
+    @estado = Estado.new
+    @estados_recrut = EstadoRecrut.activos(2,current_comite.id)
+
+     @stats = Candidato.percentagem_idades(recrutamento.id)
+     @h = pie_plot(@stats,"Idade Candidatos")
+
+     @stats1 = Candidato.est_candidatos(recrutamento)
+     @h1 = pie_plot(@stats1,"Estados Candidatos")
   end
 
 
@@ -18,6 +26,8 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
    recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                                        #vai buscar o recrutamento que esta activo
    @candidatos = recrutamento.candidatos.search(params[:search],params[:page]) unless  recrutamento.nil?    #vai buscar os candidatos desse recrutamento
    @estado = Estado.new
+   @estados_recrut = EstadoRecrut.activos(1,current_comite.id)
+
    #stats = @candidatos.est_candidatos(recrutamento)  unless  recrutamento.nil?
 
    #@h = estados_por_candidato(stats)
@@ -33,7 +43,11 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
   def candidatos_estagios
    recrutamento = current_comite.recrutamento.recrutamento_activo(2)                                     #vai buscar o recrutamento que esta activo
    @candidatos = recrutamento.candidatos.search(params[:search],params[:page])  unless  recrutamento.nil?  #vai buscar os candidatos desse recrutamento
-  
+   
+   @estado = Estado.new
+   @estados_recrut = EstadoRecrut.activos(2,current_comite.id)
+   
+   
    @stats = Candidato.percentagem_idades(recrutamento.id)
    @h = pie_plot(@stats,"Idade Candidatos")
 
@@ -82,7 +96,7 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
     
 
   end
-
+  
 
   # GET /candidatos/1
   # GET /candidatos/1.json
@@ -91,7 +105,9 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
     @estados = @candidato.estados
     
     @estado = Estado.new
-    
+    @estados_recrut = EstadoRecrut.activos(@candidato.tipo,current_comite.id)
+
+
     respond_to do |format|
       format.html # show.html.erb
       format.csv 
@@ -158,6 +174,10 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
       format.html { redirect_to candidatos_path }
       format.json { head :no_content }
     end
+  end
+
+  def guardar_cand_fora_epoca
+
   end
 
   # GET /candidatos/1/edit

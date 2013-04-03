@@ -58,6 +58,33 @@
   <%= @comite.email_ocp %>
 </p>
 
+<!--estados para membros-->
+<p>
+  <b>Estados do Comité para Membros:</b>
+  <% if @estados_membros.blank? %>
+    <h1>Não Existem Estados Definidos</h1>
+  <% else %>
+    <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_membros} %>
+  <% end %>
+  <%= link_to "AddEstadoM", "#myModalEstadoM", "data-toggle" => "modal",:class=>"btn" %>
+
+</p>
+<!--estados para estagios-->
+
+
+
+<!--estados para estagios-->
+<p>
+  <b>Estados do Comité para Estágios:</b>
+  <% if @estados_estagios.blank? %>
+    <h1>Não Existem Estados Definidos</h1>
+  <% else %>
+    <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_estagios} %>
+  <% end %>
+  <%= link_to "AddEstadoE", "#myModalEstadoE", "data-toggle" => "modal",:class=>"btn" %>
+</p>
+<!--estados para estagios-->
+
  <%= link_to_function "Estátisticas", "$('#stats_recrut').slideToggle();",:class =>'btn' %><br><br>
   <div id="stats_recrut">
      <%= high_chart("my_id1", @h ) %>
@@ -65,3 +92,36 @@
   </div>
 
 <%= link_to 'Edit', edit_comite_path(@comite) ,:class=>'btn'%>
+
+
+
+ <!-- Modal EstadoMembros-->
+<div id="myModalEstadoM" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Novo Estado</h3>
+    </div>
+    <div class="modal-body">
+       <%= render partial:'estado_recrut/form' ,:locals =>{ :comite_id => @comite.id,:tipo =>1 }%>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Mudar Estado</button>
+    </div>
+  </div>
+
+
+ <!-- Modal EstadoEsatgios-->
+<div id="myModalEstadoE" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Novo Estado</h3>
+    </div>
+    <div class="modal-body">
+       <%= render partial:'estado_recrut/form',:locals =>{ :comite_id => @comite.id,:tipo => 2 } %>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Mudar Estado</button>
+    </div>
+  </div>

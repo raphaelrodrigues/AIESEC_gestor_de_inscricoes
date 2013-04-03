@@ -257,6 +257,20 @@ $(document).ready(function() {
       });
 
 
+      $("input[type='text'][id='estado_nome']").hide();
+      $('#estado_nome').on('change', function() {
+          if (this.value == "Outro")
+          {
+           $("input[type='text'][id='estado_nome']").show();
+           $("input[type='text'][id='estado_nome']").val("");
+         }
+         else
+         {
+           $("input[type='text'][id='estado_nome']").hide();
+           $("input[type='text'][id='estado_nome']").val(this.value);
+         }
+      });
+
       /*
       * Carregar info do modal dos estado
       */

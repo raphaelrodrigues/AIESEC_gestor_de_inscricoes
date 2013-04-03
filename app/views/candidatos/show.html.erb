@@ -45,7 +45,16 @@
         <% if  !@candidato.estados.last.nil? %>
           <p>
               <b>Estado Actual</b>
-              <span title="Alterar Estado" class="label label-success"><%= @candidato.estados.first.nome %></span>
+              <span title="Alterar Estado" class="label label-success">
+                <%= @candidato.estados.first.nome %>
+              </span>
+          </p>
+        <% else %>
+          <p>
+            <b>Estado Actual</b>
+            <span title="Alterar Estado" class="label label-warning">
+                  Não contactado
+            </span>
           </p>
         <% end %>
 
@@ -78,12 +87,12 @@
         <div class="span13">
           <div class="tabbable">
             <ul class="nav nav-tabs">
-            <li class="active"><a href="#1" data-toggle="tab">Estado</a></li>
+            <li class="active"><a href="#1" data-toggle="tab">Estados</a></li>
             <li><a href="#2" data-toggle="tab">Estatistica</a></li>
             </ul>
                 <div class="tab-content">
                 <div class="tab-pane active" id="1">
-                  <%= render 'estados', collection: @estados %>
+                    <%= render 'estados', collection: @estados %>
                 </div>
                 <div class="tab-pane" id="2">
                    

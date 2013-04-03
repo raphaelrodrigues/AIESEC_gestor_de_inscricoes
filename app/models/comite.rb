@@ -17,6 +17,7 @@ class Comite < ActiveRecord::Base
 
   has_many :formularios
   has_many :recrutamento
+  has_many :estado_recrut
 
 
   def self.authenticate(nome, password)
