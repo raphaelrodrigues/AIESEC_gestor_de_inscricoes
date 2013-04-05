@@ -1,6 +1,22 @@
 
 <% if @candidatos.nil? %>
-	<h1>Não estao Abertos Recrutamentos</h1>
+		<div class="header">
+		            
+		        <h1 class="page-title">Estágiarios</h1>
+		   </div>
+		        <ul class="breadcrumb">
+		            <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+		            <li class="active">Candidatos  <span class="divider">/</span></li>
+		            <li class="active">Estágios</li>
+		        </ul>
+		<div class="container-fluid">
+	    
+			<h1>Não estão abertos Recrutamentos</h1>
+
+			<a href="/abrir_recrutamento?tipo=2"  class="btn" data-confirm="Tem a certeza que pretende abrir um novo recrutamento?">
+				Abrir Recrutamento        
+           </a>
+
 <% else %>
 	<%= render "lista_candidatos" %>
 <% end %>

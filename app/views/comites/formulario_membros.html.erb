@@ -1,5 +1,19 @@
 <% if @formulario.nil? %>
 	<div id="perguntas">
+		<div class="header">
+            <div class="stats">
+                <p class="stat"><span class="number"><%= @formulario.pergunta_forms.count %></span> Perguntas</p>
+         </div>
+          <h1 class="page-title"><%= @formulario.nome %></h1>
+
+          
+        </div>
+        
+	        <ul class="breadcrumb">
+	            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+	            <li>Recrutamento <%= l @recrutamento.created_at , :format => :long %><span class="divider">/</span></li>
+	            <li class="active"><%= @formulario.nome %> <%= @formulario.id %> <%= @formulario.comite_id %></li>
+	        </ul>
 		<h1>Nao existem formularios</h1>
 	</div>
 <% else %>

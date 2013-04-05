@@ -58,31 +58,48 @@
   <%= @comite.email_ocp %>
 </p>
 
-<!--estados para membros-->
-<p>
-  <b>Estados do Comité para Membros:</b>
-  <% if @estados_membros.blank? %>
-    <h1>Não Existem Estados Definidos</h1>
-  <% else %>
-    <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_membros} %>
-  <% end %>
-  <%= link_to "AddEstadoM", "#myModalEstadoM", "data-toggle" => "modal",:class=>"btn" %>
 
-</p>
+
+<div class="row-fluid">
+
+
+      <div class="block span6">
+        <a href="#tablewidget" class="block-heading" data-toggle="collapse">Estados do Comité para Estágios:<span class="label label-warning"></span></a>
+        <div id="tablewidget" class="block-body collapse in">
+           <p>
+            <% if @estados_estagios.blank? %>
+              <h1>Não Existem Estados Definidos</h1>
+            <% else %>
+              <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_estagios} %>
+            <% end %>
+            <%= link_to "AddEstadoE", "#myModalEstadoE", "data-toggle" => "modal",:class=>"btn" %>
+          </p>
+        </div>
+    </div>
+
+    
+    <div class="block span6">
+        <a href="#tablewidget1" class="block-heading" data-toggle="collapse">Estados do Comité para Membros:</a>
+        <div id="tablewidget1" class="block-body collapse in">
+        <!--estados para membros-->
+          <p>
+            <b></b>
+            <% if @estados_membros.blank? %>
+              <h1>Não Existem Estados Definidos</h1>
+            <% else %>
+              <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_membros} %>
+            <% end %>
+            <%= link_to "AddEstadoM", "#myModalEstadoM", "data-toggle" => "modal",:class=>"btn" %>
+
+          </p>
+        <!--estados para estagios-->
+                    
+          </div> <!-- /widget -->
+        </div>
+ </div>
+
 <!--estados para estagios-->
 
-
-
-<!--estados para estagios-->
-<p>
-  <b>Estados do Comité para Estágios:</b>
-  <% if @estados_estagios.blank? %>
-    <h1>Não Existem Estados Definidos</h1>
-  <% else %>
-    <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_estagios} %>
-  <% end %>
-  <%= link_to "AddEstadoE", "#myModalEstadoE", "data-toggle" => "modal",:class=>"btn" %>
-</p>
 <!--estados para estagios-->
 
  <%= link_to_function "Estátisticas", "$('#stats_recrut').slideToggle();",:class =>'btn' %><br><br>

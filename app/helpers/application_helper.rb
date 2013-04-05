@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module ApplicationHelper
 
   include LazyHighCharts::LayoutHelper
@@ -33,7 +34,16 @@ module ApplicationHelper
   #diz se inscriçoes estao abertas/fechadas a partir field activo
   # se activo==true return Abertas senao Fechadas
   def insc_abertas?(activo)
-    return activo ? "<span class='label label-success'>Abertas</span>".html_safe : "<span class='label label-important'>Fechadas</span>".html_safe
+    if activo == true
+      "<span class='label label-success'>Abertas</span>".html_safe
+    else
+      "<span class='label label-important'>Fechadas</span>".html_safe
+    end
+    #activo ? "<span class='label label-success'>Abertas</span>".html_safe : "<span class='label label-important'>Fechadas</span>".html_safe
+  end
+
+  def inscricoes(activo)
+      activo ? "<span class='label label-success'>Abertas</span>".html_safe : "<span class='label label-important'>Fechadas</span>".html_safe
   end
 
   # ao inserir uma pergunta no formulario insere no fim 
@@ -89,6 +99,8 @@ module ApplicationHelper
 
   if current_page?(candidatos_membros_path)
       candidatos_membros_path
+  elsif current_page?(candidatos_fora_epoca_path)
+      candidatos_fora_epoca_path
   else
       candidatos_estagios_path
   end

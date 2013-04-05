@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PerguntaController < ApplicationController
   
   before_filter :pergunta_belongsTo_comite?, :only =>[:edit,:destroy]

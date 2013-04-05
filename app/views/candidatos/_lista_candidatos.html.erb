@@ -40,12 +40,15 @@
                   <div id="candidatos_lista">
                     <%= render :partial => 'candidatos' %>
                   </div>
-
+                  
                   <div class="paginate">
                     <%= will_paginate @candidatos, :inner_window => 2 %>
+                    <% if params[:page] != "all" %>
+                      <%= link_to "Ver todos", candidatos_membros_path(:page => "all"),:class=>"btn" %>
+                    <% end %>
                   </div>
+
             </div>
-        </div>
 
 
 

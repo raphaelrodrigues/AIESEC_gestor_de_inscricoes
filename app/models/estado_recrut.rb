@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class EstadoRecrut < ActiveRecord::Base
   attr_accessible :comite_id, :nome, :ordem, :tipo
 

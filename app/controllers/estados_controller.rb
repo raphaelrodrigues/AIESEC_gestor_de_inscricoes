@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class EstadosController < ApplicationController
 
   before_filter :correct_comite, :only => [  :destroy,:edit ]

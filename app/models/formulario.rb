@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Formulario < ActiveRecord::Base
   attr_accessible :comite_id, :estado, :nome, :tipo,:recrutamento_id
 

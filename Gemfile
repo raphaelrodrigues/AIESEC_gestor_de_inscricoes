@@ -42,6 +42,7 @@ gem 'bootstrap-will_paginate'
 gem "heroku"
 gem 'yaml_db'
 gem 'lazy_high_charts'
+gem "magic_encoding", "~> 0.0.2"
 
 
 # To use ActiveModel has_secure_password

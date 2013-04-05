@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CandidatosController < ApplicationController
 
 before_filter :cand_belongsTo_comite?, :only =>[:show,:edit,:destroy]  
@@ -23,36 +24,37 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
 
 
   def candidatos_membros
-   recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                                        #vai buscar o recrutamento que esta activo
-   @candidatos = recrutamento.candidatos.search(params[:search],params[:page]) unless  recrutamento.nil?    #vai buscar os candidatos desse recrutamento
-   @estado = Estado.new
-   @estados_recrut = EstadoRecrut.activos(1,current_comite.id)
+     recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                                        #vai buscar o recrutamento que esta activo
+     @candidatos = recrutamento.candidatos.search(params[:search],params[:page]) unless  recrutamento.nil?    #vai buscar os candidatos desse recrutamento
+     
+     @estado = Estado.new
+     @estados_recrut = EstadoRecrut.activos(1,current_comite.id)
 
-   #stats = @candidatos.est_candidatos(recrutamento)  unless  recrutamento.nil?
 
-   #@h = estados_por_candidato(stats)
+     if !recrutamento.nil?
+       @stats = Candidato.percentagem_idades(recrutamento.id)
+       @h = pie_plot(@stats,"Idade Candidatos")
 
-   @stats = Candidato.percentagem_idades(recrutamento.id)
-   @h = pie_plot(@stats,"Idade Candidatos")
-
-   @stats1 = Candidato.est_candidatos(recrutamento)
-   @h1 = pie_plot(@stats1,"Estados Candidatos")
+       @stats1 = Candidato.est_candidatos(recrutamento)
+       @h1 = pie_plot(@stats1,"Estados Candidatos")
+     end
    
   end
 
   def candidatos_estagios
-   recrutamento = current_comite.recrutamento.recrutamento_activo(2)                                     #vai buscar o recrutamento que esta activo
-   @candidatos = recrutamento.candidatos.search(params[:search],params[:page])  unless  recrutamento.nil?  #vai buscar os candidatos desse recrutamento
-   
-   @estado = Estado.new
-   @estados_recrut = EstadoRecrut.activos(2,current_comite.id)
-   
-   
-   @stats = Candidato.percentagem_idades(recrutamento.id)
-   @h = pie_plot(@stats,"Idade Candidatos")
+     recrutamento = current_comite.recrutamento.recrutamento_activo(2)                                     #vai buscar o recrutamento que esta activo
+     @candidatos = recrutamento.candidatos.search(params[:search],params[:page])  unless  recrutamento.nil?  #vai buscar os candidatos desse recrutamento
+     
+     @estado = Estado.new
+     @estados_recrut = EstadoRecrut.activos(2,current_comite.id)
+     
+     if !recrutamento.nil?
+       @stats = Candidato.percentagem_idades(recrutamento.id)
+       @h = pie_plot(@stats,"Idade Candidatos")
 
-   @stats1 = Candidato.est_candidatos(recrutamento)
-   @h1 = pie_plot(@stats1,"Estados Candidatos")
+       @stats1 = Candidato.est_candidatos(recrutamento)
+       @h1 = pie_plot(@stats1,"Estados Candidatos")
+    end
 
   end
 
@@ -136,18 +138,17 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
   end
 
   def survey
-
     @comite = Comite.find(params[:cenas][:comite])
-    @formulario = @comite.formularios.formulario_activo(params[:cenas][:tipo])
+    @recrutamento = @comite.recrutamento.activo_and_aberto(params[:cenas][:tipo])
 
-    
-    
-    if !@formulario.nil?
-      @perguntas_form = @formulario.pergunta_forms
-      Counter.conta(@comite.id,@formulario.tipo)
+    if !@recrutamento.nil?
+      @formulario = @comite.formularios.formulario_activo(params[:cenas][:tipo])
+
+      if !@formulario.nil?
+        @perguntas_form = @formulario.pergunta_forms
+        Counter.conta(@comite.id,@formulario.tipo)
+      end
     end
-
-
 
     render :layout =>"survey"
   end
@@ -171,13 +172,32 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
      end
 
       respond_to do |format|
-      format.html { redirect_to candidatos_path }
+      format.html { redirect_to survey_final_path }
       format.json { head :no_content }
     end
   end
 
-  def guardar_cand_fora_epoca
+  def survey_final
+    render :layout =>"survey"
+  end
 
+
+  def candidatos_fora_epoca
+    @candidatos = Candidato.fora_epoca(current_comite.id)
+  end
+
+  def guardar_cand_fora_epoca
+      val = params[:respostas]
+      comite_id = params[:id]
+      tipo = params[:tipo]
+      @candidato = Candidato.novo(val,tipo,comite_id,0) #cria um novo candidato
+
+      @candidato.save
+
+      respond_to do |format|
+        format.html { redirect_to survey_final_path }
+        format.json { head :no_content }
+      end
   end
 
   # GET /candidatos/1/edit
@@ -225,7 +245,9 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
   # DELETE /candidatos/1.json
   def destroy
     @candidato = Candidato.find(params[:id])
-    @candidato.destroy
+    @candidato.activo = 0
+
+    @candidato.save
 
     respond_to do |format|
       format.html { redirect_to candidatos_url }

@@ -1,5 +1,6 @@
+# -*- encoding : utf-8 -*-
 module CandidatosHelper
-
+	
 	def estadoToLabel(estado)
 		if !estado.nil?
 			return "<span class='label label-info'>#{estado.nome}</span>".html_safe

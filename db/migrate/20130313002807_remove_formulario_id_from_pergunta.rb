@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RemoveFormularioIdFromPergunta < ActiveRecord::Migration
   def up
     remove_column :pergunta, :formulario_id

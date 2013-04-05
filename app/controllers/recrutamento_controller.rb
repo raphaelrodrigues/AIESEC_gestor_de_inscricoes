@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RecrutamentoController < ApplicationController
   
   before_filter :recr_belongsTo_comite?, :only =>[:show]
@@ -54,6 +55,12 @@ class RecrutamentoController < ApplicationController
 	    
 	    @formulario_novo.save                                    #guarda o formulario novo
 
+      #reinicia o contador
+      counter = Counter.my_find(current_comite.id,tipo)
+      counter.reset
+
+      
+
 	    respond_to do |format|
 	      format.html { redirect_to formulario_membros_path(@comite) }
 	      format.json { head :no_content }
@@ -92,6 +99,11 @@ class RecrutamentoController < ApplicationController
   	@recrutamento = Recrutamento.find(params[:id])
     @candidatos = @recrutamento.candidatos
     
+    @counter = Counter.my_find(current_comite.id,@recrutamento.tipo)
+
+    stats = @recrutamento.viewEinscricoes(@counter)
+    @h = pie_plot(stats,"Visitas vs Inscrições")
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @recrutamento }

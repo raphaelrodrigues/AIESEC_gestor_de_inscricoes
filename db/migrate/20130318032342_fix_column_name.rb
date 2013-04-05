@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FixColumnName < ActiveRecord::Migration
   def self.up
     rename_column :pergunta_forms, :pergunta_id, :perguntum_id

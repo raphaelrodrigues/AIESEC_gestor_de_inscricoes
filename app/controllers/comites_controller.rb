@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ComitesController < ApplicationController
   # GET /comites
   # GET /comites.json
@@ -26,6 +27,9 @@ class ComitesController < ApplicationController
     @estados_membros = EstadoRecrut.find(:all,:conditions =>["comite_id = ? and tipo = 1 and activo = 1",@comite.id])
     @estados_estagios = EstadoRecrut.find(:all,:conditions =>["comite_id = ? and tipo = 2 and activo = 1",@comite.id])
 
+
+
+
     @h = pie_plot(@stats,"cenas")
     @h1 = candidatos_recrutamento_plot1(@stats)
 
@@ -52,6 +56,22 @@ class ComitesController < ApplicationController
           pergunta = PerguntaForm.find(id)
           pergunta.ordem = n
           pergunta.save
+          n += 1
+        end
+      end
+    end
+    render :json => {}
+  end
+
+  def reorderEstados
+    estados_ids = params[:estados]
+    n = 1
+    ActiveRecord::Base.transaction do
+      estados_ids.each do |id|
+        if !id.blank?
+          estado_recrut = EstadoRecrut.find(id)
+          estado_recrut.ordem = n
+          estado_recrut.save
           n += 1
         end
       end
@@ -145,6 +165,8 @@ class ComitesController < ApplicationController
 
   def inscricoes
     @comite = Comite.find(current_comite)
+
+    @recrutamento = @comite.recrutamento
   end
 
   
@@ -156,7 +178,13 @@ class ComitesController < ApplicationController
     @counter_estag = Counter.my_find(current_comite.id,2)
 
     #ultimos candidatos inscritos
-    @last_cand = Candidato.find(:all, :conditions =>["comite_id = ?",current_comite.id], :limit => 10)
+    @last_cand = Candidato.last_month(current_comite.id)
+    
+    @recrutamento_m = current_comite.recrutamento.activo_and_aberto(1)
+    @recrutamento_e = current_comite.recrutamento.activo_and_aberto(2)
+
+    
+
 
   end
   

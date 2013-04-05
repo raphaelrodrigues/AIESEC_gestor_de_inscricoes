@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PerguntaForm < ActiveRecord::Base
   attr_accessible :formulario_id, :obrigatoria, :ordem, :perguntum_id
 

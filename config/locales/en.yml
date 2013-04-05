@@ -12,3 +12,5 @@ en:
       short: "%b %d"
       long: "%B %d, %Y"
       time:   "%d/%m/%Y %H:%M:%S"
+      us_date: "%b %d, %Y"
+      mine: "%b %d"

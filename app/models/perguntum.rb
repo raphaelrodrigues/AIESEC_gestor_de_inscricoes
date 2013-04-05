@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Perguntum < ActiveRecord::Base
   attr_accessible :activa, :descricao, :tipo, :titulo,:comite_id
 

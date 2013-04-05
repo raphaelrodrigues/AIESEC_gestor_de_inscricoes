@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Gestor::Application.routes.draw do
   
   get "estado_recrut/new"
@@ -12,7 +13,6 @@ Gestor::Application.routes.draw do
 
   resources :candidatos do
     member do
-     
       post :guardar_survey
       post :guardar_cand_fora_epoca
     end
@@ -44,6 +44,7 @@ Gestor::Application.routes.draw do
     member do
       post :guardar
       post :reorder
+      post :reorderEstados
       get :abrir_recrutamento
       post :add_estado
     end
@@ -82,6 +83,8 @@ Gestor::Application.routes.draw do
 
   get "candidatos_membros" => "candidatos#candidatos_membros" , as: "candidatos_membros"
   get "candidatos_estagios" => "candidatos#candidatos_estagios" , as: "candidatos_estagios"
+  get "candidatos_fora_epoca" => "candidatos#candidatos_fora_epoca" , as: "candidatos_fora_epoca"
+
 
   get "recrutamento_membros" => "recrutamento#recrutamento_membros" , as: "recrutamento_membros"
   get "recrutamento_estagios" => "recrutamento#recrutamento_estagios" , as: "recrutamento_estagios"
@@ -89,6 +92,7 @@ Gestor::Application.routes.draw do
 
   post "survey" => "candidatos#survey",:as =>"survey"
   get "inscricao" => "candidatos#inscricao",:as =>"inscricao"
+  get "survey_final" => "candidatos#survey_final",:as =>"survey_final"
   get "help" => "comites#help",:as =>"help"
   get "dashboard" => "comites#dashboard",:as =>"dashboard"
 

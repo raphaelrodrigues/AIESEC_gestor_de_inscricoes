@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateFormularios < ActiveRecord::Migration
   def change
     create_table :formularios do |t|

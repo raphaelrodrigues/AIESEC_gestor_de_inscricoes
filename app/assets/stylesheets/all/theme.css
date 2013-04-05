@@ -693,16 +693,16 @@ input[type="password"] {
 }
 .stat-widget-container .stat-widget .stat-button {
   margin-top: 1em;
-  margin: 2em 1em;
+  margin: 1em 1em;
   position: relative;
 }
 .stat-widget-container .stat-widget .stat-button .title {
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
   color: #999;
 }
 .stat-widget-container .stat-widget .stat-button .detail {
-  font-size: 1.5em;
+  font-size: 1em;
   color: #555;
 }
 table.table.list tr:first-child td {
@@ -790,4 +790,4 @@ table.table.list tr:first-child td {
 
 .sumdata input { border: 1px solid; font-family: Verdana; font-size: 1.25em; font-weight: bold; padding: 8px 6px 7px 6px; width: 250px; margin: 0; } 
 
-
+/*****************************************SURVEY******************************/

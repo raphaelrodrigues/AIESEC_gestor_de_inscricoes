@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateEstadoRecruts < ActiveRecord::Migration
   def change
     create_table :estado_recruts do |t|

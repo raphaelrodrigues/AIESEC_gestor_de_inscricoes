@@ -77,6 +77,7 @@ GEM
     lazy_high_charts (1.3.3)
       bundler (~> 1.0)
       hash-deep-merge
+    magic_encoding (0.0.2)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -156,6 +157,7 @@ DEPENDENCIES
   heroku
   jquery-rails
   lazy_high_charts
+  magic_encoding (~> 0.0.2)
   meta_request
   mysql2
   pg

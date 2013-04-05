@@ -1,0 +1,65 @@
+  <!-- Modal MAIL-->
+<div id="myModalMail" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Enviar Mail</h3>
+    </div>
+    <div class="modal-body">
+      <%= render 'form_mail' %>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+       <button class="btn btn-primary" name="commit" value="Enviar Mail"><i class="icon-save"></i>Enviar Mail</button>
+    </div>
+  </div>
+
+ <!-- Modal ESTDO-->
+<div id="myModalEstado" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Novo Estado</h3>
+    </div>
+    <div class="modal-body">
+       <%= render 'form_estados' %>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Mudar Estado</button>
+    </div>
+  </div>
+
+  <!-- Modal STATS-->
+<div id="myModalStats" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Estatísticas</h3>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="span13">
+          <div class="tabbable">
+            <ul class="nav nav-tabs">
+            <li class="active"><a href="#1" data-toggle="tab">Idades</a></li>
+            <li><a href="#2" data-toggle="tab">Estados</a></li>
+            </ul>
+                <div class="tab-content">
+                <div class="tab-pane active" id="1">
+                   <%= high_chart("my_id11", @h ) %>
+                  
+
+                </div>
+                <div class="tab-pane" id="2">
+                   <%= high_chart("my_id1", @h1 ) %>
+
+                </div>    
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+           
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+  </div>

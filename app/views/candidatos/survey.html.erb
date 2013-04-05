@@ -6,13 +6,13 @@
         Para mais informações contacta-nos pelo mail: 
         <%= @comite.email%><br>
 
-
+    <%= form_for(:respostas, :url => {:action => 'guardar_cand_fora_epoca',:controller => 'candidatos',:id=>@comite.id,:tipo =>params[:cenas][:tipo]},:html => {:class=>"form-horizontal ",:onsubmit=>"return ;"} ) do |f| %>
         <fieldset>
             <!-- **********************************perguntas obrigatorias**********************************-->
               <div class="control-group">
                     <label class="control-label" >Nome*</label>
                     <div class="controls">
-                      <input type="text" name="respostas[nome]" placeholder="Nome" >
+                      <input type="text" name="respostas[nome]" placeholder="Nome" required>
                       <p class="help-block"></p>
                     </div>
                </div>
@@ -20,7 +20,7 @@
                 <div class="control-group">
                     <label class="control-label" >Telemovel*</label>
                     <div class="controls">
-                      <input type="text" name="respostas[telemovel]" placeholder="Telemovel" >
+                      <input type="text" name="respostas[telemovel]" placeholder="Telemovel" required>
                       <p class="help-block"></p>
                     </div>
                </div>
@@ -29,7 +29,7 @@
                     <label class="control-label" >Data de Nascimento*</label>
                     <div class="controls">
 
-                      <input type="text" name="respostas[data_nascimento]" placeholder="ex 19/09/1990" class="datepicker">
+                      <input type="text" name="respostas[data_nascimento]" placeholder="ex 19/09/1990" class="datepicker" required>
                       <p class="help-block"></p>
                     </div>
                </div>
@@ -38,11 +38,20 @@
                     <label class="control-label" >Email*</label>
                     <div class="controls">
 
-                      <input type="text" name="respostas[email]" placeholder="exemplo@gmail.com">
+                      <input type="text" name="respostas[email]" placeholder="exemplo@gmail.com" required>
                       <p class="help-block"></p>
                     </div>
                </div>
           </fieldset>
+
+
+            <div class="form-actions">
+              <%= f.submit "Submeter",:class=>"btn btn-primary" %>
+              <button type="reset" class="btn">Cancel</button>
+            </div>
+
+            
+      <% end %>
         <a href="http://aiesec.pt"> Voltar</a>
     </div>
 <% else %>
@@ -68,7 +77,7 @@
               <div class="control-group">
                     <label class="control-label" >Nome*</label>
                     <div class="controls">
-                      <input type="text" name="respostas[nome]" placeholder="Nome" >
+                      <input type="text" name="respostas[nome]" placeholder="Nome" required="required">
                       <p class="help-block"></p>
                     </div>
                </div>
@@ -76,7 +85,7 @@
                 <div class="control-group">
                     <label class="control-label" >Telemovel*</label>
                     <div class="controls">
-                      <input type="text" name="respostas[telemovel]" placeholder="Telemovel" >
+                      <input type="text" name="respostas[telemovel]" placeholder="Telemovel" required="required">
                       <p class="help-block"></p>
                     </div>
                </div>
@@ -85,7 +94,7 @@
                     <label class="control-label" >Data de Nascimento*</label>
                     <div class="controls">
 
-                      <input type="text" name="respostas[data_nascimento]" placeholder="ex 19/09/1990" class="datepicker">
+                      <input type="text" name="respostas[data_nascimento]" placeholder="ex 19/09/1990" class="datepicker" required="required">
                       <p class="help-block"></p>
                     </div>
                </div>
@@ -94,7 +103,7 @@
                     <label class="control-label" >Email*</label>
                     <div class="controls">
 
-                      <input type="text" name="respostas[email]" placeholder="exemplo@gmail.com">
+                      <input type="text" name="respostas[email]" placeholder="exemplo@gmail.com" required="required">
                       <p class="help-block"></p>
                     </div>
                </div>
@@ -117,6 +126,8 @@
                     </div>
                   </div>
                <% end %>
+
+
                
             </fieldset>
 

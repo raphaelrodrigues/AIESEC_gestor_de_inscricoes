@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateCandidatos < ActiveRecord::Migration
   def change
     create_table :candidatos do |t|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateComites < ActiveRecord::Migration
   def change
     create_table :comites do |t|

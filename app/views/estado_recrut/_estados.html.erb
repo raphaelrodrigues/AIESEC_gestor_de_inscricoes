@@ -1,25 +1,26 @@
 <div class="container-fluid">
       <div class="well">
 
-          <h1>Estados</h1>
-
-          <table class="table table-striped">
-            <tr>
-              <th></th>
-              <th>Nome</th>
-              <th></th>
-              <th></th>
-            </tr>
-
+          <table id="sortableEstados" class="table table-striped">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Nome</th>
+                <th></th>
+                <th></th>
+              </tr>
+          </thead>
+          <tbody>
           <% estados.each do |estado| %>
-            <tr>
-              <td><%= link_to "VER", "#myModalEstadoPrevis", "data-toggle" => "modal" %></td>
+            <tr id="<%= estado.id %>" class="handle">
+              <td><%= estado.ordem %></td>
               <td><%= estado.nome %></td>
               <td><%= link_to 'Edit', edit_estado_recrut_path(estado) %></td>
               <td><%= link_to 'Destroy', estado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
-          </table>
+        </tbody>
+       </table>
           <br />
       </div>
     </div>

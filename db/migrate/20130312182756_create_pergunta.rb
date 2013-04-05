@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreatePergunta < ActiveRecord::Migration
   def change
     create_table :pergunta do |t|

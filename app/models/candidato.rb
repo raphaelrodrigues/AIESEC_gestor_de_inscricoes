@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Candidato < ActiveRecord::Base
   attr_accessible :comite_id, :data_nascimento, :nome, :recrutamento_id, :telemovel, :tipo ,:email
 
@@ -6,6 +7,8 @@ class Candidato < ActiveRecord::Base
   validates_presence_of :comite_id,:nome,:recrutamento_id
   default_scope :order => 'created_at DESC'
   
+
+
 
   validates_format_of :email, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
 
@@ -16,7 +19,15 @@ class Candidato < ActiveRecord::Base
   
 
   def self.search(search,page)
-      paginate :per_page => 10, :page => page,
+    if page == "all"
+      per_page = Candidato.all.count
+    else
+      per_page = 10
+    end
+
+    page = 1
+
+      paginate :per_page => per_page, :page => page,
            :conditions => ['nome LIKE  ?', "%#{search}%"]
 
       
@@ -25,6 +36,10 @@ class Candidato < ActiveRecord::Base
   #Para que o controller nao fique tao grande
   def self.novo(val,tipo,comite_id,recrutamento_id)
   	new(nome: val[:nome],telemovel: val[:telemovel],data_nascimento: val[:data_nascimento],comite_id: comite_id,tipo: tipo,recrutamento_id: recrutamento_id,email: val[:email])
+  end
+
+  def self.last_month(comite_id)
+    find(:all, :conditions =>["comite_id = ? and created_at > ?",comite_id, 1.month.ago],:limit => 10)
   end
 
 
@@ -45,6 +60,8 @@ class Candidato < ActiveRecord::Base
     now = Time.now.utc.to_date
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
+
+
 
 
   def self.percentagem_idades(recrutamento_id)
@@ -112,6 +129,13 @@ class Candidato < ActiveRecord::Base
     end
 
     return n
+  end
+
+  #devolve os candidatos fora de epoca
+  # estes candidatos nao possuem recrutemento
+  #recrutamento_id = 0
+  def self.fora_epoca(comite_id)
+    find(:all,:conditions=>["comite_id = ? and recrutamento_id = 0 and activo = true",comite_id])
   end
 
   #nao esta a funcionar

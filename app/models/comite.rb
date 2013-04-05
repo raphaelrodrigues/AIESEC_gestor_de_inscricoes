@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Comite < ActiveRecord::Base
   attr_accessible :descricao, :email, :email_ocp, :morada, :nome, :telefone,:password, :password_confirmation
 

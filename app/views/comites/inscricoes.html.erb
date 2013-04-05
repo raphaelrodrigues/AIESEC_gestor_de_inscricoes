@@ -33,24 +33,82 @@
               <tbody>
                 <tr>
                   <td>AIESEC Minho</td>
-                  <td><span title="Alterar Estado" class="label label-success"><%= @comite.inscricao_activa?(1) %></span></td>
-                  <td><a href="#myModal" data-toggle="modal"> <span class="label label-important"><%= @comite.inscricao_activa?(2) %></span></a></td>
+                  <td><%= insc_abertas?( @comite.inscricao_activa?(1) ) %></td>
+                  <td><%= insc_abertas?( @comite.inscricao_activa?(2) ) %></td>
                 </tr>
               </tbody>
         </table>
 
-<%= link_to "Abrir Recrutamento Membros",abrir_recrutamento_path(:tipo=> 1), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+<div class="row-fluid">
 
-<%= link_to "Abrir Inscricoes Membros",abrir_inscricoes_path(:tipo=> 1), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+ <div class="block span6">
+        <a href="#tablewidget1" class="block-heading" data-toggle="collapse">Membros</a>
+        <div id="tablewidget1" class="block-body collapse in">
+        <div class="widget">
+                        <h3></h3>
+                    </div> <!-- /widget-header -->
+                    
+                    <div class="widget-content">
+                        
+                        <div class="shortcuts">
+                           <a href="/abrir_recrutamento?tipo=1"  class="shortcut" data-confirm="Tem a certeza que pretende abrir um novo recrutamento?">
+                                <i class="shortcut-icon icon-list-alt"></i>
+                                <span class="shortcut-label">Abrir Recrutamento Membros</span>
+                            </a>
+                            <a href="/abrir_inscricoes?tipo=1" class="shortcut <%= 'disabled' if @recrutamento.recrutamento_activo(1).nil? %>" data-confirm="Tem a certeza?">
 
-<%= link_to "Fechar Inscricoes Membros",fechar_inscricoes_path(:tipo=> 1), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+                                <i class="shortcut-icon icon-user"></i>
+                                <span class="shortcut-label">Abrir Inscrições Membros</span>
+                            </a>
 
-<%= link_to "Abrir Recrutamento Estagios",abrir_recrutamento_path(:tipo=> 2), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
 
-<%= link_to "Abrir Inscricoes Estagios",abrir_inscricoes_path(:tipo=> 2), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+                            <a href="/fechar_inscricoes?tipo=1" class="shortcut <%= 'disabled' if @comite.inscricao_activa?(1) == false %>" data-confirm="Tem a certeza?">
+                                <i class="shortcut-icon icon-off"></i>
+                                <span class="shortcut-label">Fechar Inscricoes Membros</span>
+                            </a>
+                            
+            
+                        </div> <!-- /shortcuts -->  
+                    
+                    </div> <!-- /widget-content -->
+                    
+                </div> <!-- /widget -->
+        </div>
 
-<%= link_to "Fechar Inscricoes Estágios",fechar_inscricoes_path(:tipo=> 2), data: { confirm: 'Tem a certeza?' },:class =>'btn'  %>
+        <div class="block span6">
+        <a href="#tablewidget2" class="block-heading" data-toggle="collapse">Estágios</a>
+        <div id="tablewidget2" class="block-body collapse in">
+        <div class="widget">
+                        <h3></h3>
+                    </div> <!-- /widget-header -->
+                    
+                    <div class="widget-content">
+                        
+                        <div class="shortcuts">
+                           <a href="/abrir_recrutamento?tipo=2"  class="shortcut" data-confirm="Tem a certeza que pretende abrir um novo recrutamento?">
+                                <i class="shortcut-icon icon-list-alt"></i>
+                                <span class="shortcut-label">Abrir Recrutamento Estágios</span>
+                            </a>
+                           <a href="/abrir_inscricoes?tipo=2" class="shortcut <%= 'disabled' if @recrutamento.recrutamento_activo(2).nil? %>" data-confirm="Tem a certeza?">
+                                <i class="shortcut-icon icon-user"></i>
+                                <span class="shortcut-label">Abrir Inscrições Estágios</span>
+                            </a>
 
+
+                            <a href="/fechar_inscricoes?tipo=2" class="shortcut <%= 'disabled' if @comite.inscricao_activa?(2) == false %>" data-confirm="Tem a certeza?">
+                                <i class="shortcut-icon icon-off"></i>
+                                <span class="shortcut-label">Fechar Inscricoes Estágios</span>
+                            </a>
+                            
+
+            
+                        </div> <!-- /shortcuts -->  
+                    
+                    </div> <!-- /widget-content -->
+                    
+                </div> <!-- /widget -->
+        </div>
+  </div>
 	
 	
 <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

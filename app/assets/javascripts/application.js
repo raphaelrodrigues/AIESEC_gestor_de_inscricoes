@@ -1,4 +1,4 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
+  // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
@@ -17,8 +17,52 @@
 
 
 $(document).ready(function() {
-  
-      $(".sortable1").stupidtable();
+      
+
+        // ==================================================== //
+      //                 STUPID TABLE SORT                //
+      // ==================================================== //
+      var date_from_string = function(str){
+          var months = ["jan","feb","mar","apr","may","jun","jul",
+          "aug","sep","oct","nov","dec"];
+          var pattern = "^([a-zA-Z]{3})\\s*(\\d{2}),\\s*(\\d{4})$";
+
+          var pattern = "^([a-zA-Z]{3})\\s*(\\d{2})$";
+
+          var re = new RegExp(pattern);
+          
+          
+          var DateParts = re.exec(str).slice(0);
+
+
+          var Year = "2012";
+          var Month = $.inArray(DateParts[1].toLowerCase(), months);
+          var Day = DateParts[0];
+          return new Date(Year,Month,Day);
+      }
+
+
+      var table = $(".sortable1").stupidtable({
+        // Sort functions here
+        "date":function(a,b){
+            // Get these into date objects for comparison.
+            aDate = date_from_string(a);
+            bDate = date_from_string(b);
+
+            return aDate - bDate;
+        }
+      });
+
+      table.bind('aftertablesort', function (event, data) {
+          // data.column - the index of the column sorted after a click
+          // data.direction - the sorting direction (either asc or desc)
+
+          var th = $(this).find("th");
+          th.find(".arrow").remove();
+          var arrow = data.direction === "asc" ? "↑" : "↓";
+          th.eq(data.column).append('<span class="arrow">' + arrow +'</span>');
+      });
+      //$(".sortable1").stupidtable();
       $('form:first *:input[type!=hidden]:first').focus();
       //$('#search').focus();
 
@@ -30,6 +74,16 @@ $(document).ready(function() {
       // ==================================================== //
 
       $("#mail").click(function(event){
+
+         var n_chbx = checkTheBox( $(this).attr('value') )
+         if (n_chbx == 0)
+         {
+            $("#askDialog1222").modal('show');
+            //alert("Tens de seleccionar pelo menos um candidato");
+            event.preventDefault;
+            return false;
+         }
+
          $('#askDialogBody').empty();
           $("#askDialogPrompt").html("Emails Candidatos Selecionados");
           checkValues = [];
@@ -47,6 +101,17 @@ $(document).ready(function() {
 
 
       $("#telemovel").click(function(event){
+
+         var n_chbx = checkTheBox( $(this).attr('value') )
+         if (n_chbx == 0)
+         {
+           
+            $("#askDialog1222").modal('show');
+            event.preventDefault;
+            return false;
+         }
+
+
          $('#askDialogBody').empty();
           $("#askDialogPrompt").html("Telemoveis Candidatos Selecionados");
           checkValues = [];
@@ -140,7 +205,7 @@ $(document).ready(function() {
       $('#cenas_comite').bind('change', function(ev) {
           var value = $(this).val();
           //alert(value);
-
+          
           if (value == "null"){
               $("#btn-seguir").attr('disabled',"disabled");
           }
@@ -170,6 +235,27 @@ $(document).ready(function() {
                   //alert(itm_arr);
                   //$.post("/formularios/1/reorder", pobj);
                 }
+
+        }).disableSelection();
+
+         $("#sortableEstados tbody").sortable({
+          start: function (event, ui) {
+                var currPos1 = ui.item.index();
+
+          },
+              //alert("ola");
+                // this is the item you just draged
+           update: function(event, ui){
+                  var itm_arr = $("#sortableEstados tbody").sortable('toArray');
+                  var pobj1 = {estados: itm_arr};
+                  $.ajax({
+                    type: "POST",
+                    url: "/comites/5/reorderEstados", //sumbits it to the given url of the form
+                    data:  pobj1
+                  }).success(function(data){
+                    
+                });
+          }
 
         }).disableSelection();
 
@@ -271,6 +357,14 @@ $(document).ready(function() {
          }
       });
 
+
+      $('.disabled').click(function(e) {
+          alert("Não é possivel efectuar esta acção!!");
+          e.preventDefault();
+          return false;
+          //do other stuff when a click happens
+      });
+
       /*
       * Carregar info do modal dos estado
       */
@@ -307,6 +401,22 @@ $(document).ready(function() {
           clipboardHelper.copyString(text);
       }
   }
+  /*
+  *   funcao que devolve numero de checkbox selecionadas
+  */
+    function checkTheBox(x)
+    {
+        var allInputs = document.getElementsByName(x);
+        //alert(allInputs.length)
+        var flag = 0;
+        for (var i = 0, max = allInputs.length; i < max; i++) 
+        {
+            if (allInputs[i].type == 'checkbox')
+              if (allInputs[i].checked == true)
+                  flag++;
+        }
+        return flag;
+    }
 
 
 // $(function () {

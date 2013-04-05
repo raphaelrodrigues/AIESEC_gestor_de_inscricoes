@@ -11,7 +11,6 @@
                 <th data-sort="string">Idade</th>
                 <th data-sort="string">Email</th>
                 <th data-sort="string">Data Registo</th>
-                <!--<th>Recrut</th>-->
                 <th data-sort="Estado">Estado</th>
                 <th style="width: 26px;"></th>
                 <th style="width: 26px;"></th>
@@ -26,13 +25,10 @@
                   <td><%= age(candidato.data_nascimento) %></td>
                   <td id="email<%= candidato.id %>" value="<%= candidato.email %>"><%= candidato.email %></td>
                   <td><%= candidato.created_at.strftime('%d %b') %>(<%=  time_ago_in_words(candidato.created_at) %>)</td>
-                  <!--<td><%= candidato.recrutamento_id %></td>-->
                   <td>
-                    <%=  estadoToLabel(candidato.estados.first) %>
+                   <span class='label label-warning'>Fora de Época</span>
                   </td>
-                  <td><%= link_to 'Show', candidato %></td>
                   <td>
-                      <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_candidato_path(candidato)%>
                       <%= link_to '<i class="icon-remove"></i>'.html_safe, candidato, method: :delete, data: { confirm: 'Are you sure?' } %>
                   </td>
                 </tr>
@@ -40,12 +36,6 @@
             </tbody>
           </table>
       </div>
-    </div>
-
-      <div class="btn-toolbar">
-          <a href="#myModalMail" data-toggle="modal" class="btn"><i class="icon-envelope"></i>Enviar Mail</a>
-          <a href="#myModalEstado" data-toggle="modal" class="btn btn-danger"><i class="icon-tag"></i>Mudar Estado</a>
-           <a href="#myModalStats" data-toggle="modal" class="btn btn-primary"><i class="icon-signal"></i>Ver Estatisticas</a>
       
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -53,16 +43,13 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-           <li id="mail" value="candidatos[]"> <a href="#" >Obter Emails</a></li>
+           <li id="mail"> <a onclick="validate()">Obter Emails</a></li>
            <li id="telemovel"><a href="#" >Obter Telemovel</a></li>
            <li><a id="email_nao_contactados">Obter Emails de não contactados</a></li>
           <!-- dropdown menu links -->
         </ul>
     </div>
 
-<!--<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>-->
-
-</div>
 
     <div id="askDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
       <div class="modal-header">
@@ -77,65 +64,7 @@
       </div>
    </div>
 
-      <div id="askDialog1222" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
-      <div class="modal-header">
-        <a href="#" class="close" data-dismiss="modal">&times;</a>
-        <h3 id="askDialogPrompt"> </h3>
-        </div>
-      <div class="modal-body" id="askDialogBody">
-          Tens de seleccionar pelo menos um candidato
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      </div>
-   </div>
-
-
-
-<script type="text/javascript">
-
-$(function () {
-        $('#container').highcharts({
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-            title: {
-                text: "Cenas"
-            },
-            tooltip: {
-              pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-              percentageDecimals: 1
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        color: '#000000',
-                        connectorColor: '#000000',
-                        formatter: function() {
-                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
-                        }
-                    }
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Browser share',
-                data:  <%= @stats.to_json.html_safe  %>
-            }],
-            exporting: {
-          enabled: true
-        }
-        });
-    });
-</script>
-  
-
-    <%= render 'modals' %>
+   
 
 
 <% end %><!--fim do form-->

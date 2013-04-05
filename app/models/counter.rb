@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Counter < ActiveRecord::Base
   attr_accessible :comite_id, :visitas,:tipo
 
@@ -15,6 +16,11 @@ class Counter < ActiveRecord::Base
   	end
 
   	counter.save
+  end
+
+  def reset
+    self.visitas = 0
+    self.save
   end
 
 

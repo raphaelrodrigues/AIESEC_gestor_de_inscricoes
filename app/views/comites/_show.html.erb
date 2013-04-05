@@ -17,119 +17,119 @@
             <div class="row-fluid">
 
 
-<div class="btn-toolbar">
-  
-   <form id="tab" class="inline">
-        <label>Comité</label>
-        <!-- verifica qual o tipo do formulario -->
-          <% if @formulario.tipo == 1 %>
-             <select name="DropDownComiteMembros" id="DropDownComiteMembros" class="input">
-          <% else %>
-            <select name="DropDownComiteEstagios" id="DropDownComiteEstagios" class="input">
-          <% end %>
+          <div class="btn-toolbar">
+            
+             <form id="tab" class="inline">
+                  <label>Comité</label>
+                  <!-- verifica qual o tipo do formulario -->
+                    <% if @formulario.tipo == 1 %>
+                       <select name="DropDownComiteMembros" id="DropDownComiteMembros" class="input">
+                    <% else %>
+                      <select name="DropDownComiteEstagios" id="DropDownComiteEstagios" class="input">
+                    <% end %>
 
-          <% @comites.each do |c| %> 
-            <% z = params[:id] %>
-            <% if c.nome != "Aiesec Admin" %>
-              <option value="<%= c.id %>" <%= 'selected' if current_form?(params[:id].to_i,c.id) %> ><%= c.nome %></option>
-            <% end %>
-         <% end %>
-        </select>
+                    <% @comites.each do |c| %> 
+                      <% z = params[:id] %>
+                      <% if c.nome != "Aiesec Admin" %>
+                        <option value="<%= c.id %>" <%= 'selected' if current_form?(params[:id].to_i,c.id) %> ><%= c.nome %></option>
+                      <% end %>
+                   <% end %>
+                  </select>
 
-    </form>
-    
-    <!--verifica se inscriçoes estao abertas -->
-    <div id="inscricoes_form">
-      <b>Inscricoes <%= insc_abertas?(@recrutamento.inscricao_activa) %></b>
-    </div>
-
-
-
-    <%= form_for(:perguntas, :url => {:action => 'edit_pergunta_form',:controller => 'pergunta_forms',:id=>@formulario.id}) do |f| %>
-    
-  <% action = tipo_formulario?(@formulario.tipo) %>
-
-  <div class="btn-toolbar">
-    <% if current_comite?(params[:id].to_i) %>
-          <%= link_to '<i class="icon-plus"></i> Nova Pergunta'.html_safe, new_perguntum_path(:name=>action) ,:class=>"btn" %>
-
-           <a href="#myModalPergunta" data-toggle="modal" class="btn"><i class="icon-plus"></i>Nova Pergunta</a>
-          
-    <% else %>
-            <%= f.submit "Export",:class=>"btn" %>
-
-       <% end %>
- </div>
-
-  <p id="notice"><%= notice %></p>
+              </form>
+              
+              <!--verifica se inscriçoes estao abertas -->
+              <div id="inscricoes_form">
+                <b>Inscricoes <%= inscricoes(@recrutamento.inscricao_activa) %></b>
+              </div>
 
 
 
-</div>
-<div class="well">
-    <table id="<%= 'sortable' if current_comite?(params[:id].to_i) %>" class="table table-hover" >
-      <thead>
-        <tr>
-          <th><input type="checkbox" name="select-all" id="select-all"></th>
-          <th >Título</th>
-          <th>Descriçao</th>
-          <th>Tipo</th>
-          <th>Obrigatória</th>
-          <th style="width: 26px;"></th>
-        </tr>
-      </thead>
-      <tbody>
-        
-           <% @formulario.pergunta_forms.each do |p| %>
-           <tr id="<%= p.id %>" class="handle">
-              <% pergunta = p.perguntum %>
-              <td><%= check_box_tag 'perguntas[]', p.id, false,:class=>"select-all" %></td>
-              <td><%= pergunta.titulo %></td>
-              <td> <%= pergunta.descricao %></td>
-              <td><%= pergunta.tipo %></td>
-               <td><%= obrigatoria?(p.obrigatoria) %></td>
-              <!--<td><%= p.ordem %></td>-->
-              <% if current_comite?(params[:id].to_i) %> 
-                <td>
-                    <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_perguntum_path(pergunta)%>
-                    <%= link_to '<i class="icon-remove"></i>'.html_safe, p, method: :delete, data: { confirm: 'Are you sure?' } %>
-                </td>
-              <% end %>
-          </tr>
-           <% end %>
+              <%= form_for(:perguntas, :url => {:action => 'edit_pergunta_form',:controller => 'pergunta_forms',:id=>@formulario.id}) do |f| %>
+              
+            <% action = tipo_formulario?(@formulario.tipo) %>
 
-          
-      </tbody>
-    </table>
-</div>
+            <div class="btn-toolbar">
+              <% if current_comite?(params[:id].to_i) %>
+                    <%= link_to '<i class="icon-plus"></i> Nova Pergunta'.html_safe, new_perguntum_path(:name=>action) ,:class=>"btn" %>
 
-  <div class="btn-toolbar">
-    <!-- se nao for do comite que tem login feito nao pode alterar o formulario -->
-    <% if current_comite?(params[:id].to_i) %>
+                     <a href="#myModalPergunta" data-toggle="modal" class="btn"><i class="icon-plus"></i>Nova Pergunta</a>
+                    
+              <% else %>
+                      <%= f.submit "Export",:class=>"btn" %>
 
-      <span class="label label-success" id="estado">Guardado</span>
-      <button class="btn btn-primary" id="guardar" href="#"><i class="icon-save"></i> Guardar</button>
+                 <% end %>
+           </div>
 
-      <div class="btn-toolbar">
-          <%= f.submit "Remover",:class=>"btn" %>
-          <%= f.submit "Obrigatoria",:class=>"btn " %>
-          <%= f.submit "Opcional",:class=>"btn btn-primary" %>
+            <p id="notice"><%= notice %></p>
 
-    <% end %><!--fim da condicao-->
 
-  <% end %> <!-- fim do fromulario -->
-</div>
-</div>
 
-  
+          </div>
+          <div class="well">
+              <table id="<%= 'sortable' if current_comite?(params[:id].to_i) %>" class="table table-hover" >
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" name="select-all" id="select-all"></th>
+                    <th >Título</th>
+                    <th>Descriçao</th>
+                    <th>Tipo</th>
+                    <th>Obrigatória</th>
+                    <th style="width: 26px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                     <% @formulario.pergunta_forms.each do |p| %>
+                     <tr id="<%= p.id %>" class="handle">
+                        <% pergunta = p.perguntum %>
+                        <td><%= check_box_tag 'perguntas[]', p.id, false,:class=>"select-all" %></td>
+                        <td><%= pergunta.titulo %></td>
+                        <td> <%= pergunta.descricao %></td>
+                        <td><%= pergunta.tipo %></td>
+                         <td><%= obrigatoria?(p.obrigatoria) %></td>
+                        <!--<td><%= p.ordem %></td>-->
+                        <% if current_comite?(params[:id].to_i) %> 
+                          <td>
+                              <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_perguntum_path(pergunta)%>
+                              <%= link_to '<i class="icon-remove"></i>'.html_safe, p, method: :delete, data: { confirm: 'Are you sure?' } %>
+                          </td>
+                        <% end %>
+                    </tr>
+                     <% end %>
 
- <!-- Modal NOVA PERGUNTA-->
-<div id="myModalPergunta" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">Nova Pergunta</h3>
-    </div>
-    <div class="modal-body">
-       <%= render :partial=>'pergunta/form'  %>
-    </div>
-  </div>
+                    
+                </tbody>
+              </table>
+          </div>
+
+            <div class="btn-toolbar">
+              <!-- se nao for do comite que tem login feito nao pode alterar o formulario -->
+              <% if current_comite?(params[:id].to_i) %>
+
+                <span class="label label-success" id="estado">Guardado</span>
+                <button class="btn btn-primary" id="guardar" href="#"><i class="icon-save"></i> Guardar</button>
+
+                <div class="btn-toolbar">
+                    <%= f.submit "Remover",:class=>"btn" %>
+                    <%= f.submit "Obrigatoria",:class=>"btn " %>
+                    <%= f.submit "Opcional",:class=>"btn btn-primary" %>
+
+              <% end %><!--fim da condicao-->
+
+            <% end %> <!-- fim do fromulario -->
+          </div>
+          </div>
+
+            
+
+           <!-- Modal NOVA PERGUNTA-->
+          <div id="myModalPergunta" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Nova Pergunta</h3>
+              </div>
+              <div class="modal-body">
+                 <%= render :partial=>'pergunta/form'  %>
+              </div>
+            </div>
