@@ -1,76 +1,39 @@
-<% if @formulario.nil? %>
-    <div class="well">
-      <%= @comite.nome %>
-        Obrigada pelo teu interesse em te juntares à AIESEC.
-        De momento, as inscrições encontram-se fechadas!
-        Para mais informações contacta-nos pelo mail: 
-        <%= @comite.email%><br>
-
-    <%= form_for(:respostas, :url => {:action => 'guardar_cand_fora_epoca',:controller => 'candidatos',:id=>@comite.id,:tipo =>params[:cenas][:tipo]},:html => {:class=>"form-horizontal ",:onsubmit=>"return ;"} ) do |f| %>
-        <fieldset>
-            <!-- **********************************perguntas obrigatorias**********************************-->
-              <div class="control-group">
-                    <label class="control-label" >Nome*</label>
-                    <div class="controls">
-                      <input type="text" name="respostas[nome]" placeholder="Nome" required>
-                      <p class="help-block"></p>
-                    </div>
-               </div>
-
-                <div class="control-group">
-                    <label class="control-label" >Telemovel*</label>
-                    <div class="controls">
-                      <input type="text" name="respostas[telemovel]" placeholder="Telemovel" required>
-                      <p class="help-block"></p>
-                    </div>
-               </div>
-
-               <div class="control-group">
-                    <label class="control-label" >Data de Nascimento*</label>
-                    <div class="controls">
-
-                      <input type="text" name="respostas[data_nascimento]" placeholder="ex 19/09/1990" class="datepicker" required>
-                      <p class="help-block"></p>
-                    </div>
-               </div>
-
-               <div class="control-group">
-                    <label class="control-label" >Email*</label>
-                    <div class="controls">
-
-                      <input type="text" name="respostas[email]" placeholder="exemplo@gmail.com" required>
-                      <p class="help-block"></p>
-                    </div>
-               </div>
-          </fieldset>
-
-
-            <div class="form-actions">
-              <%= f.submit "Submeter",:class=>"btn btn-primary" %>
-              <button type="reset" class="btn">Cancel</button>
-            </div>
-
-            
-      <% end %>
-        <a href="http://aiesec.pt"> Voltar</a>
-    </div>
-<% else %>
 
     <!-- Forms
     ================================================== -->
     <section id="forms">
       <div class="page-header">
-        <h1>Survey <%= @comite.nome %> para <%= tipoToString( @formulario.tipo) %></h1>
+        <h1>Survey <%= @comite.nome %> para <%= tipoToString( @formulario.tipo ) %> </h1>
         <div class="fb-like" data-href="http://aiesec.pt/apply/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend" data-font="arial"></div>
 
       </div>
+
+     
+
+      <!-- **********************************INFO PRE-VISUALIZACAO**********************************-->
+      <div class="row" id="info_form">
+        <div class="span3 offset1">
+          <div class="well">
+           <span class="label label-warning">Modo de Pré-visualização</span><br><br>
+
+           Nº de Perguntas <span class="label label-success"><%= @perguntas_form.count %></span><br><br>
+
+           <% path = getPathFormulario(@formulario.tipo) %>
+         
+           <%= link_to "Voltar",path+"/"+@comite.id.to_s ,:class=>"btn btn-primary" %>
+        
+        </div>
+      </div>
+      </div>
+       <!-- **********************************INFO PRE-VISUALIZACAO END**********************************-->
+
 
       <div class="row">
         <div class="span10 offset1">
 
           <div class="well">
 
-            <%= form_for(:respostas, :url => {:action => 'guardar_survey',:controller => 'candidatos',:id=>@comite.id,:tipo=> @formulario.tipo},:html => {:class=>"form-horizontal ",:onsubmit=>"return ;"} ) do |f| %>
+            <%= form_for(:respostas,:html => {:class=>"form-horizontal ",:onsubmit=>"return ;"} ) do |f| %>
 
             <fieldset>
             <!-- **********************************perguntas obrigatorias**********************************-->
@@ -131,10 +94,6 @@
                
             </fieldset>
 
-            <div class="form-actions">
-              <%= f.submit "Submeter",:class=>"btn btn-primary" %>
-              <button type="reset" class="btn">Cancel</button>
-            </div>
 
         <%end %>
 
@@ -144,4 +103,3 @@
       </div>
 
     </section>
-<% end %><!-- fim do else -->

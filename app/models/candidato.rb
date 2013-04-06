@@ -28,7 +28,7 @@ class Candidato < ActiveRecord::Base
     page = 1
 
       paginate :per_page => per_page, :page => page,
-           :conditions => ['nome LIKE  ?', "%#{search}%"]
+           :conditions => ['nome LIKE  LOWER(?)', "%#{search}%"]
 
       
   end

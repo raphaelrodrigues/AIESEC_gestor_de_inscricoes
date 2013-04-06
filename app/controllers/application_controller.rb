@@ -16,6 +16,25 @@ class ApplicationController < ActionController::Base
     @pergunta = Perguntum.find(id_pergunta)
   end
 
+
+   def concat_options(op)
+    n = op.count
+    str = ""
+    op.each do |c|
+
+      str << c[1]
+
+      #para evitar por a virgula no fim
+      if n != c[0].to_i
+        str << "|"
+      end
+
+    end
+
+    #str = str.split('|')
+    return str
+  end
+
   ##########################ESTATISTICAS########################################
   
   #da grafico das estatisticas

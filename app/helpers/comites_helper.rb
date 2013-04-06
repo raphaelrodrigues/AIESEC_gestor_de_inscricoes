@@ -19,6 +19,14 @@ module ComitesHelper
 		end
 	end
 
-	
+	def getPathFormulario(tipo)
+		if tipo == 1
+			path = "formulario_membros"
+		else
+			path = "formulario_estagios"
+		end
+
+		return path
+	end
 
 end

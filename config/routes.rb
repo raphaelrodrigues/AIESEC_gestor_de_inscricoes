@@ -71,6 +71,7 @@ Gestor::Application.routes.draw do
   get "inscricoes" => "comites#inscricoes", :as => "inscricoes"
   get "profile" => "comites#show", :as => "profile"
 
+  post "pre_vis_survey" =>"comites#pre_vis_survey", :as => "pre_vis_survey"
   
 
   get "perguntas_comite/:id" => "pergunta#perguntas_comite",:as =>"perguntas_comite"

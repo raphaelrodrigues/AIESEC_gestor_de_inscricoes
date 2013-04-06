@@ -30,19 +30,26 @@
                     </div>
 
                     <label>Tipo</label>
-                      <div class="btn-group" data-toggle="buttons-radio">
-                      <button type="button" class="btn active" value="1" onClick="$('#btn-input-tipo').val( $(this).val() );">
-                        Resposta Aberta
-                      </button>
-                      <button type="button" class="btn " value="2" onClick="$('#btn-input-tipo').val( $(this).val() );">
-                        CheckBox
-                      </button>
-                      <button type="button" class="btn " value="3" onClick="$('#btn-input-tipo').val( $(this).val() );">
-                        ComboBox
-                      </button>
-                      <button type="button" class="btn " value="4" onClick="$('#btn-input-tipo').val( $(this).val() );">
-                        Radio Box
-                      </button>
+
+                      <div class="btn-group" data-toggle="buttons-radio" id="tipo_resposta">
+                        <button type="button" class="btn" value="1" >
+                          Resposta Aberta
+                        </button>
+                        <button type="button" class="btn " value="2" >
+                          CheckBox
+                        </button>
+                        <button type="button" class="btn " value="3" >
+                          ComboBox
+                        </button>
+                        <button type="button" class="btn " value="4">
+                          Radio Box
+                        </button>
+
+
+                    </div>
+                    <br> <br>
+                    <div id="opcoes">
+                        <input type="button" value="Add another text input" id="add_entry" class="btn">
                     </div>
 
                   <!-- END -->
@@ -57,14 +64,13 @@
                   </div>
 
                   
-                  
                 <button class="btn btn-primary"><i class="icon-save"></i>Guardar</button>
 
-
+                
                 <% end %>
       
-       <!--  <br>
-
+      
+                <button type="button" class="btn btn-primary" data-loading-text="Loading...">Loading state</button>
           <label>Opções</label>
             <div class="btn-group" data-toggle="buttons-toggle">
           <button type="button" class="btn " >Incluir</button>
@@ -72,7 +78,7 @@
           <button type="button" class="btn " >Adicionar ao Formulário Estágio</button>
           <button type="button" class="btn " >Adicionar ao Formulário Membros</button>
         </div>
-        <br> -->
+        <br> 
   </div>
 </div>
     

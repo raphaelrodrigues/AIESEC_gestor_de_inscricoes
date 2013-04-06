@@ -18,7 +18,7 @@
 
 $(document).ready(function() {
       
-
+      $('#opcoes').hide();
         // ==================================================== //
       //                 STUPID TABLE SORT                //
       // ==================================================== //
@@ -65,6 +65,14 @@ $(document).ready(function() {
       //$(".sortable1").stupidtable();
       $('form:first *:input[type!=hidden]:first').focus();
       //$('#search').focus();
+
+
+      // ==================================================== //
+      //                 TIPOS DE RESPOSTAS                //
+      // ==================================================== //
+
+
+
 
       var pobj = null;
       var checkValues = [];
@@ -181,12 +189,13 @@ $(document).ready(function() {
          if (window.location == "http://localhost:3000/formulario_membros/1")
          {
             if (!saved)
-              confirm("os dados não estou guardados!!");
+                return false;
               //$('#myModal').modal('show');
          }
 
       });
 
+         
 
       
       /*
@@ -301,6 +310,7 @@ $(document).ready(function() {
       });
 
       $('#DropDownComiteEstagios').bind('change', function(ev) {
+
          var value = $(this).val();
          //alert(value);
          document.location.href = "/formulario_estagios/"+value; 
@@ -365,6 +375,48 @@ $(document).ready(function() {
           //do other stuff when a click happens
       });
 
+      
+
+      $("#tipo_resposta .btn").click(function(event){
+          //Removing `data-toggle` from all elements
+          $('#btn-input-tipo').val( $(this).val() );
+          val = $(this).val()
+
+          if( val == 1)
+          {
+                $('#opcoes').hide();
+          }
+          else
+          {
+            $('#opcoes').show();
+          }
+         
+
+
+         // alert($(this).val() +" e"+ $('#btn-input-tipo').val()) 
+      });
+
+
+      var optionNumber = 1; 
+      $('#add_entry').click(function(e) {
+            var theForm = document.getElementById("opcoes");
+            $('#opcoes').append("<label>Opção "+ optionNumber + "</label><br>");
+                    
+             var newOption = document.createElement("input"); 
+
+             newOption.name = "perguntum[escolha]["+optionNumber+"]"; // poll[optionX]
+
+             newOption.type = "text";
+
+             $('#opcoes').append(newOption);
+
+              optionNumber++;
+          //do other stuff when a click happens
+      });
+
+      
+
+
       /*
       * Carregar info do modal dos estado
       */
@@ -384,6 +436,9 @@ $(document).ready(function() {
       // });
 
  });
+
+
+
   
   /*
   *   funcao que copia para o clipboard texto

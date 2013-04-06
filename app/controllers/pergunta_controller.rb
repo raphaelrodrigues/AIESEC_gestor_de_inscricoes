@@ -29,8 +29,9 @@ class PerguntaController < ApplicationController
   def new
     @perguntum = Perguntum.new                              
     @pergunta_form = PerguntaForm.new
-    @comite = Comite.find(current_comite)                       #procura o comite onde a quem a pergunta vai pertencer
-               
+    @comite = Comite.find(current_comite)                      #procura o comite onde a quem a pergunta vai pertencer
+    
+
     if params[:name] == "form_membro"                           #como existem 2 formularios a nova pergunta pode ser criada 
       @formulario = @comite.formularios.formulario_activo(1)    # em ambas.esta condicao serve para saber de onde ela vem,
     else                                                        # se vem do form_membros ou form_estagio
@@ -94,6 +95,11 @@ class PerguntaController < ApplicationController
   # POST /pergunta
   # POST /pergunta.json
   def create
+    op = params[:perguntum][:escolha]
+    str = concat_options(op)
+
+    cdcdcdcdc
+
     @perguntum = Perguntum.new(params[:perguntum])
 
     respond_to do |format|

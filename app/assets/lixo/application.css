@@ -11,7 +11,7 @@
  *= require_self
  *= require font-awesome
  *= require bootstrap-toggle-buttons
- *= require_tree ./all
+ *= require_tree .
  */
 tr.handle
 {
@@ -45,14 +45,6 @@ input.largerCheckbox
 {
 	display: none;
 }
-
-#stats_recrut
-{
-	display: none;
-}
-
-
-
 
 
 /*------------------------------------------------------------------

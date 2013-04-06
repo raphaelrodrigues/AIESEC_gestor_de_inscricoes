@@ -15,5 +15,6 @@ class Perguntum < ActiveRecord::Base
 		  id: idP, 
 		  activa: true).first
   end
+ 
 
 end

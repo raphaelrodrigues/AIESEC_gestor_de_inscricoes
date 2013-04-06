@@ -187,7 +187,22 @@ class ComitesController < ApplicationController
 
 
   end
+
+  def pre_vis_survey
+    @comite = Comite.find(current_comite.id)
+    formulario_id = params[:formulario] 
+    @formulario = Formulario.find(formulario_id)         #vai buscar o formulario que esta activo de estagio que é o 2
+    
+    @recrutamento = @formulario.recrutamento  unless  @formulario.nil?
+
+    if !@formulario.nil?
+        @perguntas_form = @formulario.pergunta_forms
+    end
+
+    render :layout =>"survey"
+  end
   
+
   # GET /comites/new
   # GET /comites/new.json
   def new

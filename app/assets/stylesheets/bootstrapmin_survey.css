@@ -6488,3 +6488,11 @@ i[class^="icon-"] {
 .affix {
   position: fixed;
 }
+
+#info_form
+{
+  position: fixed;
+  margin-left: -250px;
+
+
+}

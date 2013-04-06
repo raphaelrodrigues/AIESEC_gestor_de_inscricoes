@@ -110,26 +110,55 @@
                 <span class="label label-success" id="estado">Guardado</span>
                 <button class="btn btn-primary" id="guardar" href="#"><i class="icon-save"></i> Guardar</button>
 
+
+
                 <div class="btn-toolbar">
-                    <%= f.submit "Remover",:class=>"btn" %>
+                    <a href="#askDialogDel" data-toggle="modal" class="btn">Remover</a>
                     <%= f.submit "Obrigatoria",:class=>"btn " %>
                     <%= f.submit "Opcional",:class=>"btn btn-primary" %>
 
               <% end %><!--fim da condicao-->
 
-            <% end %> <!-- fim do fromulario -->
-          </div>
-          </div>
-
-            
-
-           <!-- Modal NOVA PERGUNTA-->
-          <div id="myModalPergunta" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">Nova Pergunta</h3>
-              </div>
-              <div class="modal-body">
-                 <%= render :partial=>'pergunta/form'  %>
-              </div>
             </div>
+          </div>
+
+               <!-- Modal NOVA PERGUNTA-->
+              <div id="askDialogDel" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+                  <div class="modal-header">
+                  <a href="#" class="close" data-dismiss="modal">&times;</a>
+                  <h3 id="askDialogPrompt"> </h3>
+                  </div>
+                  <div class="modal-body" id="askDialogDel">
+                    Tem a certeza que pretende remover as perguntas?
+                  </div>
+
+
+                  <div class="modal-footer">
+                  <%= f.submit "Remover",:class=>"btn btn-danger",data: { confirm: 'Are you sure?' } %>
+                  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                  </div>
+            </div>
+             
+
+
+            <% end %> <!-- fim do fromulario -->
+
+
+            <%= link_to "Pré-visualizar Formulário",pre_vis_survey_path(:formulario => @formulario.id) ,:method => :post , :class=>"btn" %>
+          
+
+          
+
+        
+        <div id="myModalPergunta" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel">Nova Pergunta</h3>
+            </div>
+            <div class="modal-body">
+               <%= render :partial=>'pergunta/form'  %>
+            </div>
+          </div>
+
+
+

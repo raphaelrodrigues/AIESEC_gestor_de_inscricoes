@@ -1,19 +1,33 @@
 <% if @formulario.nil? %>
 	<div id="perguntas">
-		<div class="header">
-            <div class="stats">
-                <p class="stat"><span class="number"><%= @formulario.pergunta_forms.count %></span> Perguntas</p>
-         </div>
-          <h1 class="page-title"><%= @formulario.nome %></h1>
 
-          
-        </div>
         
+         <h1 class="page-title">Formulário</h1>
         <ul class="breadcrumb">
             <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-            <li>Recrutamento <%= l @recrutamento.created_at , :format => :long %><span class="divider">/</span></li>
-            <li class="active"><%= @formulario.nome %> <%= @formulario.id %> <%= @formulario.comite_id %></li>
         </ul>
+         <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="btn-toolbar">
+                    
+                     <form id="tab" class="inline">
+                          <label>Comité</label>
+                          <!-- verifica qual o tipo do formulario -->
+                            <% if current_page?(candidatos_membros_path) %>
+                               <select name="DropDownComiteMembros" id="DropDownComiteMembros" class="input">
+                            <% else %>
+                              <select name="DropDownComiteEstagios" id="DropDownComiteEstagios" class="input">
+                            <% end %>
+
+                            <% @comites.each do |c| %> 
+                              <% z = params[:id] %>
+                              <% if c.nome != "Aiesec Admin" %>
+                                <option value="<%= c.id %>" <%= 'selected' if current_form?(params[:id].to_i,c.id) %> ><%= c.nome %></option>
+                              <% end %>
+                           <% end %>
+                          </select>
+                      </form>
+
 		<h1>Nao existem formularios</h1>
 	</div>
 <% else %>
