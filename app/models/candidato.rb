@@ -135,8 +135,11 @@ class Candidato < ActiveRecord::Base
   # estes candidatos nao possuem recrutemento
   #recrutamento_id = 0
   def self.fora_epoca(comite_id)
-    find(:all,:conditions=>["comite_id = ? and recrutamento_id = 0 and activo = true",comite_id])
+    find(:all,:conditions=>["comite_id = ? and recrutamento_id = 0 and activo = 1",comite_id])
   end
+
+
+
 
   #nao esta a funcionar
   # def self.est_candidatos(recrutamento)
