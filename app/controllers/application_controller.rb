@@ -31,8 +31,13 @@ class ApplicationController < ActionController::Base
 
     end
 
-    #str = str.split('|')
+   # str = str.split('|')
     return str
+  end
+
+
+  def split_options(str) 
+    return str.split('|')
   end
 
   ##########################ESTATISTICAS########################################

@@ -271,7 +271,24 @@ $(document).ready(function() {
 
          $("#guardar").click(function (event) {
               //alert("cenas");
-              $("#estado").removeClass("label-important").addClass("label-sucess");
+              $(this).guardar();
+                event.preventDefault();
+          });
+
+         $(window).keypress(function(event) {
+            if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
+
+            $(this).guardar();
+            event.preventDefault();
+            return false;
+        });
+
+
+        /*
+        * Funcao para guardar formulario
+        */
+         $.fn.guardar = function(){
+            $("#estado").removeClass("label-important").addClass("label-sucess");
               $.ajax({
                     type: "POST",
                     url: "/comites/5/reorder", //sumbits it to the given url of the form
@@ -279,9 +296,9 @@ $(document).ready(function() {
                   }).success(function(data){
                 });
                 saved = 1;
+
               $("#estado").text("Guardado");
-                event.preventDefault();
-          });
+        };
 
 
 

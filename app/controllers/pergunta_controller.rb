@@ -97,7 +97,12 @@ class PerguntaController < ApplicationController
   def create
     op = params[:perguntum][:escolha]
     str = concat_options(op)
+    options = ""
+    if params[:perguntum][:tipo] != 1
+      options = str
+    end 
 
+    params[:perguntum][:options] = options
     cdcdcdcdc
 
     @perguntum = Perguntum.new(params[:perguntum])
