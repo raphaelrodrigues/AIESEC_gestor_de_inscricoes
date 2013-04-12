@@ -1,28 +1,14 @@
 <div class="container-fluid">
       <div class="well">
-        <table class="table table-hover sortable1">
-          <thead>
-            <tr>
-              <th><input type="checkbox" name="select-all" id="select-all"></th>
-              <th data-sort="Nome">Pergunta</th>
-              <th>Respostas</th>
-              <th data-sort="Data">candidato_id</th>
-              <th data-sort="DataR">pergunta_id</th>
-              <th data-sort="Comite" >Comite</th>
-            </tr>
-          </thead>
-          <tbody>
+        <table class="table table-striped">
             <% @candidato.respostas.each do |r| %>
-              <tr>
-                <td><%= check_box_tag 'candidatos[]', r.id, false,:class=>"select-all" %></td>
-                <td><%= getPergunta(r.pergunta_id).titulo %></td>
-                <td><%= r.resposta %></td>
-                <td><%= r.candidato_id%></td>
-                <td><%= r.pergunta_id %></td>
-                <td><%= @candidato.comite_id %></td>
-              </tr>
+                <tr>
+                   <td><%= getPergunta(r.pergunta_id).titulo %></td>
+                   <td><h6><%= r.resposta %></h6></td>
+                </tr>
             <% end %>
           </tbody>
         </table>
     </div>
   </div>
+

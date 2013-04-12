@@ -7,30 +7,31 @@ class Candidato < ActiveRecord::Base
   validates_presence_of :comite_id,:nome,:recrutamento_id
   default_scope :order => 'created_at DESC'
   
-
-
-
-  validates_format_of :email, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
+  #validates_format_of :email, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
 
   belongs_to :recrutamento
   has_many :respostas
   has_many :estados
 
   
-
-  def self.search(search,page)
+  def self.search(search,page,field)
     if page == "all"
       per_page = Candidato.all.count
+      page = 1
     else
       per_page = 10
     end
 
-    page = 1
 
+    
+
+    if field == 2
+      paginate :per_page => per_page, :page => page,:joins => :estados,
+          :conditions => ['estados.nome LIKE  LOWER(?) and estados.ultimo = 1', "%#{search}%"]
+    else
       paginate :per_page => per_page, :page => page,
-           :conditions => ['nome LIKE  LOWER(?)', "%#{search}%"]
-
-      
+          :conditions => ['nome LIKE  LOWER(?)', "%#{search}%"]
+    end
   end
 
   #Para que o controller nao fique tao grande
@@ -41,7 +42,6 @@ class Candidato < ActiveRecord::Base
   def self.last_month(comite_id)
     find(:all, :conditions =>["comite_id = ? and created_at > ?",comite_id, 1.month.ago],:limit => 10)
   end
-
 
   def self.to_csv(options = {},candidato,respostas)
     CSV.generate(options) do |csv|

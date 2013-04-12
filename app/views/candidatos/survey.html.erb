@@ -6,7 +6,7 @@
         Para mais informações contacta-nos pelo mail: 
         <%= @comite.email%><br>
 
-    <%= form_for(:respostas, :url => {:action => 'guardar_cand_fora_epoca',:controller => 'candidatos',:id=>@comite.id,:tipo =>params[:cenas][:tipo]},:html => {:class=>"form-horizontal ",:onsubmit=>"return ;"} ) do |f| %>
+    <%= form_for(:respostas, :url => {:action => 'guardar_cand_fora_epoca',:controller => 'candidatos',:id=>@comite.id,:tipo =>params[:cenas][:tipo]},:html => {:class=>"form-horizontal ",:name =>"survey_form",:onsubmit=>"return validaSurvey();"} ) do |f| %>
         <fieldset>
             <!-- **********************************perguntas obrigatorias**********************************-->
               <div class="control-group">
@@ -38,7 +38,7 @@
                     <label class="control-label" >Email*</label>
                     <div class="controls">
 
-                      <input type="text" name="respostas[email]" placeholder="exemplo@gmail.com" required>
+                      <input type="email" name="respostas[email]" placeholder="exemplo@gmail.com" required>
                       <p class="help-block"></p>
                     </div>
                </div>
@@ -70,23 +70,24 @@
 
           <div class="well">
 
-            <%= form_for(:respostas, :url => {:action => 'guardar_survey',:controller => 'candidatos',:id=>@comite.id,:tipo=> @formulario.tipo},:html => {:class=>"form-horizontal ",:onsubmit=>"return ;"} ) do |f| %>
+            <%= form_for(:respostas, :url => {:action => 'guardar_survey',:controller => 'candidatos',:id=>@comite.id,:tipo=> @formulario.tipo},:html => {:class=>"form-horizontal ",:id =>"survey_form"} ) do |f| %>
 
             <fieldset>
             <!-- **********************************perguntas obrigatorias**********************************-->
               <div class="control-group">
                     <label class="control-label" >Nome*</label>
                     <div class="controls">
-                      <input type="text" name="respostas[nome]" placeholder="Nome" required="required">
-                      <p class="help-block"></p>
+                      <input type="text" name="respostas[nome]" placeholder="Nome" required="required" id="nome_survey">
+                      <!-- <em id="nome_surveyEM"></em> -->
                     </div>
                </div>
 
                 <div class="control-group">
                     <label class="control-label" >Telemovel*</label>
                     <div class="controls">
-                      <input type="text" name="respostas[telemovel]" placeholder="Telemovel" required="required">
-                      <p class="help-block"></p>
+                      <input type="text" name="respostas[telemovel]" placeholder="Telemovel" required="required" id="telemovel_survey">
+                      <!-- <em id="telemovel_surveyEM"></em> -->
+                      
                     </div>
                </div>
 
@@ -94,8 +95,9 @@
                     <label class="control-label" >Data de Nascimento*</label>
                     <div class="controls">
 
-                      <input type="text" name="respostas[data_nascimento]" placeholder="ex 19/09/1990" class="datepicker" required="required">
-                      <p class="help-block"></p>
+                      <input type="date" name="respostas[data_nascimento]" placeholder="ex 19/09/1990" class="datepicker" required="required" id="dta_survey" >
+                      <!-- <em id="dta_surveyEM" class="error-input"></em> -->
+                      
                     </div>
                </div>
 
@@ -103,8 +105,8 @@
                     <label class="control-label" >Email*</label>
                     <div class="controls">
 
-                      <input type="text" name="respostas[email]" placeholder="exemplo@gmail.com" required="required">
-                      <p class="help-block"></p>
+                      <input type="text" name="respostas[email]" placeholder="exemplo@gmail.com" required="required" id="email_survey">
+                      <!-- <em id="email_surveyEM"></em> -->
                     </div>
                </div>
 
@@ -119,8 +121,10 @@
                       <%= e_obrigatoria?(p.obrigatoria) %><!--verifica se é obrigatoria-->
                     </label>
                     <div class="controls">
-                      <%= tipo_input(pergunta.tipo,"de",p.obrigatoria) %>
-                      <input type="hidden" name="respostas[id][]" placeholder="Resposta" value="<%= pergunta.id %>">
+                      <% opcoes = pergunta.opcoes.split('|') %>
+                      <% cenas = tipo_input(pergunta.tipo,opcoes,p.obrigatoria,"Nome",pergunta.id) %>
+                      <%= cenas %>
+                     <!-- <input type="hidden" name="respostas[perguntas][id][]" placeholder="Resposta" value="<%= pergunta.id %>">-->
                       <!--<input type="text" name="respostas[resposta][]" placeholder="Resposta" >-->
                       <p class="help-block"><%= pergunta.descricao %> </p>
                     </div>
@@ -128,11 +132,13 @@
                <% end %>
 
 
+
+
                
             </fieldset>
 
             <div class="form-actions">
-              <%= f.submit "Submeter",:class=>"btn btn-primary" %>
+              <%= f.submit "Submeter",:class=>"btn btn-primary" ,:id=>"submit_form_survey"%>
               <button type="reset" class="btn">Cancel</button>
             </div>
 
@@ -145,3 +151,19 @@
 
     </section>
 <% end %><!-- fim do else -->
+
+
+ <!-- Modal ESTDO-->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Novo Estado</h3>
+    </div>
+    <div class="modal-body">
+       
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Mudar Estado</button>
+    </div>
+  </div>

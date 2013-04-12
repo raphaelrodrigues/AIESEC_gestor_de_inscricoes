@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403235006) do
+ActiveRecord::Schema.define(:version => 20130411185740) do
 
   create_table "candidatos", :force => true do |t|
     t.string   "nome"
@@ -63,9 +63,10 @@ ActiveRecord::Schema.define(:version => 20130403235006) do
     t.date     "data"
     t.text     "descricao"
     t.string   "responsavel"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.integer  "candidato_id"
+    t.integer  "ultimo",       :default => 0
   end
 
   create_table "formularios", :force => true do |t|
@@ -86,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20130403235006) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "comite_id"
+    t.string   "opcoes"
   end
 
   create_table "pergunta_forms", :force => true do |t|

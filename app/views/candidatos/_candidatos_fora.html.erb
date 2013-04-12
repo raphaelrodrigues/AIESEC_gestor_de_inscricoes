@@ -36,6 +36,7 @@
             </tbody>
           </table>
       </div>
+
       
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -43,21 +44,34 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-           <li id="mail"> <a onclick="validate()">Obter Emails</a></li>
-           <li id="telemovel"><a href="#" >Obter Telemovel</a></li>
+           <li id="mail" value="candidatos[]"> <a href="#" >Obter Emails</a></li>
+           <li id="telemovel" value="candidatos[]"><a href="#" >Obter Telemovel</a></li>
            <li><a id="email_nao_contactados">Obter Emails de não contactados</a></li>
           <!-- dropdown menu links -->
         </ul>
     </div>
+</div>
 
-
-    <div id="askDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+      <div id="askDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
       <div class="modal-header">
         <a href="#" class="close" data-dismiss="modal">&times;</a>
         <h3 id="askDialogPrompt"> </h3>
         </div>
       <div class="modal-body" id="askDialogBody">
       
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+   </div>
+
+  <div id="askDialog1222" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+      <div class="modal-header">
+        <a href="#" class="close" data-dismiss="modal">&times;</a>
+        <h3 id="askDialogPrompt"> </h3>
+        </div>
+      <div class="modal-body" id="askDialogBody">
+          Tens de seleccionar pelo menos um candidato
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

@@ -21,14 +21,16 @@ class ApplicationController < ActionController::Base
     n = op.count
     str = ""
     op.each do |c|
+      #verify if string is empty if not add
+      if !c[1].blank?
+        str << c[1]
 
-      str << c[1]
+        #para evitar por a virgula no fim
+        if n != c[0].to_i
+          str << "|"
+        end
 
-      #para evitar por a virgula no fim
-      if n != c[0].to_i
-        str << "|"
-      end
-
+      end #fim do if
     end
 
    # str = str.split('|')
@@ -148,7 +150,12 @@ class ApplicationController < ActionController::Base
   end
 
 
+
   ##########################FIM ESTATISTICAS########################################
+
+
+
+
   private
     #verifica se esta alguem logado e se estiver devolve o comite que esta logado
   	def current_comite

@@ -7,73 +7,113 @@
 
 <p id="notice"><%= notice %></p>
 
-<h3> Registou-se há <%=  time_ago_in_words(@candidato.created_at)  %> </h3>
 
-    <!--info candidatos-->
-      <div class="info_anuncio">
-        <div class="span6">
 
-            <address>
-              <strong>Nome: </strong> <span><%= @candidato.nome %></span><br><br> 
+  <!-- verifica se tem algum estado, se tiver mostra-->
+        
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs">
+      <li class="active"><a href="#pane1" data-toggle="tab">Info</a></li>
+      <li><a href="#pane2" data-toggle="tab">Respostas</a></li>
+      <li><a href="#pane3" data-toggle="tab">Estados</a></li>
 
-            </address>
-          
-              <h2>
-              <strong>Telemovel: <%= @candidato.telemovel %></strong> <br /><br />
-              </h2>
+  </ul>
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
+      
 
-              <div class="span10">
-                <div class="sumdata"> 
-                    <div><span>Telemovel: </span> <%= @candidato.telemovel %></div>
-                    <div><span>Email:</span> <%= @candidato.email %></div> 
-                    <div ><span>Idade</span> <%= age(@candidato.data_nascimento) %></div>
-                    <div><span>Data Nascimento </span> <%= @candidato.data_nascimento %></div>
-                    <div><span>Tipo:</span> <%= @candidato.tipo %></div>
-                    <div ><span>Comite:</span> <%= @candidato.comite_id %></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
+          <div class="span6 well" >
+                  <table class="table table-striped table-condensed">
+                      <tbody><tr>
+                          <td><h6>Nome:</h6></td>
+                          <td><i class="icon-user"></i> <%= @candidato.nome %></td>
+                      </tr>
+                      <tr>
+                          <td><h6>Telemovel:</h6></td>
+                          <td><i class="icon-home"></i> <%= @candidato.telemovel %></td>
+                      </tr>
+                      <tr>
+                          <td><h6>Email:</h6></td>
+                          <td><i class="icon-envelope"></i> <%= @candidato.email %></td>
+                      </tr>
+                      <tr>
+                          <td><h6>Idade:</h6></td>
+                          <td><i class="icon-headphones"></i> <%= age(@candidato.data_nascimento) %> Anos</td>
+                      </tr>
+                      
+                      <tr>
+                          <td><h6>Data Registo:</h6></td>
+                          <td><i class=" icon-calendar"></i> <%= @candidato.created_at.strftime('%d %b') %>(<%=  time_ago_in_words(@candidato.created_at) %>)</td>
+                      </tr>
+                  </tbody></table>
+          </div>
 
+
+          <div class="span4">
+                          <div id="reports" class="well">
+                              <h3 class="modal-header"> Registou-se há <%=  time_ago_in_words(@candidato.created_at)  %></h3>
+                                <% if  !@candidato.estados.last.nil? %>
+                                    <p>
+                                        <b>Estado Actual</b>
+                                        <span title="Alterar Estado" class="label label-success">
+                                          <%= @candidato.estados.first.nome %>
+                                        </span>
+                                    </p>
+                                  <% else %>
+                                    <p>
+                                      <b>Estado Actual</b>
+                                      <span title="Alterar Estado" class="label label-warning">
+                                            Não contactado
+                                      </span>
+                                    </p>
+                                  <% end %>
+
+
+                          <ul class="nav nav-list">
+                              <li>
+                              <div class="alert alert-info no-reports">
+                                 <p class="list-item"><b>Ultima actualização:</b><%= getUltimoUpdate %> </p>
+                                
+                              </div>
+                            </li>
+                          </ul>
+                      </div>
               </div>
-          <!--devolve para html a ultima actualizacao do estado do candidato-->
-          <b>Ultima actualização:</b>
-          <%= getUltimoUpdate %> 
-        </p>   
+    </div>
 
-        <!-- verifica se tem algum estado, se tiver mostra-->
-        <% if  !@candidato.estados.last.nil? %>
-          <p>
-              <b>Estado Actual</b>
-              <span title="Alterar Estado" class="label label-success">
-                <%= @candidato.estados.first.nome %>
-              </span>
-          </p>
-        <% else %>
-          <p>
-            <b>Estado Actual</b>
-            <span title="Alterar Estado" class="label label-warning">
-                  Não contactado
-            </span>
-          </p>
-        <% end %>
+     <div id="pane2" class="tab-pane">
+      <%= render 'respostas' %>
+    </div>
 
-    </div><!--fim info canditado--> 
+     <div id="pane3" class="tab-pane">
+        
+        <div class="row">
+                <div class="span13">
+                  <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                    <li class="active"><a href="#1" data-toggle="tab">Estados</a></li>
+                    <li><a href="#2" data-toggle="tab">Estatistica</a></li>
+                    </ul>
+                        <div class="tab-content">
+                        <div class="tab-pane active" id="1">
+                            <%= render 'estados', collection: @estados %>
+                        </div>
+                        <div class="tab-pane" id="2">
+                           
+                        </div>    
+                    </ul>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+    </div>
+
+
 </div>
 
 
 
-<p>
-  Download:
-  <%= link_to "CSV", candidato_path(id: @candidato.id ,format: "csv") %> |
-  <%= link_to "Excel", candidato_path(id: @candidato.id ,format: "xls") %>
-</p>
-
-<button class="btn btn-primary">Copy mail to clipBoard</button><br><br>
-
-
-
-<%= link_to '<i class="icon-plus"></i> Novo Estado'.html_safe, new_estado_path(:candidato=> @candidato.id) ,:class=>"btn" %>
  <div class="btn-toolbar">
           <a href="#myModalEstado" data-toggle="modal" class="btn"><i class="icon-plus"></i>Novo Estado</a>
 </div>
@@ -81,27 +121,7 @@
 
 
 
-<%= render 'respostas' %>
 
-<div class="row">
-        <div class="span13">
-          <div class="tabbable">
-            <ul class="nav nav-tabs">
-            <li class="active"><a href="#1" data-toggle="tab">Estados</a></li>
-            <li><a href="#2" data-toggle="tab">Estatistica</a></li>
-            </ul>
-                <div class="tab-content">
-                <div class="tab-pane active" id="1">
-                    <%= render 'estados', collection: @estados %>
-                </div>
-                <div class="tab-pane" id="2">
-                   
-                </div>    
-            </ul>
-          </div>
-        </div>
-      </div>
-</div>
 
 
 <%= link_to 'Edit', edit_candidato_path(@candidato) %> |

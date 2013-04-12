@@ -6496,3 +6496,7 @@ i[class^="icon-"] {
 
 
 }
+
+.error-input { 
+  color:red; 
+}

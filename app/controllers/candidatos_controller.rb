@@ -9,8 +9,8 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
   # GET /candidatos.json
   def index #a tirar retirar /view/index
 
-    recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                              #vai buscar o recrutamento que esta activo
-    @candidatos = recrutamento.candidatos.search(params[:search],params[:page])  #vai buscar os candidatos desse recrutamento
+    recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                             #vai buscar o recrutamento que esta activo
+    @candidatos = recrutamento.candidatos.search(params[:search],params[:page],params[:field])  #vai buscar os candidatos desse recrutamento
 
     @estado = Estado.new
     @estados_recrut = EstadoRecrut.activos(2,current_comite.id)
@@ -25,8 +25,10 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
 
   def candidatos_membros
      recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                                        #vai buscar o recrutamento que esta activo
-     @candidatos = recrutamento.candidatos.search(params[:search],params[:page]) unless  recrutamento.nil?    #vai buscar os candidatos desse recrutamento
      
+     @candidatos = recrutamento.candidatos.search(params[:search],params[:page],params[:field]) unless  recrutamento.nil?    #vai buscar os candidatos desse recrutamento
+     
+
      @estado = Estado.new
      @estados_recrut = EstadoRecrut.activos(1,current_comite.id)
 
@@ -43,7 +45,7 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
 
   def candidatos_estagios
      recrutamento = current_comite.recrutamento.recrutamento_activo(2)                                     #vai buscar o recrutamento que esta activo
-     @candidatos = recrutamento.candidatos.search(params[:search],params[:page])  unless  recrutamento.nil?  #vai buscar os candidatos desse recrutamento
+     @candidatos = recrutamento.candidatos.search(params[:search],params[:page],params[:field])  unless  recrutamento.nil?  #vai buscar os candidatos desse recrutamento
      
      @estado = Estado.new
      @estados_recrut = EstadoRecrut.activos(2,current_comite.id)
@@ -94,9 +96,6 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
               format.html { redirect_to  r}
               format.json { head :no_content }
       end
-
-    
-
   end
   
 
@@ -155,22 +154,20 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
 
   #guardar respostas de um candidato
   def guardar_survey
+
      val = params[:respostas]
      @comite = Comite.find(params[:id])
-
+      
      @formulario = @comite.formularios.formulario_activo(params[:tipo])
      @candidato = Candidato.novo(val,params[:tipo],@comite.id,@formulario.recrutamento.id) #cria um novo candidato
-
      @perguntas = @formulario.pergunta_forms             #vai buscar todas as perguntas do formulario
-     
-     n = 0
+
      if @candidato.save
        @perguntas.each do |p|
-          Resposta.new(candidato_id: @candidato.id,pergunta_id:params[:respostas][:id][n],resposta:params[:respostas][:resposta][n],tipo: params[:tipo]).save
-          n = n + 1
-       end
+            Resposta.new(candidato_id: @candidato.id,pergunta_id:p.perguntum_id,resposta:val[p.perguntum_id.to_s][:resposta].to_sentence,tipo: params[:tipo]).save
+      end
      end
-
+     
       respond_to do |format|
       format.html { redirect_to survey_final_path }
       format.json { head :no_content }

@@ -95,15 +95,15 @@ class PerguntaController < ApplicationController
   # POST /pergunta
   # POST /pergunta.json
   def create
-    op = params[:perguntum][:escolha]
+    op = params[:perguntum][:opcoes]
     str = concat_options(op)
     options = ""
     if params[:perguntum][:tipo] != 1
       options = str
     end 
 
-    params[:perguntum][:options] = options
-    cdcdcdcdc
+    params[:perguntum][:opcoes] = options
+    
 
     @perguntum = Perguntum.new(params[:perguntum])
 

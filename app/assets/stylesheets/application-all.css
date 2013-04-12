@@ -22,6 +22,11 @@ tr.handle
   cursor: move;
 }
 
+.sortable tr.handle {
+  font-size: 12px;
+  cursor: move;
+}
+
 input.largerCheckbox
 {
 	width: 50px;
@@ -100,3 +105,141 @@ input.largerCheckbox
 	color: #666;
 }
 
+
+.mcol-left{
+	width: 48%;
+	float: left;
+}
+
+.mcol-right{
+	width: 48%;
+	float: right;
+}
+
+.col-left{
+	width: 48%;
+	float: left;
+}
+
+.col-right{
+	width: 48%;
+	float: right;
+}
+
+.header-data{
+	margin-top: 15px;
+}
+
+.header-data .hdata{
+	display: inline-block;
+	width: 85px;
+	margin-right: 40px;
+}
+
+.header-data .hdata i{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	line-height: 40px;
+	font-size: 17px;
+	text-align: center;
+	color: #fff;
+	border-radius: 50px;
+	box-shadow: inset 0px 0px 1px #777;
+}	
+
+.header-data .hdata p, header .header-data .hdata a, header .header-data .hdata a:hover{
+	display: block;
+	line-height: 16px;
+	font-weight: bold;
+	font-size: 14px;
+	text-align: center;
+	margin-top: 3px;
+	color: #666;
+}
+
+.header-data .hdata em{
+	display: block;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 12px;
+}
+
+
+.bblue{
+	background:#5eb2d9;
+}
+
+.bbrown{
+	background:#b46e4c;
+}
+
+.bgreen{
+	background: #4ac344;
+}
+
+.borange{
+	background:#ff8421;
+}
+
+.bred{
+	background: #ff5d5e;
+}
+
+.byellow{
+	background: #d7a443;
+}
+
+.stats_right
+{
+	position: absolute;
+	margin-top: -100px;
+	margin-left: 650px;
+}
+
+.stats_right1
+{
+	position: absolute;
+	margin-top: -80px;
+	margin-left: 650px;
+}
+
+
+.ver
+{
+	position: absolute;
+	margin-left: 240px;
+	margin-top: -60px;
+}
+
+form input.error-input { border: 1px solid #ff876f; }
+	form input.error-input:hover { border: 1px solid #b03e27; }
+
+
+input.error-input { border: 1px solid #ff876f; }
+	 input.error-input:hover { border: 1px solid #b03e27; }
+
+
+	 /* Back to top */
+
+.totop {
+	position: fixed;
+	bottom: 0px;
+	right: 20px;
+	z-index: 104400;
+	background: #0993d3 !important; 
+}
+
+.totop a, .totop a:visited{
+	display: block;
+	width: 30px;
+	height: 30px;
+	color: #fff;
+	text-align: center;
+	line-height: 30px;
+}
+
+.totop a:hover {
+	color: #eee;
+	text-decoration: none;
+}

@@ -6,13 +6,13 @@
             <thead>
               <tr>
                 <th><input type="checkbox" name="select-all" id="select-all"></th>
-                <th data-sort="string">Nome</th>
+                <th data-sort="string-ins">Nome</th>
                 <th>Telemovel</th>
                 <th data-sort="string">Idade</th>
                 <th data-sort="string">Email</th>
                 <th data-sort="string">Data Registo</th>
                 <!--<th>Recrut</th>-->
-                <th data-sort="Estado">Estado</th>
+                <th data-sort="string-ins">Estado</th>
                 <th style="width: 26px;"></th>
                 <th style="width: 26px;"></th>
               </tr>
@@ -45,7 +45,7 @@
       <div class="btn-toolbar">
           <a href="#myModalMail" data-toggle="modal" class="btn"><i class="icon-envelope"></i>Enviar Mail</a>
           <a href="#myModalEstado" data-toggle="modal" class="btn btn-danger"><i class="icon-tag"></i>Mudar Estado</a>
-           <a href="#myModalStats" data-toggle="modal" class="btn btn-primary"><i class="icon-signal"></i>Ver Estatisticas</a>
+          <a href="#myModalStats1" data-toggle="modal" class="btn btn-danger"><i class="icon-signal"></i>Ver Estatisticas</a>
       
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -54,7 +54,7 @@
         </a>
         <ul class="dropdown-menu">
            <li id="mail" value="candidatos[]"> <a href="#" >Obter Emails</a></li>
-           <li id="telemovel"><a href="#" >Obter Telemovel</a></li>
+           <li id="telemovel" value="candidatos[]"><a href="#" >Obter Telemovel</a></li>
            <li><a id="email_nao_contactados">Obter Emails de não contactados</a></li>
           <!-- dropdown menu links -->
         </ul>

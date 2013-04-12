@@ -52,13 +52,15 @@ hr {
   text-shadow: none;
 }
 
-
+/* 3299BB 26ADE4 107FC9 115FA8*/
 .navbar .navbar-inner {
-  background: #4d5b79;
+  background: #3A89C9;
+  /*
   background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6c7a95));
   background: -ms-linear-gradient(bottom, #4d5b76, #6c7a95);
   background: -moz-linear-gradient(center bottom, #4d5b76 0%, #6c7a95 100%);
   background: -o-linear-gradient(bottom, #4d5b76, #6c7a95);
+  */
   filter: progid:dximagetransform.microsoft.gradient(startColorStr='#4d5b76', EndColorStr='#6c7a95');
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#6c7a95',EndColorStr='#4d5b76')";
   padding: 0em 1em;
@@ -166,6 +168,8 @@ footer hr {
   display: inline-block;
 }
 .stats p.stat {
+  font-size: 1em;
+  font-weight: bold;
   margin: 1em 0em 0em 1em;
 }
 .stats .stat {
@@ -176,19 +180,21 @@ footer hr {
 .stats .stat .number {
   font-weight: bold;
   margin-right: .5em;
-  padding: .5em;
+  padding: .4em;
   border: 1px solid #ccc;
-  background: #eeeeee;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e3e3e3), color-stop(1, #ffffff));
-  background: -ms-linear-gradient(bottom, #e3e3e3, #ffffff);
-  background: -moz-linear-gradient(center bottom, #e3e3e3 0%, #ffffff 100%);
-  background: -o-linear-gradient(bottom, #e3e3e3, #ffffff);
+  background: #26ADE4;
+
+  /*
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e3e3e3), color-stop(1, #3A89C9));
+  background: -ms-linear-gradient(bottom, #4d5b79, #3A89C9);
+  background: -moz-linear-gradient(center bottom, #4d5b79 0%, #3A89C9 100%);
+  background: -o-linear-gradient(bottom, #4d5b79, #3A89C9);
+
+  */
   filter: progid:dximagetransform.microsoft.gradient(startColorStr='#4d5b76', EndColorStr='#6c7a95');
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff',EndColorStr='#e3e3e3')";
-  -webkit-box-shadow: 1px 1px 0px #ffffff;
-  -moz-box-shadow: 1px 1px 0px #ffffff;
-  box-shadow: 1px 1px 0px #ffffff;
-  text-shadow: 1px 1px 1px #fff;
+
+  color: #fff;
 }
 /*Blocks*/
 .block {

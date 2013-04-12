@@ -59,21 +59,61 @@ module ApplicationHelper
   end
 
 
-  #retorna qual o input
-  def tipo_input(tipo,nome,obrigatoria)
+  def name
+
+  end
+   #retorna qual o input
+  def tipo_input(tipo,opcoes,obrigatoria,nome,id)
     case tipo
     when 1
-      text_field_tag 'respostas[resposta][]', nil,:required => obrigatoria,:placeholder=> nome
+     name = "respostas[#{id}][resposta][]"
+     return text_field_tag name, nil,:required => obrigatoria,:placeholder=> nome
+      
+     
     when 4
-        html = "<input type='checkbox' name='respostas[resposta][]' value='1'>".html_safe 
-        html << "<input type='hidden'  name='respostas[resposta][]'  value='0' />".html_safe 
+        html = "<div id='obrigatoria_#{obrigatoria}'>".html_safe
+         if !opcoes.empty?
+          
+          opcoes.each do |o|
+
+            html << "<input type='checkbox' name='respostas[#{id}][resposta][]' value='".html_safe
+            html << o.html_safe
+            html << "'>&nbsp;&nbsp;".html_safe
+            html << o.html_safe
+            html << "<br>".html_safe
+            #html << "<input type='hidden'  name='respostas[id][resposta][]'  value='0' />".html_safe 
+            
+          end
+
+          html << "</div>".html_safe
+        end
+          return html
+        
     when 3
-        html = "<input type='comboxbox' name='respostas[resposta][]' value='1'>".html_safe 
-        html << "<input type='hidden'  name='respostas[resposta][]'  value='0' />".html_safe 
-    when 2
-        html = "<input type='radiobox' name='respostas[resposta][]' value='1'>".html_safe 
-        html << "<input type='hidden'  name='respostas[resposta][]'  value='0' />".html_safe 
+      html = ""
+      if !opcoes.empty?
+        select_tag "respostas[#{id}][resposta][]", options_for_select(opcoes.collect{ |u| [u, u] }), :include_blank => true
+      end
+
+    when 2  
+      html = "".html_safe
+        if opcoes != ""
+          opcoes.each do |o|
+            html << "<input type='radio' name='respostas[#{id}][resposta][]' value='#{o}'>  #{o}<br>".html_safe 
+            #html << "<input type='hidden'  name='respostas[resposta][]'  value='0' />".html_safe 
+          end
+        end
+      return html
+
+    when 5
+      name = "respostas[#{id}][resposta][]"
+      return text_area_tag name, nil,:required => obrigatoria,:placeholder=> nome
     end
+
+ end
+
+ def my_text_field_tag(name, value = nil, options={})
+  text_field_tag name, value
  end
 
  def e_obrigatoria?(obrigatoria)
@@ -85,9 +125,9 @@ module ApplicationHelper
 
  def obrigatoria?(obr)
   if obr == true
-    '<i class=" icon-ok"></i>'.html_safe
+    '<td style="color:green;"><i class=" icon-ok"></i></td>'.html_safe
   else
-    '<i class="icon-remove"></i>'.html_safe
+    '<td style="color:red;"><i class="icon-remove"></i></td>'.html_safe
   end
  end
 

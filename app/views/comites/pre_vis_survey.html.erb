@@ -71,7 +71,7 @@
                     </div>
                </div>
 
-              
+
               <legend>Questionário</legend>
                <% @perguntas_form.each do |p| %>
                   <% pergunta = p.perguntum %>
@@ -82,16 +82,15 @@
                       <%= e_obrigatoria?(p.obrigatoria) %><!--verifica se é obrigatoria-->
                     </label>
                     <div class="controls">
-                      <%= tipo_input(pergunta.tipo,"de",p.obrigatoria) %>
+                      <% opcoes = pergunta.opcoes.split('|') %>
+                      <% cenas = tipo_input(pergunta.tipo,opcoes,p.obrigatoria,"Nome",pergunta.id) %>
+                      <%= cenas %>
                       <input type="hidden" name="respostas[id][]" placeholder="Resposta" value="<%= pergunta.id %>">
                       <!--<input type="text" name="respostas[resposta][]" placeholder="Resposta" >-->
                       <p class="help-block"><%= pergunta.descricao %> </p>
                     </div>
                   </div>
                <% end %>
-
-
-               
             </fieldset>
 
 

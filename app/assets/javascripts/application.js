@@ -18,6 +18,79 @@
 
 $(document).ready(function() {
       
+       /* Scroll to Top */
+
+
+    $(".totop").hide();
+
+
+      $(window).scroll(function(){
+
+        if ($(this).scrollTop()>300)
+        {
+
+          $('.totop').slideDown();
+        } 
+        else
+        {
+          $('.totop').slideUp();
+        }
+    });
+
+      $('.totop a').click(function (e) {
+        e.preventDefault();
+        $('body,html').animate({scrollTop: 0}, 500);
+      });
+
+      $("#survey_form").submit(function() {
+
+            var email = document.forms["survey_form"]["email_survey"];
+            var dta_nasc = document.forms["survey_form"]["dta_survey"];
+
+          f = 0;
+          $("#email_survey").removeClass(" error-input");
+          $('#dta_survey').removeClass('error-input');
+          //dta_nasc.removeClass('error-input');         
+         // prop('disabled',true).addClass("disabled");
+          $("em").each(function () {
+              $(this).empty();
+              //dta_nasc.removeClass('error-input');
+              $('#email_surveyEM').removeClass('error-input');
+              $('#dta_surveyEM').removeClass('error-input');
+              
+            });
+            
+              var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+              if(reg.test(email.value) == false) {
+
+                  email.className += " error-input";
+                  $("<em id='email_surveyEM' class='error-input'>  Email invalido </em>").insertAfter(email);
+                  f = 1;
+              }
+
+              var reg = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+              if( reg.test(dta_nasc.value) == false){
+                f = 1;
+                dta_nasc.className += " error-input";
+                $("<em id='dta_surveyEM'class='error-input'>  Data inválida </em>").insertAfter(dta_nasc);
+              }
+
+            
+            if(f == 1){
+
+             $('.error-input')[0].select()
+              $('.error-input')[0].focus();
+              //alert($(document).closest("em.error-input").innerHTML);
+              //.$('form:first *:input[type!=hidden]:first').find(focus();
+              //$("#myModal").modal('show');
+              return false;
+            }
+            else
+            {
+              f = 0;
+              return true;
+            }
+    });
       $('#opcoes').hide();
         // ==================================================== //
       //                 STUPID TABLE SORT                //
@@ -41,16 +114,15 @@ $(document).ready(function() {
           return new Date(Year,Month,Day);
       }
 
-
       var table = $(".sortable1").stupidtable({
-        // Sort functions here
-        "date":function(a,b){
-            // Get these into date objects for comparison.
-            aDate = date_from_string(a);
-            bDate = date_from_string(b);
+        // // Sort functions here
+        // "date":function(a,b){
+        //     // Get these into date objects for comparison.
+        //     aDate = date_from_string(a);
+        //     bDate = date_from_string(b);
 
-            return aDate - bDate;
-        }
+        //     return aDate - bDate;
+        // }
       });
 
       table.bind('aftertablesort', function (event, data) {
@@ -84,8 +156,10 @@ $(document).ready(function() {
       $("#mail").click(function(event){
 
          var n_chbx = checkTheBox( $(this).attr('value') )
+
          if (n_chbx == 0)
          {
+
             $("#askDialog1222").modal('show');
             //alert("Tens de seleccionar pelo menos um candidato");
             event.preventDefault;
@@ -93,8 +167,9 @@ $(document).ready(function() {
          }
 
          $('#askDialogBody').empty();
-          $("#askDialogPrompt").html("Emails Candidatos Selecionados");
+        $("#askDialogPrompt").html("Emails Candidatos Selecionados");
           checkValues = [];
+
           //verifica quais as checkboxes selecionadas
            $('input[class=select-all]:checked').each(function() {
              var email = "email".concat($(this).val());
@@ -103,7 +178,6 @@ $(document).ready(function() {
           });
           
           $('#askDialogBody').html(checkValues);
-
           $("#askDialog").modal('show');
       });
 
@@ -351,7 +425,7 @@ $(document).ready(function() {
       });
 
       $("#candidatos_search input").keyup(function() {
-            //alert($("#candidatos_search").attr("action"));
+            //alert($("#candidatos_search").serialize());
             $.get($("#candidatos_search").attr("action"), $("#candidatos_search").serialize(), null,     "script");
             return false;
       });
@@ -392,6 +466,7 @@ $(document).ready(function() {
           //do other stuff when a click happens
       });
 
+
       
 
       $("#tipo_resposta .btn").click(function(event){
@@ -399,9 +474,9 @@ $(document).ready(function() {
           $('#btn-input-tipo').val( $(this).val() );
           val = $(this).val()
 
-          if( val == 1)
+          if( val == 1 || val == 5)
           {
-                $('#opcoes').hide();
+            $('#opcoes').hide();
           }
           else
           {
@@ -411,24 +486,6 @@ $(document).ready(function() {
 
 
          // alert($(this).val() +" e"+ $('#btn-input-tipo').val()) 
-      });
-
-
-      var optionNumber = 1; 
-      $('#add_entry').click(function(e) {
-            var theForm = document.getElementById("opcoes");
-            $('#opcoes').append("<label>Opção "+ optionNumber + "</label><br>");
-                    
-             var newOption = document.createElement("input"); 
-
-             newOption.name = "perguntum[escolha]["+optionNumber+"]"; // poll[optionX]
-
-             newOption.type = "text";
-
-             $('#opcoes').append(newOption);
-
-              optionNumber++;
-          //do other stuff when a click happens
       });
 
       
@@ -452,10 +509,23 @@ $(document).ready(function() {
       //     $("#myModalEstadoPrevis").modal('show');
       // });
 
+
+
+
  });
 
 
 
+  var next = 1;
+        function addFormField(){
+            var addto = "#field" + next;
+            next = next + 1;
+            var newIn = '<br /><br /><input id="field' + next + '" name="perguntum[opcoes][' + next + ']" type="text" data-provide="typeahead" data-items="8">';
+            var newInput = $(newIn);
+            $(addto).after(newInput);
+            $("#field" + next).attr('data-source',$(addto).attr('data-source'));
+            $("#count").val(next);  
+        }
   
   /*
   *   funcao que copia para o clipboard texto

@@ -113,12 +113,13 @@
       <div class="block span6">
         <a href="#tablewidget" class="block-heading" data-toggle="collapse">Ultimas Inscrições<span class="label label-warning">+<%= @last_cand.count %></span></a>
         <div id="tablewidget" class="block-body collapse in">
-            <table class="table"> 
+            <table class="table table-condensed"> 
               <thead>
                 <tr>
                   <th>First Name</th>
                   <th>Idade</th>
                   <th>Email</th>
+                  <th>Data</th>
                   <th>Tipo</th>
                   
                 </tr>
@@ -129,6 +130,7 @@
                   <td><%=  link_to  c.nome, c %></td>
                   <td><%= age(c.data_nascimento) %></td>
                   <td><%= c.email %></td>
+                   <td><%= c.created_at.strftime('%d %b') %></td>
                   <td>
                       <% if c.recrutamento_id != 0 %>
                         <%= tipoToStringLabel(c.tipo) %>

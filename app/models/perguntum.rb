@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Perguntum < ActiveRecord::Base
-  attr_accessible :activa, :descricao, :tipo, :titulo,:comite_id
+  attr_accessible :activa, :descricao, :tipo, :titulo,:comite_id,:opcoes
 
   validates :comite_id,:descricao, :tipo, :titulo, :presence => true
 
@@ -16,5 +16,4 @@ class Perguntum < ActiveRecord::Base
 		  activa: true).first
   end
  
-
 end

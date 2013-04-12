@@ -1,7 +1,7 @@
         <div class="header">
             <div class="stats">
-                <p class="stat"><span class="number"><%= @formulario.pergunta_forms.count %></span> Perguntas</p>
-         </div>
+                <p class="stat">Perguntas <span class="number"><%= @formulario.pergunta_forms.count %></span></p>
+            </div>
           <h1 class="page-title"><%= @formulario.nome %></h1>
 
           
@@ -87,7 +87,7 @@
                         <td><%= pergunta.titulo %></td>
                         <td> <%= pergunta.descricao %></td>
                         <td><%= pergunta.tipo %></td>
-                         <td><%= obrigatoria?(p.obrigatoria) %></td>
+                        <%= obrigatoria?(p.obrigatoria) %>
                         <!--<td><%= p.ordem %></td>-->
                         <% if current_comite?(params[:id].to_i) %> 
                           <td>
@@ -144,7 +144,7 @@
             <% end %> <!-- fim do fromulario -->
 
 
-            <%= link_to "Pré-visualizar Formulário(Meter comando)",pre_vis_survey_path(:formulario => @formulario.id) ,:method => :post , :class=>"btn" %>
+            <%= link_to '<i class="icon-drink"></i>Pré-visualizar Formulário(Meter comando)'.html_safe,pre_vis_survey_path(:formulario => @formulario.id) ,:method => :post , :class=>"btn" %>
 
         
         <div id="myModalPergunta" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

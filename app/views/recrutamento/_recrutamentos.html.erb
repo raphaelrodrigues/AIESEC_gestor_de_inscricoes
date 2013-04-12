@@ -21,9 +21,49 @@
 
               <label>Recrutamento Activo <%= @recr_activo.id %>
                 <h4>Iniciado há <%= time_ago_in_words(@recr_activo.created_at) %></h4>
-                <%= link_to "Ver", recrutamento_path(@recr_activo.id) ,:class=>'btn'%> 
+                <div class="ver">
+                  <%= link_to "Ver", recrutamento_path(@recr_activo.id) ,:class=>'btn'%> 
+                </div>
                 
               </label>
+
+              <div class="stats_right1">
+                <div class="span4">
+                          <div class="header-data">
+
+                              <!-- Traffic data -->
+                              <div class="hdata">
+                                <div class="mcol-left">
+                                  <!-- Icon with red background -->
+                                  <i class="icon-user bblue"></i> 
+
+                                </div>
+                                <div class="mcol-right">
+                                  <!-- Number of visitors -->
+                                  <p><%= @recr_activo.candidatos.count %> <em>Candidatos </em></p>
+
+                                </div>
+                                <div class="clearfix"></div>
+                              </div>
+
+                              <!-- Members data -->
+                              <div class="hdata">
+                                <div class="mcol-left">
+                                  <!-- Icon with blue background -->
+
+                                  <i class="icon-th-list bgreen"></i> 
+                                </div>
+                                <div class="mcol-right">
+                                  <!-- Number of visitors -->
+                                  <p><%= @recr_activo.formulario.pergunta_forms.count %>  <em>Perguntas </em></p>
+
+                                </div>
+                                <div class="clearfix"></div>
+                              </div>
+                         </div>
+                       </div>
+                    </div>
+
              
               <table class="table">
                     <thead>
@@ -43,10 +83,6 @@
                         <td>
                           <% if @recr_activo.inscricao_activa == true %>
                                <span title="Alterar Estado" class="label label-success">Abertas</span>
-                              Candidatos inscritos
-                              <span title="Alterar Estado" class="label label-success">
-                                <%= @recr_activo.candidatos.count %>
-                              </span> 
 
                           <% else %>
                               <a href="#myModal" data-toggle="modal"> <span class="label label-important">Fechadas</span>

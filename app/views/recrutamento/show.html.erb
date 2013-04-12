@@ -14,24 +14,62 @@
 <p>
   <b>Inicio: </b>
   <%= @recrutamento.created_at %><P>
-  <b>Estado</b> : <%= @recrutamento.estado %><p>
-
-  <b>Pertence ao Comite </b><%= @recrutamento.comite_id %>
 </p>
 
-<p>
-  Meter uma zona de estatisticas
-  Possui <%= @recrutamento.candidatos.count %> Candidatos<br>
-
-  Possui   <%= @counter.visitas %> visitas
-</p>
 <%= @recrutamento.viewEinscricoes(@counter) %>
-<p>
-  Formúlario possui  <%= @recrutamento.formulario.pergunta_forms.count %> Perguntas
-</p>
 
+<div class="stats_right">
+  <div class="span6">
+            <div class="header-data">
 
+              <!-- Traffic data -->
+              <div class="hdata">
+                <div class="mcol-left">
+                  <!-- Icon with red background -->
+                  <i class="icon-user bblue"></i> 
 
+                </div>
+                <div class="mcol-right">
+                  <!-- Number of visitors -->
+                  <p><%= @recrutamento.candidatos.count %> <em>Candidatos </em></p>
+
+                </div>
+                <div class="clearfix"></div>
+              </div>
+
+              <!-- Members data -->
+              <div class="hdata">
+                <div class="mcol-left">
+                  <!-- Icon with blue background -->
+
+                  <i class="icon-th-list bgreen"></i> 
+                </div>
+                <div class="mcol-right">
+                  <!-- Number of visitors -->
+                  <p><%= @recrutamento.formulario.pergunta_forms.count %>  <em>Perguntas</em></p>
+
+                </div>
+                <div class="clearfix"></div>
+              </div>
+
+              <!-- revenue data -->
+              <div class="hdata">
+                <div class="mcol-left">
+                  <!-- Icon with green background -->
+                  <i class="icon-signal bred"></i> 
+
+                </div>
+                <div class="mcol-right">
+                  <!-- Number of visitors -->
+                  <p><%= @counter.visitas %> <em>Visitas</em></p>
+
+                </div>
+                <div class="clearfix"></div>
+              </div>                        
+
+            </div>
+      </div>
+</div>
 
 <div class="row">
         <div class="span13">

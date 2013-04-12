@@ -31,13 +31,23 @@
 
                     <label>Tipo</label>
 
-                      <div class="btn-group" data-toggle="buttons-radio" id="tipo_resposta">
+
+                  
+
+                      <div class="btn-group " data-toggle="buttons-radio" id="tipo_resposta">
                         <button type="button" class="btn" value="1" >
                           Resposta Aberta
                         </button>
-                        <button type="button" class="btn " value="2" >
-                          CheckBox
+
+                        <button type="button" class="btn" value="5" >
+                          Area de Texto
                         </button>
+
+                        <button type="button" class="btn" value="2" >
+                         Checkbox
+                          
+                        </button>
+
                         <button type="button" class="btn " value="3" >
                           ComboBox
                         </button>
@@ -49,8 +59,20 @@
                     </div>
                     <br> <br>
                     <div id="opcoes">
-                        <input type="button" value="Add another text input" id="add_entry" class="btn">
+                               <input type="hidden" name="count" value="1" />
+                                <div class="control-group" id="fields">
+                                 <label class="control-label" for="field1">Opções</label>
+                                 <div class="controls" id="profs"> 
+                                   <div class="input-append">
+                                     <input  id="field1" name="perguntum[opcoes][1]" type="text" placeholder="Type something (it has typeahead too)" />
+                                     <button id="b1" onClick="addFormField()" class="btn btn-info" type="button">+</button>
+                                   </div>
+                                   <br /><small>Press + to add another form field :)</small>
+                                 </div>
+                               </div>
+                              </div>
                     </div>
+
 
                   <!-- END -->
 
@@ -63,7 +85,7 @@
                     <%= f.hidden_field :activa, :checked=>true %>
                   </div>
 
-                  
+                 <% #render "pergunta_forms/form" %>
                 <button class="btn btn-primary"><i class="icon-save"></i>Guardar</button>
 
                 
@@ -78,9 +100,13 @@
           <button type="button" class="btn " >Adicionar ao Formulário Estágio</button>
           <button type="button" class="btn " >Adicionar ao Formulário Membros</button>
         </div>
+
+          <a class="btn btn-large" onclick="jQuery('#looking_to_hire').attr('checked', 'checked')" type="button">
+                            <label class="radio">
+                            <input type="radio" name="looking_for" id="looking_to_hire" value="Employer" checked="checked"><p>Contratar</p>
+                            </label>
+                        </a>
         <br> 
-  </div>
-</div>
     
 
 

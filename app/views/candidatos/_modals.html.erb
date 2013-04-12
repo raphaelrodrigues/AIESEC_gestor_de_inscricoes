@@ -29,11 +29,8 @@
   </div>
 
   <!-- Modal STATS-->
-<div id="myModalStats" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">Estatísticas</h3>
-    </div>
+<div id="myModalStats1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    
     <div class="modal-body">
       <div class="row">
         <div class="span13">
@@ -45,8 +42,6 @@
                 <div class="tab-content">
                 <div class="tab-pane active" id="1">
                    <%= high_chart("my_id11", @h ) %>
-                  
-
                 </div>
                 <div class="tab-pane" id="2">
                    <%= high_chart("my_id1", @h1 ) %>
