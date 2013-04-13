@@ -27,11 +27,9 @@ class ComitesController < ApplicationController
     @estados_membros = EstadoRecrut.find(:all,:conditions =>["comite_id = ? and tipo = 1 and activo = 1",@comite.id])
     @estados_estagios = EstadoRecrut.find(:all,:conditions =>["comite_id = ? and tipo = 2 and activo = 1",@comite.id])
 
-
-
-
+    
     @h = pie_plot(@stats,"cenas")
-    @h1 = candidatos_recrutamento_plot1(@stats)
+    @h1 = column_plot1(@stats,"")
 
     respond_to do |format|
       format.html # show.html.erb

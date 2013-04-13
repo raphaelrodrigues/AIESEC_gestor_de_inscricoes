@@ -12,21 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :ordem %><br />
-    <%= f.number_field :ordem,value:get_ultima_ordem(@formulario.id) %>
+    
+    <%= f.hidden_field :ordem,value:get_ultima_ordem(@formulario.id) %>
   </div>
   
   <div class="field">
-    <%= f.label :obrigatoria %><br />
+    <%= f.label :obrigatoria %>
     <%= f.check_box :obrigatoria %>
   </div>
 
   <div class="field">
-    <%= f.label :formulario_id %><br />
-    <%= f.number_field :formulario_id,value:@formulario.id %>
+
+
+    <%= f.hidden_field :formulario_id,value:@formulario.id %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+   <div class="actions">
+       <button class="btn btn-primary" type="submit"><i class="icon-save"></i>Guardar</button>
   </div>
 <% end %>

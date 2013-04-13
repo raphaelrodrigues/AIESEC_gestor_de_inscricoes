@@ -77,7 +77,7 @@ class ApplicationController < ActionController::Base
 
 
      #da grafico das estatisticas
-  def candidatos_recrutamento_plot1(stats)
+  def column_plot1(stats,name)
 
    obj1 = stats
 
@@ -85,11 +85,11 @@ class ApplicationController < ActionController::Base
           f.chart({:defaultSeriesType=>"bar" ,type: 'column',renderTo: 'container', :margin=> [10, 100, 60, 100]} )
           series = {
                    :type=> 'column',
-                   :name=> '',
+                   :name=> name,
                    :data=> obj1
           }
           f.series(series)
-          f.options[:title][:text] = "Candidatos por Recrutamento"
+          f.options[:title][:text] = name
           f.options[:xAxis] = {
 
               :title => { :text => "Recrutamentos" },
@@ -205,6 +205,20 @@ class ApplicationController < ActionController::Base
         @ultima_ordem = 1
       end
     end
+
+
+    def get_ultima_ordem_estados(comite_id,tipo)
+      estado_last = EstadoRecrut.my_last(comite_id,tipo)
+
+      #se nao houver nenhum estado ainda
+      if !estado_last.nil?
+       @ordem = estado_last.ordem + 1
+      else
+        @ordem = 1
+      end
+
+    end
+
      
    protected
    	   # Checks that comite is logged in

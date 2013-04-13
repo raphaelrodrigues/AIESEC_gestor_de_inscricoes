@@ -17,21 +17,22 @@
   </div>
 
   <div class="field">
-    <%= f.label :comite_id %><br />
-    <%= f.text_field :comite_id,value: comite_id %>
+    
+    <%= f.hidden_field :comite_id,value: comite_id %>
   </div>
 
   <div class="field">
-    <%= f.label :tipo %><br />
-    <%= f.text_field :tipo ,:value=> tipo %>
+   
+    <%= f.hidden_field :tipo ,:value=> tipo %>
   </div>
 
+
   <div class="field">
-    <%= f.label :ordem %><br />
-    <%= f.text_field :ordem, value: 1  %>
+  
+    <%= f.hidden_field :ordem, value: 1  %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Criar Estado",:class=>"btn"%>
   </div>
 <% end %>

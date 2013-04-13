@@ -102,30 +102,28 @@
         <table class="table">
          <thead>
           <tr>
-            <th>Estado</th>
-            <th>Tipo</th>
-            <th>Comite_id</th>
             <th>Data de Início</th>
-            <th>Data de Fim</th>
-            <th></th>
-            <th></th>
+            <th>Tipo</th>
+            <th>Nº de candidatos</th>
+            <th>Nº de perguntas Formulário</th>
             <th></th>
           </tr>
         </thead>
         <% @recrutamentos.each do |r| %>
           <% if r.id != @recr_activo.id %>
             <tr>
-              <td><%= r.estado %></td>
-              <td><%= r.tipo %></td>
-              <td><%= r.comite_id %></td>
-              <td><%= l r.created_at %></td>
+              <td><b><%= l r.created_at %></b>  (<%= time_ago_in_words(r.created_at) %>)</td>
+              <td><%= tipoToString( r.tipo ) %></td>
+              <td><%= r.candidatos.count %></td>
+              <td><%= r.formulario.pergunta_forms.count %></td>
+              <!--
               <td>
-                <%= if r.finished_at.nil? 
-                        "Não terminado"
-                    else
-                        l r.finished_at
-                    end
-                %>
+                <% #if r.finished_at.nil? 
+                   #    "Não terminado"
+                   # else
+                   #    l r.finished_at
+                   # end
+                %>-->
               </td>
                <td><%= link_to 'Show', r %></td>
             </tr>

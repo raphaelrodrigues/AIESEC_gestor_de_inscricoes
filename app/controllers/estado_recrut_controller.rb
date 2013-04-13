@@ -8,7 +8,11 @@ class EstadoRecrutController < ApplicationController
 
 
   def create_estado
+    comite_id = params[:estado_recrut][:comite_id]
+    tipo = params[:estado_recrut][:tipo]
+    params[:estado_recrut][:ordem] = get_ultima_ordem_estados(comite_id,tipo)
   	@estado_recrut = EstadoRecrut.new(params[:estado_recrut])
+
     @estado_recrut.save
 
     respond_to do |format|

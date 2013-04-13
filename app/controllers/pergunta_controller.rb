@@ -95,6 +95,7 @@ class PerguntaController < ApplicationController
   # POST /pergunta
   # POST /pergunta.json
   def create
+    
     op = params[:perguntum][:opcoes]
     str = concat_options(op)
     options = ""
@@ -104,12 +105,16 @@ class PerguntaController < ApplicationController
 
     params[:perguntum][:opcoes] = options
     
-
+    formulario_id = params[:pergunta_form][:formulario_id]
     @perguntum = Perguntum.new(params[:perguntum])
-
+    
     respond_to do |format|
       if @perguntum.save 
         params[:pergunta_form][:perguntum_id] = @perguntum.id                    #ao ser criada uma pergunta normal é preciso
+        if !params[:add_top].nil?
+          params[:pergunta_form][:ordem] = 1
+          PerguntaForm.reorder(formulario_id)
+        end
         @pergunta_form = PerguntaForm.new(params[:pergunta_form]).save          #criar uma sub-pergunta
         format.html { redirect_to @perguntum, notice: 'Perguntum was successfully created.' }
         format.json { render json: @perguntum, status: :created, location: @perguntum }

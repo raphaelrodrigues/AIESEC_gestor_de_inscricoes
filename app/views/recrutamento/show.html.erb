@@ -9,106 +9,94 @@
               <li class="active">Recrutamento</li>
 </ul>
 
-        
-<h3> Criado há <%=  time_ago_in_words(@recrutamento.created_at)  %> </h3>
-<p>
-  <b>Inicio: </b>
-  <%= @recrutamento.created_at %><P>
-</p>
+<div class="container-fluid">
+   <div class="row-fluid">     
+        <h3> Criado há <%=  time_ago_in_words(@recrutamento.created_at)  %> </h3>
+        <p>
+          <b>Inicio: </b>
+          <%= @recrutamento.created_at %><P>
+        </p>
 
-<%= @recrutamento.viewEinscricoes(@counter) %>
+        <div class="stats_right">
+          <div class="span12">
+                    <div class="header-data">
 
-<div class="stats_right">
-  <div class="span6">
-            <div class="header-data">
+                      <!-- Traffic data -->
+                      <div class="hdata">
+                        <div class="mcol-left">
+                          <!-- Icon with red background -->
+                          <i class="icon-user bblue"></i> 
 
-              <!-- Traffic data -->
-              <div class="hdata">
-                <div class="mcol-left">
-                  <!-- Icon with red background -->
-                  <i class="icon-user bblue"></i> 
+                        </div>
+                        <div class="mcol-right">
+                          <!-- Number of visitors -->
+                          <p><%= @recrutamento.candidatos.count %> <em>Candidatos </em></p>
 
-                </div>
-                <div class="mcol-right">
-                  <!-- Number of visitors -->
-                  <p><%= @recrutamento.candidatos.count %> <em>Candidatos </em></p>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
 
-                </div>
-                <div class="clearfix"></div>
+                      <!-- Members data -->
+                      <div class="hdata">
+                        <div class="mcol-left">
+                          <!-- Icon with blue background -->
+
+                          <i class="icon-th-list bgreen"></i> 
+                        </div>
+                        <div class="mcol-right">
+                          <!-- Number of visitors -->
+                          <p><%= @recrutamento.formulario.pergunta_forms.count %>  <em>Perguntas</em></p>
+
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+
+                      <!-- revenue data -->
+                      <div class="hdata">
+                        <div class="mcol-left">
+                          <!-- Icon with green background -->
+                          <i class="icon-signal bred"></i> 
+
+                        </div>
+                        <div class="mcol-right">
+                          <!-- Number of visitors -->
+                          <p><%= @counter.visitas %> <em>Visitas</em></p>
+
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>                        
+
+                    </div>
               </div>
-
-              <!-- Members data -->
-              <div class="hdata">
-                <div class="mcol-left">
-                  <!-- Icon with blue background -->
-
-                  <i class="icon-th-list bgreen"></i> 
-                </div>
-                <div class="mcol-right">
-                  <!-- Number of visitors -->
-                  <p><%= @recrutamento.formulario.pergunta_forms.count %>  <em>Perguntas</em></p>
-
-                </div>
-                <div class="clearfix"></div>
-              </div>
-
-              <!-- revenue data -->
-              <div class="hdata">
-                <div class="mcol-left">
-                  <!-- Icon with green background -->
-                  <i class="icon-signal bred"></i> 
-
-                </div>
-                <div class="mcol-right">
-                  <!-- Number of visitors -->
-                  <p><%= @counter.visitas %> <em>Visitas</em></p>
-
-                </div>
-                <div class="clearfix"></div>
-              </div>                        
-
-            </div>
-      </div>
-</div>
-
-<div class="row">
-        <div class="span13">
-          <div class="tabbable">
-            <ul class="nav nav-tabs">
-            <li class="active"><a href="#1" data-toggle="tab">Candidatos</a></li>
-            <li><a href="#2" data-toggle="tab">Formulários</a></li>
-             <li><a href="#3" data-toggle="tab">Estatisticas</a></li>
-            </ul>
-                <div class="tab-content">
-                <div class="tab-pane active" id="1">
-                  <%= render "candidatos",collection: @candidatos %>
-                </div>
-                <div class="tab-pane" id="2">
-                  <%= render "formulario",collection: @recrutamento.formulario %>
-                </div>  
-
-                 <div class="tab-pane" id="3">
-                    <%= high_chart("my_id111", @h ) %>
-                </div>    
-            </ul>
-          </div>
         </div>
-      </div>
+
+        <div class="row">
+                <div class="span13">
+                  <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                    <li class="active"><a href="#1" data-toggle="tab">Candidatos</a></li>
+                    <li><a href="#2" data-toggle="tab">Formulários</a></li>
+                     <li><a href="#3" data-toggle="tab">Estatisticas</a></li>
+                    </ul>
+                        <div class="tab-content">
+                        <div class="tab-pane active" id="1">
+                          <%= render "candidatos",collection: @candidatos %>
+                        </div>
+                        <div class="tab-pane" id="2">
+                          <%= render "formulario",collection: @recrutamento.formulario %>
+                        </div>  
+
+                         <div class="tab-pane" id="3">
+                            <%= high_chart("my_id111", @h ) %>
+                        </div>    
+                    </ul>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+
+
+        <br />
+     </div>
 </div>
-
-
-  <%= link_to_function "Candidatos", "$('#candidatos_recrut').slideToggle();",:class =>'btn btn-primary' %><br><br>
-  <div id="candidatos_recrut">
-   <%= render "candidatos",collection: @candidatos %>
-  </div>
-  <%= link_to_function "Formulários", "$('#formulario_recrut').slideToggle();",:class =>'btn btn-primary' %><br><br>
-  <div id="formulario_recrut">
-    <%= render "formulario",collection: @recrutamento.formulario %>
-  </div>
-
-  <%= link_to_function "Estatisticas", "$('#stats_recrut').slideToggle();",:class =>'btn btn-primary' %><br><br>
-  <div id="stats_recrut">
-       <%= high_chart("my_id11", @h ) %>
-  </div>
-
-<br />

@@ -56,15 +56,16 @@
                         </button>
 
 
+
                     </div>
                     <br> <br>
                     <div id="opcoes">
                                <input type="hidden" name="count" value="1" />
                                 <div class="control-group" id="fields">
-                                 <label class="control-label" for="field1">Opções</label>
+                                 <label class="control-label" for="field1">Opções(Tem de ter pelo menos uma)</label>
                                  <div class="controls" id="profs"> 
                                    <div class="input-append">
-                                     <input  id="field1" name="perguntum[opcoes][1]" type="text" placeholder="Type something (it has typeahead too)" />
+                                     <input  class="option" id="field1" name="perguntum[opcoes][1]" type="text" placeholder="Opção1" />
                                      <button id="b1" onClick="addFormField()" class="btn btn-info" type="button">+</button>
                                    </div>
                                    <br /><small>Press + to add another form field :)</small>
@@ -77,35 +78,33 @@
                   <!-- END -->
 
                   <div class="field">
-                    <%= f.label :comite_id %><br />
-                    <%= f.number_field :comite_id,value:current_comite.id %>
+                      <%= check_box_tag :add_top %>
+                       Adicionar ao topo do Formulário
+                  </div>
+                  <div class="field">
+                    
+                    <%= f.hidden_field :comite_id,value:current_comite.id %>
                   </div>
 
                   <div class="field">
                     <%= f.hidden_field :activa, :checked=>true %>
                   </div>
 
-                 <% #render "pergunta_forms/form" %>
-                <button class="btn btn-primary"><i class="icon-save"></i>Guardar</button>
+                 <%#render "pergunta_forms/form" %>
 
                 
                 <% end %>
       
       
-                <button type="button" class="btn btn-primary" data-loading-text="Loading...">Loading state</button>
           <label>Opções</label>
             <div class="btn-group" data-toggle="buttons-toggle">
           <button type="button" class="btn " >Incluir</button>
-          <button type="button" class="btn " >Obrigatória</button>
+         
           <button type="button" class="btn " >Adicionar ao Formulário Estágio</button>
           <button type="button" class="btn " >Adicionar ao Formulário Membros</button>
         </div>
 
-          <a class="btn btn-large" onclick="jQuery('#looking_to_hire').attr('checked', 'checked')" type="button">
-                            <label class="radio">
-                            <input type="radio" name="looking_for" id="looking_to_hire" value="Employer" checked="checked"><p>Contratar</p>
-                            </label>
-                        </a>
+         
         <br> 
     
 

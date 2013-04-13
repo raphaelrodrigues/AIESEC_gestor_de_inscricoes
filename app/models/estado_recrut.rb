@@ -15,4 +15,8 @@ class EstadoRecrut < ActiveRecord::Base
   def self.activos(tipo,comite_id)
   	find(:all,:conditions =>["comite_id = ? and tipo = ? and activo = 1",comite_id,tipo])
   end
+
+  def self.my_last(comite_id,tipo)
+  	find(:all,:conditions =>["comite_id = ? and tipo = ? and activo = 1",comite_id,tipo]).last
+  end
 end

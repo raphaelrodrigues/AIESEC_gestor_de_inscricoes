@@ -373,11 +373,12 @@ a.block-heading:hover,
   border-bottom: 1px solid #ccc;
 }
 /*Buttons*/
+/* SE quiser meter os botoes quadrados
 .btn {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
-}
+}*/
 .btn-primary {
   background-color: #414959;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6c7994), to(#414959));

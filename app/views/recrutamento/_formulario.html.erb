@@ -3,30 +3,20 @@
     <table  class="table table-striped" >
       <thead>
         <tr>
-          <th><input type="checkbox" name="select-all" id="select-all"></th>
           <th >Titulo</th>
           <th>Descriçao</th>
           <th>Obrigatória</th>
-          <th style="width: 26px;"></th>
         </tr>
       </thead>
       <tbody>
            <% @recrutamento.formulario.pergunta_forms.each do |p| %>
-           <tr id="<%= p.id %>" class="handle">
-              <% @pergunta = getPergunta(p.perguntum_id) %>
-              <td><%= check_box_tag 'perguntas[]', p.id, false,:class=>"select-all" %></td>
-              <td><%= @pergunta.titulo %></td>
-              <td> <%= @pergunta.descricao %></td>
-              <td><%= obrigatoria?(p.obrigatoria) %></td>
-              <% if current_comite?(params[:id].to_i) %> 
-                <td>
-                    <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_perguntum_path(@pergunta)%>
-                    <%= link_to '<i class="icon-remove"></i>'.html_safe, p, method: :delete, data: { confirm: 'Are you sure?' } %>
-                </td>
-              <% end %>
-          </tr>
-           <% end %>
-
+             <tr id="<%= p.id %>" class="handle">
+                <% @pergunta = getPergunta(p.perguntum_id) %>
+                <td><%= @pergunta.titulo %></td>
+                <td> <%= @pergunta.descricao %></td>
+                <td><%= obrigatoria?(p.obrigatoria) %></td>
+            </tr>
+         <% end %>
       </tbody>
     </table>
   </div>

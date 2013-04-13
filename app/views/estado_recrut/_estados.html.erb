@@ -1,11 +1,11 @@
 <div class="container-fluid">
       <div class="well">
 
-          <table id="sortableEstados" class="table table-striped sortable">
+          <table id="sortableEstados" class="table table-striped sortable <%= tipo == 1 ? 'membros' : 'estagio' %>">
             <thead>
               <tr>
                 <th></th>
-                <th>Nome</th>
+                <th>Nome </th>
                 <th></th>
                 <th></th>
               </tr>
@@ -15,8 +15,8 @@
             <tr id="<%= estado.id %>" class="handle">
               <td><%= estado.ordem %></td>
               <td><%= estado.nome %></td>
-              <td><%= link_to 'Edit', edit_estado_recrut_path(estado) %></td>
-              <td><%= link_to 'Destroy', estado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to 'Editar', edit_estado_recrut_path(estado) %></td>
+              <td><%= link_to 'Remover', estado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
         </tbody>

@@ -131,11 +131,7 @@
             <li ><%= link_to "Inscrições", inscricoes_path %></li>
             <li ><%= link_to "Candidatos fora de epoca", candidatos_fora_epoca_path %></li>
             <li ><%= link_to "Survey", inscricao_path %></li>
-            <li ><a href="reset-password.html">Datas</a></li>
-            <li ><%= link_to "Formulário",survey_path(current_comite) %></li>
-            <li> 
-                 <input type="text" value="" class="input naLinha" placeholder="Search...">
-            </li>
+           
         </ul>
 
         
@@ -166,7 +162,7 @@
     
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
-    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script><!--algo nao vai funcionar passar isto pra baixo-->
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     
   </body>
 </html>

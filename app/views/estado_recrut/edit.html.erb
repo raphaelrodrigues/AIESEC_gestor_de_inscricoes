@@ -38,18 +38,15 @@
               </div>
 
                <div class="field">
-                <%= f.label :comite_id %><br />
-                <%= f.text_field :comite_id,value: @estado_recrut.comite_id %>
+                <%= f.hidden_field :comite_id,value: @estado_recrut.comite_id %>
               </div>
 
               <div class="field">
-                <%= f.label :tipo %><br />
-                <%= f.text_field :tipo ,:value=> @estado_recrut.tipo %>
+                <%= f.hidden_field :tipo ,:value=> @estado_recrut.tipo %>
               </div>
 
               <div class="field">
-                <%= f.label :ordem %><br />
-                <%= f.text_field :ordem, value: @estado_recrut.ordem  %>
+                <%= f.hidden_field :ordem, value: @estado_recrut.ordem  %>
               </div>
 
 
@@ -57,8 +54,6 @@
                 <%= f.submit "Actualizar",:class=>"btn btn-primary"%>
               </div>
             <% end %>
-
-            <%= link_to 'Back', estados_path %>
       </div>
     </div>
   </div>

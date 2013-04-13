@@ -29,4 +29,29 @@ module ComitesHelper
 		return path
 	end
 
+
+	def tipoPerguntaToString(tipo)
+		case tipo
+			when 1
+				"Respota Aberta"
+			when 2
+				"Escolha Multipla"
+			when 3
+				"ComboBox"
+			when 4
+				"Radio Box"
+			when 5
+				"Area de Texto"
+		end
+	end
+
+	def arrayToString(opcoes)
+		html = "".html_safe
+		opcoes.each do |op|
+			html << op.html_safe
+			html << "<br>".html_safe
+		end
+		return html
+	end
+
 end

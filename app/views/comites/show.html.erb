@@ -70,7 +70,7 @@
             <% if @estados_estagios.blank? %>
               <h1>Não Existem Estados Definidos</h1>
             <% else %>
-              <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_estagios} %>
+              <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_estagios,:tipo =>2} %>
             <% end %>
             <%= link_to "AddEstadoE", "#myModalEstadoE", "data-toggle" => "modal",:class=>"btn" %>
           </p>
@@ -87,10 +87,9 @@
             <% if @estados_membros.blank? %>
               <h1>Não Existem Estados Definidos</h1>
             <% else %>
-              <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_membros} %>
+              <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_membros,:tipo => 1} %>
             <% end %>
             <%= link_to "AddEstadoM", "#myModalEstadoM", "data-toggle" => "modal",:class=>"btn" %>
-
           </p>
         <!--estados para estagios-->
                     
@@ -123,7 +122,6 @@
     </div>
     <div class="modal-footer">
       <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Mudar Estado</button>
     </div>
   </div>
 
@@ -139,6 +137,6 @@
     </div>
     <div class="modal-footer">
       <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-       <button class="btn btn-primary" name="commit" value="Mudar Estado"><i class="icon-save"></i> Mudar Estado</button>
+      
     </div>
   </div>

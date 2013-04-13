@@ -102,7 +102,7 @@ class RecrutamentoController < ApplicationController
     @counter = Counter.my_find(current_comite.id,@recrutamento.tipo)
 
     stats = @recrutamento.viewEinscricoes(@counter)
-    @h = pie_plot(stats,"Visitas vs Inscrições")
+    @h = column_plot1(stats,"Visitas vs Inscrições")
 
     respond_to do |format|
       format.html # show.html.erb

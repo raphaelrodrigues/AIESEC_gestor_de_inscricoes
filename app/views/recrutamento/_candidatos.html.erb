@@ -11,8 +11,6 @@
             <th>Tipo</th>
             <th>Recrutamento</th>
             <th></th>
-            <th></th>
-            <th></th>
           </tr>
 
         <% @recrutamento.candidatos.each do |candidato| %>
@@ -25,8 +23,6 @@
             <td><%= candidato.tipo %></td>
             <td><%= candidato.recrutamento_id %></td>
             <td><%= link_to 'Show', candidato %></td>
-            <td><%= link_to 'Edit', edit_candidato_path(candidato) %></td>
-            <td><%= link_to 'Destroy', candidato, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
         </table>

@@ -42,6 +42,52 @@ $(document).ready(function() {
         $('body,html').animate({scrollTop: 0}, 500);
       });
 
+
+      /*
+      * Onsubmit formulario de nova pergunta
+      * para verificar se insere pelo menos uma opcao se escolher 
+      * um tipo de pergunta com opcoes
+      */
+      $("#new_perguntum").submit(function() {
+        var value = $('#btn-input-tipo').val();
+        var f = 1;
+        //alert(value)
+        if( value != 1 )
+            if( value != 5)
+            {
+              //verificar se existe pelo menos uma opçao inserida
+              $('.option').each(function() {
+                  //se houver um elemento que nao seja vazio entao é valido
+                  if (this.value != "")
+                  {
+                    f = 0
+                    return false;
+                  }
+              });
+              
+            }
+            else
+              f = 0
+        else
+            f = 0
+
+
+          alert(f)
+
+          if ( f == 0)
+            return true;
+          else
+          {
+            alert("Tem de introduzir pelo menos uma opção");
+            return false;
+          }
+
+      });
+
+       /*
+      * Onsubmit formulario de nova pergunta
+      * verifica email e data de nascimento sao validas
+      */
       $("#survey_form").submit(function() {
 
             var email = document.forms["survey_form"]["email_survey"];
@@ -308,6 +354,7 @@ $(document).ready(function() {
                  //alert(currPos1);
                  saved = 0;
                  $("#estado").removeClass("label-success").addClass("label-important").text("Não guardado");
+                 $("#estado1").removeClass("label-success").addClass("label-important").text("Não guardado");
 
           },
               //alert("ola");
@@ -321,7 +368,7 @@ $(document).ready(function() {
 
         }).disableSelection();
 
-         $("#sortableEstados tbody").sortable({
+         $("#sortableEstados.estagio tbody").sortable({
           start: function (event, ui) {
                 var currPos1 = ui.item.index();
 
@@ -329,14 +376,35 @@ $(document).ready(function() {
               //alert("ola");
                 // this is the item you just draged
            update: function(event, ui){
-                  var itm_arr = $("#sortableEstados tbody").sortable('toArray');
+                  var itm_arr = $("#sortableEstados.estagio tbody").sortable('toArray');
                   var pobj1 = {estados: itm_arr};
                   $.ajax({
                     type: "POST",
                     url: "/comites/5/reorderEstados", //sumbits it to the given url of the form
                     data:  pobj1
                   }).success(function(data){
-                    
+                    alert(itm_arr)
+                });
+          }
+
+        }).disableSelection();
+
+         $("#sortableEstados.membros tbody").sortable({
+          start: function (event, ui) {
+                var currPos1 = ui.item.index();
+
+          },
+              //alert("ola");
+                // this is the item you just draged
+           update: function(event, ui){
+                  var itm_arr = $("#sortableEstados.membros tbody").sortable('toArray');
+                  var pobj1 = {estados: itm_arr};
+                  $.ajax({
+                    type: "POST",
+                    url: "/comites/5/reorderEstados", //sumbits it to the given url of the form
+                    data:  pobj1
+                  }).success(function(data){
+                    alert(itm_arr)
                 });
           }
 
@@ -363,6 +431,7 @@ $(document).ready(function() {
         */
          $.fn.guardar = function(){
             $("#estado").removeClass("label-important").addClass("label-sucess");
+            $("#estado1").removeClass("label-important").addClass("label-sucess");
               $.ajax({
                     type: "POST",
                     url: "/comites/5/reorder", //sumbits it to the given url of the form
@@ -372,6 +441,7 @@ $(document).ready(function() {
                 saved = 1;
 
               $("#estado").text("Guardado");
+              $("#estado1").text("Guardado");
         };
 
 
@@ -514,18 +584,20 @@ $(document).ready(function() {
 
  });
 
-
+  /*
+  *   funcao que adiciona caixas de texto para as opções
+  */
 
   var next = 1;
-        function addFormField(){
-            var addto = "#field" + next;
-            next = next + 1;
-            var newIn = '<br /><br /><input id="field' + next + '" name="perguntum[opcoes][' + next + ']" type="text" data-provide="typeahead" data-items="8">';
-            var newInput = $(newIn);
-            $(addto).after(newInput);
-            $("#field" + next).attr('data-source',$(addto).attr('data-source'));
-            $("#count").val(next);  
-        }
+  function addFormField(){
+      var addto = "#field" + next;
+      next = next + 1;
+      var newIn = '<br /><br /><input class="option" id="field' + next + '" name="perguntum[opcoes][' + next + ']" placeholder= "Opção' + next + '" type="text" data-provide="typeahead" data-items="8">';
+      var newInput = $(newIn);
+      $(addto).after(newInput);
+      $("#field" + next).attr('data-source',$(addto).attr('data-source'));
+      $("#count").val(next);  
+  }
   
   /*
   *   funcao que copia para o clipboard texto

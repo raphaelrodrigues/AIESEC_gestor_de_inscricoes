@@ -161,10 +161,17 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
      @formulario = @comite.formularios.formulario_activo(params[:tipo])
      @candidato = Candidato.novo(val,params[:tipo],@comite.id,@formulario.recrutamento.id) #cria um novo candidato
      @perguntas = @formulario.pergunta_forms             #vai buscar todas as perguntas do formulario
-
+     rsp = ""
      if @candidato.save
        @perguntas.each do |p|
-            Resposta.new(candidato_id: @candidato.id,pergunta_id:p.perguntum_id,resposta:val[p.perguntum_id.to_s][:resposta].to_sentence,tipo: params[:tipo]).save
+            if val[p.perguntum_id.to_s].nil?
+              rsp = "[Não Respondeu]"
+            else
+              rsp = val[p.perguntum_id.to_s][:resposta].to_sentence
+            end
+
+            Resposta.new(candidato_id: @candidato.id,pergunta_id:p.perguntum_id,resposta:rsp,tipo: params[:tipo]).save
+            rsp = ""
       end
      end
      

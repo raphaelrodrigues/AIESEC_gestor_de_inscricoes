@@ -71,25 +71,24 @@ module ApplicationHelper
       
      
     when 4
-        html = "<div id='obrigatoria_#{obrigatoria}'>".html_safe
-         if !opcoes.empty?
-          
-          opcoes.each do |o|
 
+        html = "<div id='obrigatoria_#{obrigatoria}'>".html_safe
+
+         if !opcoes.empty?
+          opcoes.each do |o|
             html << "<input type='checkbox' name='respostas[#{id}][resposta][]' value='".html_safe
             html << o.html_safe
             html << "'>&nbsp;&nbsp;".html_safe
             html << o.html_safe
             html << "<br>".html_safe
             #html << "<input type='hidden'  name='respostas[id][resposta][]'  value='0' />".html_safe 
-            
           end
 
           html << "</div>".html_safe
         end
           return html
-        
     when 3
+    
       html = ""
       if !opcoes.empty?
         select_tag "respostas[#{id}][resposta][]", options_for_select(opcoes.collect{ |u| [u, u] }), :include_blank => true

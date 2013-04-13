@@ -14,7 +14,6 @@
                 <!--<th>Recrut</th>-->
                 <th data-sort="string-ins">Estado</th>
                 <th style="width: 26px;"></th>
-                <th style="width: 26px;"></th>
               </tr>
             </thead>
             <tbody>
@@ -30,11 +29,7 @@
                   <td>
                     <%=  estadoToLabel(candidato.estados.first) %>
                   </td>
-                  <td><%= link_to 'Show', candidato %></td>
-                  <td>
-                      <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_candidato_path(candidato)%>
-                      <%= link_to '<i class="icon-remove"></i>'.html_safe, candidato, method: :delete, data: { confirm: 'Are you sure?' } %>
-                  </td>
+                  <td><%= link_to '<i class="icon-user"></i>Perfil'.html_safe, candidato %></td>
                 </tr>
               <% end %>
             </tbody>

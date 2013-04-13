@@ -38,6 +38,7 @@ input.largerCheckbox
 	position: absolute;
 	margin-left: 800px;
 	margin-top: -50px;
+	font-size: 12px;
 }
 
 #candidatos_recrut
@@ -194,7 +195,7 @@ input.largerCheckbox
 {
 	position: absolute;
 	margin-top: -100px;
-	margin-left: 650px;
+	margin-left: 600px;
 }
 
 .stats_right1

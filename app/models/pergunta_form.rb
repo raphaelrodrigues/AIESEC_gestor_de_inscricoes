@@ -9,6 +9,11 @@ class PerguntaForm < ActiveRecord::Base
 
   default_scope :order => 'ordem ASC'
 
-
+  def self.reorder(formulario_id)
+  	where("formulario_id = ?",formulario_id).each do |p|
+  		p.ordem = p.ordem + 1
+  		p.save
+  	end
+  end
   
 end

@@ -37,12 +37,6 @@
                   </select>
 
               </form>
-              
-              <!--verifica se inscriçoes estao abertas -->
-              <div id="inscricoes_form">
-                <b>Inscricoes <%= inscricoes(@recrutamento.inscricao_activa) %></b>
-              </div>
-
 
 
               <%= form_for(:perguntas, :url => {:action => 'edit_pergunta_form',:controller => 'pergunta_forms',:id=>@formulario.id}) do |f| %>
@@ -51,6 +45,18 @@
 
             <div class="btn-toolbar">
               <% if current_comite?(params[:id].to_i) %>
+
+                      <!--verifica se inscriçoes estao abertas -->
+                    <div id="inscricoes_form">
+                      <b>Inscrições <%= inscricoes(@recrutamento.inscricao_activa) %></b>
+                      <br> <br>
+                         <div >
+                       
+                        <b>Formulário</b>  <span class="label label-success" id="estado1">Guardado</span>
+                        
+                         </div>
+                    </div>
+
                     <%= link_to '<i class="icon-plus"></i> Nova Pergunta'.html_safe, new_perguntum_path(:name=>action) ,:class=>"btn" %>
 
                      <a href="#myModalPergunta" data-toggle="modal" class="btn"><i class="icon-plus"></i>Nova Pergunta</a>
@@ -74,6 +80,7 @@
                     <th >Título</th>
                     <th>Descriçao</th>
                     <th>Tipo</th>
+                    <th>Opções</th>
                     <th>Obrigatória</th>
                     <th style="width: 26px;"></th>
                   </tr>
@@ -86,8 +93,14 @@
                         <td><%= check_box_tag 'perguntas[]', p.id, false,:class=>"select-all" %></td>
                         <td><%= pergunta.titulo %></td>
                         <td> <%= pergunta.descricao %></td>
-                        <td><%= pergunta.tipo %></td>
-                        <%= obrigatoria?(p.obrigatoria) %>
+                        <td><%= tipoPerguntaToString( pergunta.tipo ) %></td>
+                        <td>
+                          <% opcoes = pergunta.opcoes.split('|') %>
+                          <%= arrayToString(opcoes) %>
+                        </td>
+                        
+                          <%= obrigatoria?(p.obrigatoria) %>
+                        
                         <!--<td><%= p.ordem %></td>-->
                         <% if current_comite?(params[:id].to_i) %> 
                           <td>
@@ -107,8 +120,8 @@
               <!-- se nao for do comite que tem login feito nao pode alterar o formulario -->
               <% if current_comite?(params[:id].to_i) %>
 
-                <span class="label label-success" id="estado">Guardado</span>
-                <button class="btn btn-primary" id="guardar" href="#"><i class="icon-save"></i> Guardar</button>
+                <span class="label label-success" id="estado">Guardado</span>&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary" id="guardar" href="#" title="ctrl + s para guardar"><i class="icon-save"></i> Guardar</button>
 
 
 
