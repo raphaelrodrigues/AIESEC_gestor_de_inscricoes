@@ -131,10 +131,9 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
 
     if !@recrutamento.nil?
       @formulario = @comite.formularios.formulario_activo(params[:cenas][:tipo])
-
+      Counter.conta(@recrutamento.id)
       if !@formulario.nil?
         @perguntas_form = @formulario.pergunta_forms
-        Counter.conta(@recrutamento.id)
       end
     end
 
