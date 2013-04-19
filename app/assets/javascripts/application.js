@@ -89,7 +89,7 @@ $(document).ready(function() {
       * verifica email e data de nascimento sao validas
       */
       $("#survey_form").submit(function() {
-
+          
             var email = document.forms["survey_form"]["email_survey"];
             var dta_nasc = document.forms["survey_form"]["dta_survey"];
 

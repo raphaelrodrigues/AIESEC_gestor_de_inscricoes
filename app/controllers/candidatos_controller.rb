@@ -128,7 +128,7 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
   def survey
     @comite = Comite.find(params[:cenas][:comite])
     @recrutamento = @comite.recrutamento.activo_and_aberto(params[:cenas][:tipo])
-
+    
     if !@recrutamento.nil?
       @formulario = @comite.formularios.formulario_activo(params[:cenas][:tipo])
       Counter.conta(@recrutamento.id)

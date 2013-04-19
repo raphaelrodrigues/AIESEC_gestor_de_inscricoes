@@ -6,22 +6,23 @@
         Para mais informações contacta-nos pelo mail: 
         <%= @comite.email%><br>
 
-    <%= form_for(:respostas, :url => {:action => 'guardar_cand_fora_epoca',:controller => 'candidatos',:id=>@comite.id,:tipo =>params[:cenas][:tipo]},:html => {:class=>"form-horizontal ",:name =>"survey_form",:onsubmit=>"return validaSurvey();"} ) do |f| %>
+    <%= form_for(:respostas, :url => {:action => 'guardar_cand_fora_epoca',:controller => 'candidatos',:id=>@comite.id,:tipo =>params[:cenas][:tipo]},:html => {:class=>"form-horizontal ",:name =>"survey_form",:id =>"survey_form"} ) do |f| %>
         <fieldset>
             <!-- **********************************perguntas obrigatorias**********************************-->
               <div class="control-group">
                     <label class="control-label" >Nome*</label>
                     <div class="controls">
-                      <input type="text" name="respostas[nome]" placeholder="Nome" required>
-                      <p class="help-block"></p>
+                      <input type="text" name="respostas[nome]" placeholder="Nome" required="required" id="nome_survey">
+                      <!-- <em id="nome_surveyEM"></em> -->
                     </div>
                </div>
 
                 <div class="control-group">
                     <label class="control-label" >Telemovel*</label>
                     <div class="controls">
-                      <input type="text" name="respostas[telemovel]" placeholder="Telemovel" required>
-                      <p class="help-block"></p>
+                      <input type="text" name="respostas[telemovel]" placeholder="Telemovel" required="required" id="telemovel_survey">
+                      <!-- <em id="telemovel_surveyEM"></em> -->
+                      
                     </div>
                </div>
 
@@ -29,8 +30,9 @@
                     <label class="control-label" >Data de Nascimento*</label>
                     <div class="controls">
 
-                      <input type="text" name="respostas[data_nascimento]" placeholder="ex 19/09/1990" class="datepicker" required>
-                      <p class="help-block"></p>
+                      <input type="date" name="respostas[data_nascimento]" placeholder="ex 19/09/1990" class="datepicker" required="required" id="dta_survey" >
+                      <!-- <em id="dta_surveyEM" class="error-input"></em> -->
+                      
                     </div>
                </div>
 
@@ -38,8 +40,8 @@
                     <label class="control-label" >Email*</label>
                     <div class="controls">
 
-                      <input type="email" name="respostas[email]" placeholder="exemplo@gmail.com" required>
-                      <p class="help-block"></p>
+                      <input type="text" name="respostas[email]" placeholder="exemplo@gmail.com" required="required" id="email_survey">
+                      <!-- <em id="email_surveyEM"></em> -->
                     </div>
                </div>
           </fieldset>
