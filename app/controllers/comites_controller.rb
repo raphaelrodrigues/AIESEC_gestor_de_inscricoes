@@ -180,8 +180,8 @@ class ComitesController < ApplicationController
     #    counter.save
     # end
 
-    @counter_membr = Counter.my_find(6)
-    @counter_estag = Counter.my_find(6)
+    #@counter_membr = Counter.my_find(6)
+    #@counter_estag = Counter.my_find(6)
 
     #ultimos candidatos inscritos
     @last_cand = Candidato.last_month(current_comite.id)
