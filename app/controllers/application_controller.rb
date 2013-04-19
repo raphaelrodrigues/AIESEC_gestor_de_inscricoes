@@ -42,6 +42,16 @@ class ApplicationController < ActionController::Base
     return str.split('|')
   end
 
+  def path_redirect_formulario(tipo)
+    if tipo == 1
+      path = formulario_membros_path(@comite.id)
+    else
+      path = formulario_estagios_path(@comite.id)
+    end
+
+    return path
+  end
+
   ##########################ESTATISTICAS########################################
   
   #da grafico das estatisticas
@@ -171,12 +181,17 @@ class ApplicationController < ActionController::Base
     #verifica se um recrutamento pertence ao comite
     def recr_belongsTo_comite?
       @recrutamento = Recrutamento.find(params[:id])
-      redirect_to "/recrutamento" unless @recrutamento.comite_id == current_comite.id
+      redirect_to "/dashboard" unless @recrutamento.comite_id == current_comite.id
     end
     #verifica se um candidato pertence ao comite
     def cand_belongsTo_comite?
       @candidato = Candidato.find(params[:id])
-      redirect_to "/candidatos" unless @candidato.comite_id == current_comite.id
+      redirect_to "/dashboard" unless @candidato.comite_id == current_comite.id
+    end
+
+    def estado_belongTo_comite?
+      estado = EstadoRecrut.find(params[:id])
+      redirect_to "/dashboard" unless estado.comite_id == current_comite.id
     end
 
     def isAdmin?

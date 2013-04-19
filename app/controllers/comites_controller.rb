@@ -119,9 +119,9 @@ class ComitesController < ApplicationController
     end
 
     if !@formulario.nil?
-      @formulario.estado = 0                                         #altera o estado do formulario antigo outro para 0
+      @formulario.estado = 0                                       #altera o estado do formulario antigo outro para 0
       @formulario.save  
-    end                                             #salva o formulario antigo
+    end                                                            #salva o formulario antigo
     
     @formulario_membro_novo.save                                   #guarda o formulario novo
 
@@ -133,8 +133,10 @@ class ComitesController < ApplicationController
     
     @formulario_membro_novo.save                                    #guarda o formulario novo
 
+ 
+
     respond_to do |format|
-      format.html { redirect_to formulario_membros_path(@comite.id) }
+      format.html { redirect_to path }
       format.json { head :no_content }
     end
 
@@ -172,8 +174,9 @@ class ComitesController < ApplicationController
   end
 
   def dashboard
-    @counter_membr = Counter.my_find(current_comite.id,1)
-    @counter_estag = Counter.my_find(current_comite.id,2)
+
+    @counter_membr = Counter.my_find(6)
+    @counter_estag = Counter.my_find(6)
 
     #ultimos candidatos inscritos
     @last_cand = Candidato.last_month(current_comite.id)

@@ -1,4 +1,4 @@
-<%= form_for(:candidatos, :html=>{:id =>"form_candidatos"},:url => {:action => 'edit_candidatos',:controller => 'candidatos'},:multipart => true) do |f| %>
+<%= form_for(:candidatos, :html=>{:id =>"form_candidatos"},:url => {:action => 'edit_candidatos',:controller => 'candidatos',:tipo => @tipo },:multipart => true) do |f| %>
 
   <div class="container-fluid">
         <div class="well">

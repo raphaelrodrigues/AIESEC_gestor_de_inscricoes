@@ -5,23 +5,6 @@ before_filter :cand_belongsTo_comite?, :only =>[:show,:edit,:destroy]
 
 skip_before_filter :authorize, :only => [:inscricao,:survey]
 
-  # GET /candidatos
-  # GET /candidatos.json
-  def index #a tirar retirar /view/index
-
-    recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                             #vai buscar o recrutamento que esta activo
-    @candidatos = recrutamento.candidatos.search(params[:search],params[:page],params[:field])  #vai buscar os candidatos desse recrutamento
-
-    @estado = Estado.new
-    @estados_recrut = EstadoRecrut.activos(2,current_comite.id)
-
-     @stats = Candidato.percentagem_idades(recrutamento.id)
-     @h = pie_plot(@stats,"Idade Candidatos")
-
-     @stats1 = Candidato.est_candidatos(recrutamento)
-     @h1 = pie_plot(@stats1,"Estados Candidatos")
-  end
-
 
   def candidatos_membros
      recrutamento = current_comite.recrutamento.recrutamento_activo(1)                                                        #vai buscar o recrutamento que esta activo
@@ -31,7 +14,7 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
 
      @estado = Estado.new
      @estados_recrut = EstadoRecrut.activos(1,current_comite.id)
-
+     @tipo = 1
 
      if !recrutamento.nil?
        @stats = Candidato.percentagem_idades(recrutamento.id)
@@ -49,7 +32,8 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
      
      @estado = Estado.new
      @estados_recrut = EstadoRecrut.activos(2,current_comite.id)
-     
+     @tipo = 2
+
      if !recrutamento.nil?
        @stats = Candidato.percentagem_idades(recrutamento.id)
        @h = pie_plot(@stats,"Idade Candidatos")
@@ -69,7 +53,11 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
   # que foram selecionadas nos formulario
   # para cada uma delas é feita a accao que se deseja
   def edit_candidatos
-    r = candidatos_membros_path
+    if params[:tipo] == 1
+      r = candidatos_membros_path
+    else
+      r = candidatos_estagios_path
+    end
 
     if !params[:candidatos].nil?
       val = params[:candidatos]
@@ -81,7 +69,7 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
                 estado = candidato.estados.build(params[:estado])
                 estado.save
              end
-             r = candidatos_membros_path
+             
 
           when "Enviar Mail"
             n =0
@@ -92,6 +80,7 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
       end
 
     end #fim do if
+
       respond_to do |format|
               format.html { redirect_to  r}
               format.json { head :no_content }
@@ -145,7 +134,7 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
 
       if !@formulario.nil?
         @perguntas_form = @formulario.pergunta_forms
-        Counter.conta(@comite.id,@formulario.tipo)
+        Counter.conta(@recrutamento.id)
       end
     end
 
@@ -254,7 +243,7 @@ skip_before_filter :authorize, :only => [:inscricao,:survey]
     @candidato.save
 
     respond_to do |format|
-      format.html { redirect_to candidatos_url }
+      format.html { redirect_to dashboard_path }
       format.json { head :no_content }
     end
   end

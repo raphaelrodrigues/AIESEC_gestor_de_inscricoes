@@ -70,9 +70,9 @@
             <% if @estados_estagios.blank? %>
               <h1>Não Existem Estados Definidos</h1>
             <% else %>
-              <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_estagios,:tipo =>2} %>
+              <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_estagios,:tipo =>2,:comite_id =>@comite.id} %>
             <% end %>
-            <%= link_to "AddEstadoE", "#myModalEstadoE", "data-toggle" => "modal",:class=>"btn" %>
+            <%= link_to "AddEstadoE", "#myModalEstadoE", "data-toggle" => "modal",:class=>"btn"  unless current_comite.id != @comite.id %>
           </p>
         </div>
     </div>
@@ -87,9 +87,9 @@
             <% if @estados_membros.blank? %>
               <h1>Não Existem Estados Definidos</h1>
             <% else %>
-              <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_membros,:tipo => 1} %>
+              <%= render partial: "estado_recrut/estados",:locals => { :estados => @estados_membros,:tipo => 1,:comite_id =>@comite.id} %>
             <% end %>
-            <%= link_to "AddEstadoM", "#myModalEstadoM", "data-toggle" => "modal",:class=>"btn" %>
+            <%= link_to "AddEstadoM", "#myModalEstadoM", "data-toggle" => "modal",:class=>"btn" unless current_comite.id != @comite.id %>
           </p>
         <!--estados para estagios-->
                     
@@ -112,31 +112,33 @@
 
 
  <!-- Modal EstadoMembros-->
-<div id="myModalEstadoM" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">Novo Estado</h3>
-    </div>
-    <div class="modal-body">
-       <%= render partial:'estado_recrut/form' ,:locals =>{ :comite_id => @comite.id,:tipo =>1 }%>
-    </div>
-    <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    </div>
-  </div>
+ <% if current_comite.id == @comite.id %>
+    <div id="myModalEstadoM" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Novo Estado</h3>
+        </div>
+        <div class="modal-body">
+           <%= render partial:'estado_recrut/form' ,:locals =>{ :comite_id => @comite.id,:tipo =>1 }%>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+      </div>
 
 
- <!-- Modal EstadoEsatgios-->
-<div id="myModalEstadoE" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">Novo Estado</h3>
-    </div>
-    <div class="modal-body">
-       <%= render partial:'estado_recrut/form',:locals =>{ :comite_id => @comite.id,:tipo => 2 } %>
-    </div>
-    <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      
-    </div>
-  </div>
+     <!-- Modal EstadoEsatgios-->
+    <div id="myModalEstadoE" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Novo Estado</h3>
+        </div>
+        <div class="modal-body">
+           <%= render partial:'estado_recrut/form',:locals =>{ :comite_id => @comite.id,:tipo => 2 } %>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+          
+        </div>
+      </div>
+<% end %>

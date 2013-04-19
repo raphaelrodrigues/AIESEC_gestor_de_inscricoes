@@ -17,6 +17,16 @@
           <%= @recrutamento.created_at %><P>
         </p>
 
+        <p><b>Inscrições</b>
+        <% if @recrutamento.inscricao_activa == true %>
+           <span title="Alterar Estado" class="label label-success">Abertas</span>
+        <% else %>
+            <a href="#myModal" data-toggle="modal"> <span class="label label-important">Fechadas</span>
+            </a>
+        <% end %>
+        </p>
+
+        
         <div class="stats_right">
           <div class="span12">
                     <div class="header-data">

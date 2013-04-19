@@ -71,8 +71,10 @@ class PerguntaController < ApplicationController
       case params[:commit]
         when "Add Form. Membros"
             tipo = 1
+            path = formulario_membros_path(current_comite.id)
         when "Add Form. Estagios"
             tipo = 2
+            path = formulario_estagios_path(current_comite.id)
       end
 
       @formulario = Comite.find_by_id(current_comite.id).formularios.formulario_activo(tipo)
@@ -85,7 +87,7 @@ class PerguntaController < ApplicationController
       end
     end
       respond_to do |format|
-        format.html { redirect_to  formulario_membros_path(current_comite.id)}
+        format.html { redirect_to  path}
         format.json { head :no_content }
       end
     

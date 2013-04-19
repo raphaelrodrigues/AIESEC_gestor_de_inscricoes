@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class EstadoRecrutController < ApplicationController
 
-
+  before_filter :estado_belongTo_comite?, :only => [ :edit, :destroy]
   def edit
   	@estado_recrut = EstadoRecrut.find(params[:id])
   end

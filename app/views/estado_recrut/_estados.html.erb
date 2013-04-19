@@ -15,8 +15,10 @@
             <tr id="<%= estado.id %>" class="handle">
               <td><%= estado.ordem %></td>
               <td><%= estado.nome %></td>
-              <td><%= link_to 'Editar', edit_estado_recrut_path(estado) %></td>
-              <td><%= link_to 'Remover', estado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% if comite_id == current_comite.id %>
+                <td><%= link_to 'Editar', edit_estado_recrut_path(estado) %></td>
+                <td><%= link_to 'Remover', estado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
