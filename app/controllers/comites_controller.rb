@@ -175,6 +175,11 @@ class ComitesController < ApplicationController
 
   def dashboard
 
+    Recrutamento.all.each do |r|
+       counter = Counter.new(:visitas => 0, :recrutamento_id => r.id )
+       counter.save
+    end
+
     @counter_membr = Counter.my_find(6)
     @counter_estag = Counter.my_find(6)
 
