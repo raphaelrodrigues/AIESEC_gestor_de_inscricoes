@@ -11,7 +11,8 @@
                 <th data-sort="string">Idade</th>
                 <th data-sort="string">Email</th>
                 <th data-sort="string">Data Registo</th>
-                <th data-sort="Estado">Estado</th>
+                <th data-sort="string">Tipo</th>
+                <th data-sort="string">Estado</th>
                 <th style="width: 26px;"></th>
                 <th style="width: 26px;"></th>
               </tr>
@@ -25,6 +26,8 @@
                   <td><%= age(candidato.data_nascimento) %></td>
                   <td id="email<%= candidato.id %>" value="<%= candidato.email %>"><%= candidato.email %></td>
                   <td><%= candidato.created_at.strftime('%d %b') %>(<%=  time_ago_in_words(candidato.created_at) %>)</td>
+                  <td><b><%= tipoToString(candidato.tipo) %><b></td>
+
                   <td>
                    <span class='label label-warning'>Fora de Época</span>
                   </td>

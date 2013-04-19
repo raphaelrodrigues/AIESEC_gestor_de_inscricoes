@@ -14,16 +14,7 @@
 			<h1>Não existem Candidatos</h1>
 		<% else %>
 
-			<% path = getPathSearch %>
 			
-			<%= form_tag path , :method => 'get'  ,:class => 'form-inline', :id=>'candidatos_search' do  %>
-                       
-                    <%= text_field_tag :search, params[:search], :class =>"span3 search-input",:placeholder => "Pesquisa...",:autocomplete=>"off" %>
-
-                    <label class="naLinha"></label>
-                    <%= select_tag(:field, options_for_select([['Nome', 1], ['Data', 2], ["Estado",3]]) ) %>
-                      
-             <% end %>
 			<div id="candidatos_lista">
 			    <%= render :partial => 'candidatos_fora' %>
 			</div>
