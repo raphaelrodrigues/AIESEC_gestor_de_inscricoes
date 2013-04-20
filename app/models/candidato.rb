@@ -27,10 +27,10 @@ class Candidato < ActiveRecord::Base
 
     if field == 2
       paginate :per_page => per_page, :page => page,:joins => :estados,
-          :conditions => ['estados.nome LIKE  LOWER(?) and estados.ultimo = 1', "%#{search}%"]
+          :conditions => ['estados.nome ILIKE  ? and estados.ultimo = 1', "%#{search}%"]
     else
       paginate :per_page => per_page, :page => page,
-          :conditions => ['nome LIKE  LOWER(?)', "%#{search}%"]
+          :conditions => ['nome ILIKE  LOWER?', "%#{search}%"]
     end
   end
 
