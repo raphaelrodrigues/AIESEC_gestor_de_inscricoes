@@ -98,7 +98,7 @@ module ApplicationHelper
       html = "".html_safe
         if opcoes != ""
           opcoes.each do |o|
-            html << "<input type='radio' name='respostas[#{id}][resposta][]' value='#{o}'>  #{o}sdsdfsdf ".html_safe 
+            html << "<input type='radio' name='respostas[#{id}][resposta][]' value='#{o}'>  #{o} ".html_safe 
             #html << "<input type='hidden'  name='respostas[resposta][]'  value='0' />".html_safe 
           end
         end
