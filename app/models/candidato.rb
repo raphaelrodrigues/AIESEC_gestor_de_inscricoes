@@ -30,7 +30,7 @@ class Candidato < ActiveRecord::Base
           :conditions => ['estados.nome ILIKE  ? and estados.ultimo = 1', "%#{search}%"]
     else
       paginate :per_page => per_page, :page => page,
-          :conditions => ['nome ILIKE  LOWER?', "%#{search}%"]
+          :conditions => ['nome ILIKE  ?', "%#{search}%"]
     end
   end
 
