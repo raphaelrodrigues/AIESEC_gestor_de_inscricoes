@@ -43,6 +43,10 @@ class Candidato < ActiveRecord::Base
     find(:all, :conditions =>["comite_id = ? and created_at > ?",comite_id, 1.month.ago],:limit => 10)
   end
 
+  def self.last_week
+    find(:all, :conditions =>["created_at > ?", 1.week.ago])
+  end
+
   def self.to_csv(options = {},candidato,respostas)
     CSV.generate(options) do |csv|
       csv << column_names
@@ -90,6 +94,18 @@ class Candidato < ActiveRecord::Base
 
   end
 
+  def self.nNao_contactados(recrutamento)
+    n = 0
+
+    recrutamento.candidatos.each do |c|
+      if c.estados.first.nil?
+          n = n + 1
+      end      
+    end
+
+    return n
+
+  end
   
   def self.est_candidatos(recrutamento)
     lista_estados = Array.new

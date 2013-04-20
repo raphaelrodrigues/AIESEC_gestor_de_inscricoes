@@ -57,12 +57,12 @@
                          </div>
                     </div>
 
-                    <%= link_to '<i class="icon-plus"></i> Nova Pergunta'.html_safe, new_perguntum_path(:name=>action) ,:class=>"btn" %>
+                    <%# link_to '<i class="icon-plus"></i> Nova Pergunta'.html_safe, new_perguntum_path(:name=>action) ,:class=>"btn" %>
 
                      <a href="#myModalPergunta" data-toggle="modal" class="btn"><i class="icon-plus"></i>Nova Pergunta</a>
                     
               <% else %>
-                      <%= f.submit "Export",:class=>"btn" %>
+                      <%= f.submit "Exportar para meu formulário",:class=>"btn" %>
 
                  <% end %>
            </div>
@@ -130,6 +130,8 @@
                     <%= f.submit "Obrigatoria",:class=>"btn " %>
                     <%= f.submit "Opcional",:class=>"btn btn-primary" %>
 
+
+                    <%= link_to '<i class="icon-drink"></i>Pré-visualizar Formulário'.html_safe,pre_vis_survey_path(:formulario => @formulario.id) ,:method => :post , :class=>"btn" %>
               <% end %><!--fim da condicao-->
 
             </div>
@@ -157,7 +159,7 @@
             <% end %> <!-- fim do fromulario -->
 
 
-            <%= link_to '<i class="icon-drink"></i>Pré-visualizar Formulário(Meter comando)'.html_safe,pre_vis_survey_path(:formulario => @formulario.id) ,:method => :post , :class=>"btn" %>
+            
 
         
         <div id="myModalPergunta" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

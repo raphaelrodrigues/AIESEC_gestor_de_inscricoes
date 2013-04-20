@@ -168,7 +168,7 @@ footer hr {
   display: inline-block;
 }
 .stats p.stat {
-  font-size: 1em;
+  font-size: 0.85em;
   font-weight: bold;
   margin: 1em 0em 0em 1em;
 }

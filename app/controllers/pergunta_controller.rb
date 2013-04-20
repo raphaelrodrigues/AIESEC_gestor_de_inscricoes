@@ -4,14 +4,14 @@ class PerguntaController < ApplicationController
   before_filter :pergunta_belongsTo_comite?, :only =>[:edit,:destroy]
   # GET /pergunta
   # GET /pergunta.json
-  def index
-    @perguntas = Perguntum.where("activa = true") #apenas devolve as que estao activas
+  # def index
+  #   @perguntas = Perguntum.where("activa = true") #apenas devolve as que estao activas
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @pergunta }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html # index.html.erb
+  #     format.json { render json: @pergunta }
+  #   end
+  # end
 
   # GET /pergunta/1
   # GET /pergunta/1.json
@@ -57,7 +57,6 @@ class PerguntaController < ApplicationController
     @comites = Comite.find(:all,:select=>"id,nome")
     @perguntas = Perguntum.where("comite_id = ? and activa = true",params[:id])
     
-
   end
 
   # quando se esta na lista das perguntas dos comites

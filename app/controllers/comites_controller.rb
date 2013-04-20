@@ -89,6 +89,7 @@ class ComitesController < ApplicationController
     @recrutamento = @formulario.recrutamento  unless  @formulario.nil?
     
     @perguntum = Perguntum.new
+    @pergunta_form = PerguntaForm.new
 
   end
 
@@ -102,6 +103,7 @@ class ComitesController < ApplicationController
     @recrutamento = @formulario.recrutamento  unless  @formulario.nil?
  
     @perguntum = Perguntum.new
+    @pergunta_form = PerguntaForm.new
     
   end
 

@@ -1,0 +1,137 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 #Guides \
+\
+Guia de estilo para desenvolvimento JAVA.\
+\
+# Table of Contents\
+\
+	* [
+\f1\fs32 What Makes Up a Good Name](#What-Makes-Up-a-Good-Name)\
+	* [Good Documentation](#[Good Documentation)\
+	* [Standards For Member Functions](#Standards For Member Functions)\
+		** [Naming Member Functions](#Naming Member Functions)\
+		** [Getters](#Getters)\
+	* [Techniques for Writing Clean Code](#Techniques for Writing Clean Code)\
+		**[Document Your Code](#Document Your Code)\
+		**[Paragraph/Indent Your Code](#Paragraph/Indent Your Code)\
+	       **[Paragraph and Punctuate Multi-Line Statements](#Paragraph and Punctuate Multi-Line Statements)\
+		**[Use Whitespace in Your Code](#Use Whitespace in Your Code)\
+	*[Standards for Fields (Attributes/Properties)](#Standards for Fields (Attributes/Properties))\
+		**[Naming Fields](#Naming Fields)\
+		**[Naming Collections](#Naming Collections)\
+		**[Naming Local Variables](#Naming Local Variables)\
+			***[Naming Streams](#Naming Streams)\
+			***[Naming Loop Counters](#Naming Loop Counters)\
+
+\f0\fs24 \
+#
+\f1\fs32 What Makes Up a Good Name\
+Use full English descriptors1 that accurately describe the variable/field/class/... \
+For example, use names like `firstName`, `grandTotal`, or `CorporateCustomer`\
+\
+Use terminology applicable to the domain. If your users refer to their clients as customers, then use the term `Customer` for the class, not `Client`. Many developers will make the mistake of creating generic terms for concepts when perfectly good terms already exist in the industry/domain.\
+\
+\
+Avoid long names (< 15 characters is a good idea). Although the class name `PhysicalOrVirtualProductOrService`\
+\
+#Good Documentation\
+Comments should add to the clarity of your code. \
+Keep comments simple. Some of the best comments I have ever seen are simple, point-form notes. You do not have to write a book, you just have to provide enough information so that others can understand your code.\
+\
+Write the documentation before you write the code. The best way to document code is to write the comments before you write the code.\
+\
+```JAVA\
+/**\
+Customer \'96 A customer is any\
+person or organization that we sell services and products to.\
+@author S.W. Ambler \
+*/\
+```\
+\
+#Standards For Member Functions\
+\
+##Naming Member Functions\
+\
+Examples: \
+```JAVA\
+openAccount()\
+printMailingLabel() save()\
+delete()\
+```\
+\
+##Getters\
+Examples: \
+```JAVA\
+getFirstName()\
+getAccountNumber() \
+getLostEh() \
+isPersistent() \
+isAtEnd()\
+```\
+\
+#Techniques for Writing Clean Code\
+\
+##Document Your Code\
+\
+##Paragraph/Indent Your Code\
+\
+###Paragraph and Punctuate Multi-Line Statements\
+Example:\
+```JAVA\
+BankAccount newPersonalAccount = AccountFactory\
+				createBankAccountFor( currentCustomer, startDate,\
+				 initialDeposit, branch);\
+```\
+\
+###Use Whitespace in Your Code\
+```JAVA\
+counter=1; grandTotal=invoice.total()+getAmountDue(); \
+grandTotal=Discounter.discount(grandTotal,this);\
+```\
+vs\
+```JAVA\
+counter = 1;\
+grandTotal = invoice.total() + getAmountDue(); \
+grandTotal = Discounter.discount(grandTotal, this);\
+```\
+#Standards for Fields (Attributes/Properties)\
+\
+##Naming Fields\
+Examples: \
+```JAVA\
+firstName\
+zipCode \
+unitPrice \
+discountRate \
+orderItems \
+sqlDatabase\
+```\
+\
+##Naming Collections\
+Examples: \
+```JAVA\
+customers\
+orderItems \
+aliases\
+```\
+\
+##Naming Local Variables\
+\
+###Naming Streams\
+```JAVA\
+inputStream, outputStream, and ioStream instead of in, out, and inOut\
+```\
+\
+###Naming Loop Counters\
+```JAVA\
+i, j, or k\
+```\
+\
+\
+\
+}
